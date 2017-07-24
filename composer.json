@@ -1,0 +1,34 @@
+{
+  "name": "spryker/github-hooks",
+  "description": "Spryker Github hooks",
+  "type": "library",
+  "license": "MIT",
+  "keywords": ["framework", "sniffer", "architecture", "standards"],
+  "homepage": "http://spryker.com",
+  "authors": [
+    {
+      "name": "Spryker",
+      "homepage": "http://spryker.com"
+    }
+  ],
+  "support": {
+    "source": "https://github.com/spryker/github-hooks"
+  },
+  "require": {
+    "php": ">=5.4.16"
+  },
+  "require-dev": {
+    "spryker/code-sniffer": "*",
+    "phpunit/phpunit": "~5.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "SprykerHook\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SprykerHook\\Test\\": "tests"
+    }
+  }
+}
