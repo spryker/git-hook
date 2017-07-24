@@ -5,26 +5,20 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GitHubHook\Hook;
+namespace GithubHook\Hook;
 
-use GitHubHook\FileCommands\PreCommit\ArchitectureCheckCommand;
-use GitHubHook\FileCommands\PreCommit\CodeStyleCommand;
+use Exception;
+use GithubHook\Command\FileCommand\FileCommandExecutor;
+use GithubHook\Command\FileCommand\PreCommit\ArchitectureCheckCommand;
+use GithubHook\Command\FileCommand\PreCommit\CodeStyleCheckCommand;
+use GithubHook\Command\FileCommand\PreCommit\CodeStyleFixCommand;
+use GithubHook\Helper\ConsoleHelper;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SprykerPreCommit extends Application
 {
-
-    /**
-     * @var \Symfony\Component\Console\Output\OutputInterface
-     */
-    private $output;
-
-    /**
-     * @var \Symfony\Component\Console\Input\InputInterface
-     */
-    private $input;
 
     public function __construct()
     {
@@ -41,31 +35,19 @@ class SprykerPreCommit extends Application
      */
     public function doRun(InputInterface $input, OutputInterface $output)
     {
-        $this->input = $input;
-        $this->output = $output;
+        $consoleHelper = new ConsoleHelper($input, $output);
+        $consoleHelper->githubhookHeader('Spryker Github pre-commit hook');
 
         $committedFiles = $this->extractCommittedFiles();
 
-        $output->writeln('<fg=white;options=bold;bg=red>Spryker Github pre-commit hook</fg=white;options=bold;bg=red>');
-
-        $success = true;
-
-        foreach ($this->getFileCommands() as $fileCommand) {
-            foreach ($committedFiles as $committedFile) {
-                $output->writeln(sprintf('<info>%s</info>', $committedFile));
-
-                if (!$fileCommand->run($committedFile, $output)) {
-                    $success = false;
-                }
-            }
-
-        }
+        $fileCommandExecutor = new FileCommandExecutor($this->getFileCommands(), $committedFiles, $consoleHelper);
+        $success = $fileCommandExecutor->execute();
 
         if (!$success) {
-            throw new Exception('There are some errors! If you can not fix them you can append "--no-validation" to your commit command.');
+            throw new Exception(PHP_EOL . PHP_EOL . 'There are some errors! If you can not fix them you can append "--no-verify (-n)" to your commit command.');
         }
 
-        $output->writeln('<info>Good job dude!</info>');
+        $consoleHelper->success('Good job dude!');
     }
 
     /**
@@ -74,39 +56,40 @@ class SprykerPreCommit extends Application
     private function extractCommittedFiles()
     {
         $output = [];
-        $rc = 0;
+        $check = 0;
 
-        exec('git rev-parse --verify HEAD 2> /dev/null', $output, $rc);
+        exec('git rev-parse --verify HEAD 2> /dev/null', $output, $check);
 
         $against = '4b825dc642cb6eb9a060e54bf8d69288fbee4904';
-        if ($rc == 0) {
+        if ($check === 0) {
             $against = 'HEAD';
         }
 
-        exec('git diff-index --cached --name-status ' . $against . ' | egrep \'^(A|M)\' | awk \'{print $2;}\'', $output);
-
-        $filterFilesCallback = function ($file) {
-            return is_file($file);
-        };
-
-        $committedFiles = array_filter($output, $filterFilesCallback);
+        exec('git diff-index --cached --name-status ' . $against . ' | egrep \'^(A|M)\' | awk \'{print $2;}\'', $committedFiles);
 
         $prepareFilePathCallback = function ($file) {
-            return PATH_PREFIX . $file;
+            return '.' . PATH_PREFIX . $file;
         };
 
         $committedFiles = array_map($prepareFilePathCallback, $committedFiles);
+
+        $filterFilesCallback = function ($file) {
+            return is_file(PROJECT_ROOT . DIRECTORY_SEPARATOR . $file);
+        };
+
+        $committedFiles = array_filter($committedFiles, $filterFilesCallback);
 
         return $committedFiles;
     }
 
     /**
-     * @return \GitHubHook\FileCommands\PreCommit\FileCommandInterface[]
+     * @return \GithubHook\Command\FileCommand\FileCommandInterface[]
      */
     private function getFileCommands()
     {
         return [
-            new CodeStyleCommand(),
+            new CodeStyleFixCommand(),
+            new CodeStyleCheckCommand(),
             new ArchitectureCheckCommand(),
         ];
     }

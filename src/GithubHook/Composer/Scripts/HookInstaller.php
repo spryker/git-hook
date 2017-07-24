@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GitHubHook\Composer\Scripts;
+namespace GithubHook\Composer\Scripts;
 
 use Composer\Script\Event;
 
@@ -40,15 +40,16 @@ class HookInstaller
     protected static function installProjectHooks(Event $event)
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
-        $hookDirectory = $vendorDir . '/spryker/github-hooks/hooks/';
+        $hookDirectory = $vendorDir . '/spryker/github-hooks/hooks/project/';
         $gitHookDirectory = $vendorDir . '/../.git/hooks/';
 
         foreach (static::$hooks as $hook) {
             $src = $hookDirectory . $hook;
-            $dist = $gitHookDirectory . $hookDirectory;
+            $dist = $gitHookDirectory . $hook;
+
             copy($src, $dist);
 
-            $event->getIO()->write('<info>Copied "' . $hook . '" to .git/hooks</info>');
+            $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
         }
     }
 
@@ -60,15 +61,15 @@ class HookInstaller
     protected static function installSprykerHooks(Event $event)
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
-        $hookDirectory = $vendorDir . '/spryker/github-hooks/hooks/';
+        $hookDirectory = $vendorDir . '/spryker/github-hooks/hooks/spryker/';
         $gitHookDirectory = $vendorDir . '/spryker/spryker/.git/hooks/';
 
         foreach (static::$hooks as $hook) {
             $src = $hookDirectory . $hook;
-            $dist = $gitHookDirectory . $hookDirectory;
+            $dist = $gitHookDirectory . $hook;
             copy($src, $dist);
 
-            $event->getIO()->write('<info>Copied "' . $hook . '" to .git/hooks</info>');
+            $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
         }
     }
 

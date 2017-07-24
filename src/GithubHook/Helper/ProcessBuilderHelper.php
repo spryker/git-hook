@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GitHubHook\Helper;
+namespace GithubHook\Helper;
 
 use Symfony\Component\Process\ProcessBuilder;
 

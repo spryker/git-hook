@@ -15,20 +15,16 @@
     "source": "https://github.com/spryker/github-hooks"
   },
   "require": {
-    "php": ">=5.4.16"
+    "php": ">=5.4.16",
+    "phpstan/phpstan": "^0.8"
   },
   "require-dev": {
     "spryker/code-sniffer": "*",
     "phpunit/phpunit": "~5.2"
   },
   "autoload": {
-    "psr-4": {
-      "SprykerHook\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "SprykerHook\\Test\\": "tests"
+    "psr-0": {
+      "GithubHook": "src"
     }
   }
 }
