@@ -5,26 +5,26 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Command\RepositoryCommand;
+namespace GitHook\Command\RepositoryCommand;
 
-use GithubHook\Command\CommandConfiguration;
-use GithubHook\Helper\ConsoleHelper;
+use GitHook\Command\CommandConfiguration;
+use GitHook\Helper\ConsoleHelper;
 
 class RepositoryCommandExecutor
 {
     /**
-     * @var \GithubHook\Command\RepositoryCommand\RepositoryCommandInterface[]
+     * @var \GitHook\Command\RepositoryCommand\RepositoryCommandInterface[]
      */
     protected $commands;
 
     /**
-     * @var \GithubHook\Helper\ConsoleHelper
+     * @var \GitHook\Helper\ConsoleHelper
      */
     protected $consoleHelper;
 
     /**
-     * @param \GithubHook\Command\FileCommand\FileCommandInterface[] $commands
-     * @param \GithubHook\Helper\ConsoleHelper $consoleHelper
+     * @param \GitHook\Command\FileCommand\FileCommandInterface[] $commands
+     * @param \GitHook\Helper\ConsoleHelper $consoleHelper
      */
     public function __construct(array $commands, ConsoleHelper $consoleHelper)
     {

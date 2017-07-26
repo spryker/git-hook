@@ -5,13 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Command\RepositoryCommand;
+namespace GitHook\Command\RepositoryCommand;
 
 interface RepositoryCommandInterface
 {
 
     /**
-     * @return \GithubHook\Command\CommandResultInterface
+     * @return \GitHook\Command\CommandResultInterface
      */
     public function run();
 

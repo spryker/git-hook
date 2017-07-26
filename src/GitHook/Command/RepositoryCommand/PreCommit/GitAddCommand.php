@@ -5,12 +5,12 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Command\RepositoryCommand\PreCommit;
+namespace GitHook\Command\RepositoryCommand\PreCommit;
 
-use GithubHook\Command\CommandConfigurationInterface;
-use GithubHook\Command\CommandResult;
-use GithubHook\Command\RepositoryCommand\RepositoryCommandInterface;
-use GithubHook\Helper\ProcessBuilderHelper;
+use GitHook\Command\CommandConfigurationInterface;
+use GitHook\Command\CommandResult;
+use GitHook\Command\RepositoryCommand\RepositoryCommandInterface;
+use GitHook\Helper\ProcessBuilderHelper;
 use Symfony\Component\Process\ProcessBuilder;
 
 class GitAddCommand implements RepositoryCommandInterface
@@ -19,9 +19,9 @@ class GitAddCommand implements RepositoryCommandInterface
     use ProcessBuilderHelper;
 
     /**
-     * @param \GithubHook\Command\CommandConfigurationInterface $commandConfiguration
+     * @param \GitHook\Command\CommandConfigurationInterface $commandConfiguration
      *
-     * @return \GithubHook\Command\CommandConfigurationInterface
+     * @return \GitHook\Command\CommandConfigurationInterface
      */
     public function configure(CommandConfigurationInterface $commandConfiguration)
     {
@@ -33,7 +33,7 @@ class GitAddCommand implements RepositoryCommandInterface
     }
 
     /**
-     * @return \GithubHook\Command\CommandResult
+     * @return \GitHook\Command\CommandResult
      */
     public function run()
     {

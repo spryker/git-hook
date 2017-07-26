@@ -5,17 +5,17 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Command\FileCommand;
+namespace GitHook\Command\FileCommand;
 
-use GithubHook\Command\CommandConfiguration;
-use GithubHook\Command\CommandConfigurationInterface;
-use GithubHook\Helper\ConsoleHelper;
+use GitHook\Command\CommandConfiguration;
+use GitHook\Command\CommandConfigurationInterface;
+use GitHook\Helper\ConsoleHelper;
 
 class FileCommandExecutor implements CommandExecutorInterface
 {
 
     /**
-     * @var \GithubHook\Command\FileCommand\FileCommandInterface[]
+     * @var \GitHook\Command\FileCommand\FileCommandInterface[]
      */
     protected $commands;
 
@@ -25,14 +25,14 @@ class FileCommandExecutor implements CommandExecutorInterface
     protected $committedFiles;
 
     /**
-     * @var \GithubHook\Helper\ConsoleHelper
+     * @var \GitHook\Helper\ConsoleHelper
      */
     protected $consoleHelper;
 
     /**
-     * @param \GithubHook\Command\FileCommand\FileCommandInterface[] $commands
+     * @param \GitHook\Command\FileCommand\FileCommandInterface[] $commands
      * @param array $committedFiles
-     * @param \GithubHook\Helper\ConsoleHelper $consoleHelper
+     * @param \GitHook\Helper\ConsoleHelper $consoleHelper
      */
     public function __construct(array $commands, array $committedFiles, ConsoleHelper $consoleHelper)
     {
@@ -82,7 +82,7 @@ class FileCommandExecutor implements CommandExecutorInterface
 
     /**
      * @param string $committedFile
-     * @param \GithubHook\Command\CommandConfigurationInterface $configuration
+     * @param \GitHook\Command\CommandConfigurationInterface $configuration
      *
      * @return bool
      */

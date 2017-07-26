@@ -5,17 +5,17 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Hook;
+namespace GitHook\Hook;
 
 use Exception;
-use GithubHook\Command\FileCommand\FileCommandExecutor;
-use GithubHook\Command\FileCommand\PreCommit\ArchitectureCheckCommand;
-use GithubHook\Command\FileCommand\PreCommit\CodeStyleCheckCommand;
-use GithubHook\Command\FileCommand\PreCommit\CodeStyleFixCommand;
-use GithubHook\Command\FileCommand\PreCommit\PhpStanCheckCommand;
-use GithubHook\Command\RepositoryCommand\PreCommit\GitAddCommand;
-use GithubHook\Command\RepositoryCommand\RepositoryCommandExecutor;
-use GithubHook\Helper\ConsoleHelper;
+use GitHook\Command\FileCommand\FileCommandExecutor;
+use GitHook\Command\FileCommand\PreCommit\ArchitectureCheckCommand;
+use GitHook\Command\FileCommand\PreCommit\CodeStyleCheckCommand;
+use GitHook\Command\FileCommand\PreCommit\CodeStyleFixCommand;
+use GitHook\Command\FileCommand\PreCommit\PhpStanCheckCommand;
+use GitHook\Command\RepositoryCommand\PreCommit\GitAddCommand;
+use GitHook\Command\RepositoryCommand\RepositoryCommandExecutor;
+use GitHook\Helper\ConsoleHelper;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -90,7 +90,7 @@ class SprykerPreCommit extends Application
     }
 
     /**
-     * @return \GithubHook\Command\FileCommand\FileCommandInterface[]
+     * @return \GitHook\Command\FileCommand\FileCommandInterface[]
      */
     private function getFileCommands()
     {
@@ -103,7 +103,7 @@ class SprykerPreCommit extends Application
     }
 
     /**
-     * @return \GithubHook\Command\RepositoryCommand\RepositoryCommandInterface[]
+     * @return \GitHook\Command\RepositoryCommand\RepositoryCommandInterface[]
      */
     private function getRepositoryCommands()
     {

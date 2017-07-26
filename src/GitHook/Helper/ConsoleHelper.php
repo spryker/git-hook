@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Helper;
+namespace GitHook\Helper;
 
 use Symfony\Component\Console\Style\SymfonyStyle;
 

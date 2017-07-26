@@ -5,13 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Command\FileCommand;
+namespace GitHook\Command\FileCommand;
 
 interface CommandExecutorInterface
 {
 
     /**
-     * @param \GithubHook\Command\FileCommand\FileCommandInterface[] $fileCommands
+     * @param \GitHook\Command\FileCommand\FileCommandInterface[] $fileCommands
      * @param array $committedFiles
      *
      * @return void

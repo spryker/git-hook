@@ -1,6 +1,6 @@
 {
-  "name": "spryker/github-hooks",
-  "description": "Spryker Github hooks",
+  "name": "spryker/git-hook",
+  "description": "Spryker Git hooks",
   "type": "library",
   "license": "MIT",
   "keywords": ["framework", "sniffer", "architecture", "standards"],
@@ -12,7 +12,7 @@
     }
   ],
   "support": {
-    "source": "https://github.com/spryker/github-hooks"
+    "source": "https://github.com/spryker/git-hook"
   },
   "require": {
     "php": ">=5.4.16",
@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-0": {
-      "GithubHook": "src"
+      "GitHook": "src"
     }
   }
 }

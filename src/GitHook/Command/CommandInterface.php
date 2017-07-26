@@ -5,15 +5,15 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Command;
+namespace GitHook\Command;
 
 interface CommandInterface
 {
 
     /**
-     * @param \GithubHook\Command\CommandConfigurationInterface $configuration
+     * @param \GitHook\Command\CommandConfigurationInterface $configuration
      *
-     * @return \GithubHook\Command\CommandConfigurationInterface
+     * @return \GitHook\Command\CommandConfigurationInterface
      */
     public function configure(CommandConfigurationInterface $configuration);
 

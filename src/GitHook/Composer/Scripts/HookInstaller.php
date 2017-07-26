@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Composer\Scripts;
+namespace GitHook\Composer\Scripts;
 
 use Composer\Script\Event;
 

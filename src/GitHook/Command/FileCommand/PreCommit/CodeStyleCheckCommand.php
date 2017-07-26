@@ -5,28 +5,28 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Command\FileCommand\PreCommit;
+namespace GitHook\Command\FileCommand\PreCommit;
 
-use GithubHook\Command\CommandConfigurationInterface;
-use GithubHook\Command\CommandResult;
-use GithubHook\Command\FileCommand\FileCommandInterface;
-use GithubHook\Helper\ProcessBuilderHelper;
+use GitHook\Command\CommandConfigurationInterface;
+use GitHook\Command\CommandResult;
+use GitHook\Command\FileCommand\FileCommandInterface;
+use GitHook\Helper\ProcessBuilderHelper;
 
-class ArchitectureCheckCommand implements FileCommandInterface
+class CodeStyleCheckCommand implements FileCommandInterface
 {
 
     use ProcessBuilderHelper;
 
     /**
-     * @param \GithubHook\Command\CommandConfigurationInterface $commandConfiguration
+     * @param \GitHook\Command\CommandConfigurationInterface $commandConfiguration
      *
-     * @return \GithubHook\Command\CommandConfigurationInterface
+     * @return \GitHook\Command\CommandConfigurationInterface
      */
     public function configure(CommandConfigurationInterface $commandConfiguration)
     {
         $commandConfiguration
-            ->setName('Architecture check')
-            ->setDescription('Checks the Architecture rules.')
+            ->setName('CodeStyle check')
+            ->setDescription('Checks for not automatically fixable CodeStyle bugs.')
             ->setAcceptedFileExtensions('php');
 
         return $commandConfiguration;
@@ -35,13 +35,13 @@ class ArchitectureCheckCommand implements FileCommandInterface
     /**
      * @param string $file
      *
-     * @return \GithubHook\Command\CommandResult
+     * @return \GitHook\Command\CommandResult
      */
     public function run($file)
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['vendor/bin/phpmd', $file, 'xml', 'vendor/spryker/architecture-sniffer/src/ruleset.xml'];
+        $processDefinition = ['vendor/bin/phpcs', $file, '--standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml'];
         $process = $this->buildProcess($processDefinition);
         $process->run();
 

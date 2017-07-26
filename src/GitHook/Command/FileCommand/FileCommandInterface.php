@@ -5,9 +5,9 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Command\FileCommand;
+namespace GitHook\Command\FileCommand;
 
-use GithubHook\Command\CommandInterface;
+use GitHook\Command\CommandInterface;
 
 interface FileCommandInterface extends CommandInterface
 {
@@ -15,7 +15,7 @@ interface FileCommandInterface extends CommandInterface
     /**
      * @param string $file
      *
-     * @return \GithubHook\Command\CommandResult
+     * @return \GitHook\Command\CommandResult
      */
     public function run($file);
 
