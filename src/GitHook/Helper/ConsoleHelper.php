@@ -17,7 +17,7 @@ class ConsoleHelper extends SymfonyStyle
      *
      * @return void
      */
-    public function githubHookHeader($hookName)
+    public function gitHookHeader($hookName)
     {
         $output = PHP_EOL . PHP_EOL . '  ' . $hookName . PHP_EOL;
         $this->writeln(sprintf('<fg=white;options=bold;bg=green>%s</fg=white;options=bold;bg=green>', $output));

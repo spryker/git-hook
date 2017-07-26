@@ -39,7 +39,7 @@ class SprykerPreCommit extends Application
     public function doRun(InputInterface $input, OutputInterface $output)
     {
         $consoleHelper = new ConsoleHelper($input, $output);
-        $consoleHelper->githubhookHeader('Spryker Github pre-commit hook');
+        $consoleHelper->gitHookHeader('Spryker Git pre-commit hook');
 
         $committedFiles = $this->extractCommittedFiles();
 

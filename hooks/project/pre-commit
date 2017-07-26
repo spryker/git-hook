@@ -6,7 +6,7 @@ define('PATH_PREFIX', DIRECTORY_SEPARATOR);
 
 require PROJECT_ROOT . '/vendor/autoload.php';
 
-use GithubHook\Hook\SprykerPreCommit;
+use GitHook\Hook\SprykerPreCommit;
 
 $console = new SprykerPreCommit();
 $console->run();

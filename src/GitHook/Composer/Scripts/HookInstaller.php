@@ -24,23 +24,10 @@ class HookInstaller
      *
      * @return bool
      */
-    public static function installHooks(Event $event)
-    {
-        self::installProjectHooks($event);
-        self::installSprykerHooks($event);
-
-        return true;
-    }
-
-    /**
-     * @param \Composer\Script\Event $event
-     *
-     * @return void
-     */
-    protected static function installProjectHooks(Event $event)
+    public static function installProjectHooks(Event $event)
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
-        $hookDirectory = $vendorDir . '/spryker/github-hooks/hooks/project/';
+        $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/project/';
         $gitHookDirectory = $vendorDir . '/../.git/hooks/';
 
         foreach (static::$hooks as $hook) {
@@ -51,17 +38,19 @@ class HookInstaller
 
             $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
         }
+
+        return true;
     }
 
     /**
      * @param \Composer\Script\Event $event
      *
-     * @return void
+     * @return bool
      */
-    protected static function installSprykerHooks(Event $event)
+    public static function installSprykerHooks(Event $event)
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
-        $hookDirectory = $vendorDir . '/spryker/github-hooks/hooks/spryker/';
+        $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker/';
         $gitHookDirectory = $vendorDir . '/spryker/spryker/.git/hooks/';
 
         foreach (static::$hooks as $hook) {
@@ -71,6 +60,8 @@ class HookInstaller
 
             $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
         }
+
+        return true;
     }
 
 }
