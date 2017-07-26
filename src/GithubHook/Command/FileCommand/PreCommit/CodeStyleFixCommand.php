@@ -11,6 +11,7 @@ use GithubHook\Command\CommandConfigurationInterface;
 use GithubHook\Command\CommandResult;
 use GithubHook\Command\FileCommand\FileCommandInterface;
 use GithubHook\Helper\ProcessBuilderHelper;
+use Symfony\Component\Process\ProcessBuilder;
 
 class CodeStyleFixCommand implements FileCommandInterface
 {
@@ -26,7 +27,8 @@ class CodeStyleFixCommand implements FileCommandInterface
     {
         $commandConfiguration
             ->setName('CodeStyle fixer')
-            ->setDescription('Fixes all fixable CodeStyle bugs. !!! If you run commit command with "--no-verify (-n)" CodeStyle fixer has no effect, you need to run it by yourself.');
+            ->setDescription('Fixes all fixable CodeStyle bugs.')
+            ->setAcceptedFileExtensions('php');
 
         return $commandConfiguration;
     }
@@ -34,21 +36,15 @@ class CodeStyleFixCommand implements FileCommandInterface
     /**
      * @param string $file
      *
-     * @return bool|\GithubHook\Command\CommandResult
+     * @return \GithubHook\Command\CommandResult
      */
     public function run($file)
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['vendor/bin/console', 'code:sniff', '-f', $file];
+        $processDefinition = ['vendor/bin/phpcbf', $file, '--standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml'];
         $process = $this->buildProcess($processDefinition);
         $process->run();
-
-        if (!$process->isSuccessful()) {
-            $commandResult
-                ->setError(trim($process->getErrorOutput()))
-                ->setMessage(trim($process->getOutput()));
-        }
 
         return $commandResult;
     }

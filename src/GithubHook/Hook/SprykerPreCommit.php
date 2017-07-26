@@ -12,6 +12,9 @@ use GithubHook\Command\FileCommand\FileCommandExecutor;
 use GithubHook\Command\FileCommand\PreCommit\ArchitectureCheckCommand;
 use GithubHook\Command\FileCommand\PreCommit\CodeStyleCheckCommand;
 use GithubHook\Command\FileCommand\PreCommit\CodeStyleFixCommand;
+use GithubHook\Command\FileCommand\PreCommit\PhpStanCheckCommand;
+use GithubHook\Command\RepositoryCommand\PreCommit\GitAddCommand;
+use GithubHook\Command\RepositoryCommand\RepositoryCommandExecutor;
 use GithubHook\Helper\ConsoleHelper;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
@@ -41,12 +44,16 @@ class SprykerPreCommit extends Application
         $committedFiles = $this->extractCommittedFiles();
 
         $fileCommandExecutor = new FileCommandExecutor($this->getFileCommands(), $committedFiles, $consoleHelper);
-        $success = $fileCommandExecutor->execute();
+        $fileCommandSuccess = $fileCommandExecutor->execute();
 
-        if (!$success) {
+        $repositoryCommandExecutor = new RepositoryCommandExecutor($this->getRepositoryCommands(), $consoleHelper);
+        $repositoryCommandSuccess = $repositoryCommandExecutor->execute();
+
+        if (!$fileCommandSuccess || !$repositoryCommandSuccess) {
             throw new Exception(PHP_EOL . PHP_EOL . 'There are some errors! If you can not fix them you can append "--no-verify (-n)" to your commit command.');
         }
 
+        $consoleHelper->newLine(2);
         $consoleHelper->success('Good job dude!');
     }
 
@@ -90,7 +97,18 @@ class SprykerPreCommit extends Application
         return [
             new CodeStyleFixCommand(),
             new CodeStyleCheckCommand(),
+            new PhpStanCheckCommand(),
             new ArchitectureCheckCommand(),
+        ];
+    }
+
+    /**
+     * @return \GithubHook\Command\RepositoryCommand\RepositoryCommandInterface[]
+     */
+    private function getRepositoryCommands()
+    {
+        return [
+            new GitAddCommand(),
         ];
     }
 

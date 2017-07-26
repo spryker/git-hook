@@ -5,14 +5,15 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GithubHook\Command\FileCommand\PreCommit;
+namespace GithubHook\Command\RepositoryCommand\PreCommit;
 
 use GithubHook\Command\CommandConfigurationInterface;
 use GithubHook\Command\CommandResult;
-use GithubHook\Command\FileCommand\FileCommandInterface;
+use GithubHook\Command\RepositoryCommand\RepositoryCommandInterface;
 use GithubHook\Helper\ProcessBuilderHelper;
+use Symfony\Component\Process\ProcessBuilder;
 
-class CodeStyleCheckCommand implements FileCommandInterface
+class GitAddCommand implements RepositoryCommandInterface
 {
 
     use ProcessBuilderHelper;
@@ -25,24 +26,23 @@ class CodeStyleCheckCommand implements FileCommandInterface
     public function configure(CommandConfigurationInterface $commandConfiguration)
     {
         $commandConfiguration
-            ->setName('CodeStyle check')
-            ->setDescription('Checks for not automatically fixable CodeStyle bugs.')
-            ->setAcceptedFileExtensions('php');
+            ->setName('Git add command')
+            ->setDescription('If one of the other commands changed a file we need to add it otherwise it will be ignored in this commit.');
 
         return $commandConfiguration;
     }
 
     /**
-     * @param string $file
-     *
      * @return \GithubHook\Command\CommandResult
      */
-    public function run($file)
+    public function run()
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['vendor/bin/phpcs', $file, '--standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml'];
-        $process = $this->buildProcess($processDefinition);
+        $processDefinition = ['git', 'add', '.'];
+        $processBuilder = new ProcessBuilder($processDefinition);
+        $processBuilder->setWorkingDirectory(PROJECT_ROOT . PATH_PREFIX);
+        $process = $processBuilder->getProcess();
         $process->run();
 
         if (!$process->isSuccessful()) {

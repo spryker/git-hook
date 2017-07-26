@@ -11,8 +11,12 @@ use GithubHook\Command\CommandConfigurationInterface;
 use GithubHook\Command\CommandResult;
 use GithubHook\Command\FileCommand\FileCommandInterface;
 use GithubHook\Helper\ProcessBuilderHelper;
+use Symfony\Component\Process\Process;
 
-class CodeStyleCheckCommand implements FileCommandInterface
+/**
+ * If you see an error about something can't be autoloaded, check if there is an alias for the given class.
+ */
+class PhpStanCheckCommand implements FileCommandInterface
 {
 
     use ProcessBuilderHelper;
@@ -25,8 +29,7 @@ class CodeStyleCheckCommand implements FileCommandInterface
     public function configure(CommandConfigurationInterface $commandConfiguration)
     {
         $commandConfiguration
-            ->setName('CodeStyle check')
-            ->setDescription('Checks for not automatically fixable CodeStyle bugs.')
+            ->setName('PhpStan check')
             ->setAcceptedFileExtensions('php');
 
         return $commandConfiguration;
@@ -41,8 +44,7 @@ class CodeStyleCheckCommand implements FileCommandInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['vendor/bin/phpcs', $file, '--standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml'];
-        $process = $this->buildProcess($processDefinition);
+        $process = new Process('vendor/bin/phpstan analyse --autoload-file=vendor/autoload.php ' . $file, PROJECT_ROOT);
         $process->run();
 
         if (!$process->isSuccessful()) {
