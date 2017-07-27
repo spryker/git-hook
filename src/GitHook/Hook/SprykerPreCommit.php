@@ -12,6 +12,7 @@ use GitHook\Command\FileCommand\FileCommandExecutor;
 use GitHook\Command\FileCommand\PreCommit\ArchitectureCheckCommand;
 use GitHook\Command\FileCommand\PreCommit\CodeStyleCheckCommand;
 use GitHook\Command\FileCommand\PreCommit\CodeStyleFixCommand;
+use GitHook\Command\FileCommand\PreCommit\PhpMdCheckCommand;
 use GitHook\Command\FileCommand\PreCommit\PhpStanCheckCommand;
 use GitHook\Command\RepositoryCommand\PreCommit\GitAddCommand;
 use GitHook\Command\RepositoryCommand\RepositoryCommandExecutor;
@@ -98,6 +99,7 @@ class SprykerPreCommit extends Application
             new CodeStyleFixCommand(),
             new CodeStyleCheckCommand(),
             new PhpStanCheckCommand(),
+            new PhpMdCheckCommand(),
             new ArchitectureCheckCommand(),
         ];
     }

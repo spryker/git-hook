@@ -15,8 +15,16 @@ class HookInstaller
     /**
      * @var array
      */
-    protected static $hooks = [
+    protected static $projectHooks = [
         'pre-commit',
+    ];
+
+    /**
+     * @var array
+     */
+    protected static $sprykerHooks = [
+        'pre-commit',
+        'pre-push',
     ];
 
     /**
@@ -30,11 +38,12 @@ class HookInstaller
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/project/';
         $gitHookDirectory = $vendorDir . '/../.git/hooks/';
 
-        foreach (static::$hooks as $hook) {
+        foreach (static::$projectHooks as $hook) {
             $src = $hookDirectory . $hook;
             $dist = $gitHookDirectory . $hook;
 
             copy($src, $dist);
+            chmod($dist, 0755);
 
             $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
         }
@@ -53,10 +62,11 @@ class HookInstaller
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker/';
         $gitHookDirectory = $vendorDir . '/spryker/spryker/.git/hooks/';
 
-        foreach (static::$hooks as $hook) {
+        foreach (static::$sprykerHooks as $hook) {
             $src = $hookDirectory . $hook;
             $dist = $gitHookDirectory . $hook;
             copy($src, $dist);
+            chmod($dist, 0755);
 
             $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
         }

@@ -1,0 +1,12 @@
+#!/usr/bin/php
+<?php
+
+define('PROJECT_ROOT', '/data/shop/development/current');
+define('PATH_PREFIX', DIRECTORY_SEPARATOR . 'vendor/spryker/spryker/');
+
+require PROJECT_ROOT . '/vendor/autoload.php';
+
+use GitHook\Hook\SprykerPrePush;
+
+$console = new SprykerPrePush();
+$console->run();
