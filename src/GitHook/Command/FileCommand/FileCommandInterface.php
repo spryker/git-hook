@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -8,6 +8,7 @@
 namespace GitHook\Command\FileCommand;
 
 use GitHook\Command\CommandInterface;
+use GitHook\Command\CommandResult;
 
 interface FileCommandInterface extends CommandInterface
 {
@@ -17,6 +18,6 @@ interface FileCommandInterface extends CommandInterface
      *
      * @return \GitHook\Command\CommandResult
      */
-    public function run($file);
+    public function run(string $file): CommandResult;
 
 }

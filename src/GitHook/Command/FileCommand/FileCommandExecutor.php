@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -44,7 +44,7 @@ class FileCommandExecutor implements CommandExecutorInterface
     /**
      * @return bool
      */
-    public function execute()
+    public function execute(): bool
     {
         $success = true;
         foreach ($this->commands as $command) {
@@ -86,7 +86,7 @@ class FileCommandExecutor implements CommandExecutorInterface
      *
      * @return bool
      */
-    private function acceptsFileExtension($committedFile, CommandConfigurationInterface $configuration)
+    private function acceptsFileExtension(string $committedFile, CommandConfigurationInterface $configuration): bool
     {
         $pathinfo = pathinfo($committedFile);
         $extension = $pathinfo['extension'];

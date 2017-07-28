@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -28,7 +28,7 @@ class CommandConfiguration implements CommandConfigurationInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -36,9 +36,9 @@ class CommandConfiguration implements CommandConfigurationInterface
     /**
      * @param string $name
      *
-     * @return $this
+     * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function setName($name)
+    public function setName(string $name): CommandConfigurationInterface
     {
         $this->name = $name;
 
@@ -48,7 +48,7 @@ class CommandConfiguration implements CommandConfigurationInterface
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -56,9 +56,9 @@ class CommandConfiguration implements CommandConfigurationInterface
     /**
      * @param string $description
      *
-     * @return $this
+     * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function setDescription($description)
+    public function setDescription(string $description): CommandConfigurationInterface
     {
         $this->description = $description;
 
@@ -68,7 +68,7 @@ class CommandConfiguration implements CommandConfigurationInterface
     /**
      * @return array
      */
-    public function getAcceptedFileExtensions()
+    public function getAcceptedFileExtensions(): array
     {
         return $this->acceptedFileExtensions;
     }
@@ -76,9 +76,9 @@ class CommandConfiguration implements CommandConfigurationInterface
     /**
      * @param string|array $fileExtensions
      *
-     * @return $this
+     * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function setAcceptedFileExtensions($fileExtensions)
+    public function setAcceptedFileExtensions($fileExtensions): CommandConfigurationInterface
     {
         $this->acceptedFileExtensions = (array)$fileExtensions;
 

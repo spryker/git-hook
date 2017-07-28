@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -15,6 +15,6 @@ interface CommandInterface
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function configure(CommandConfigurationInterface $configuration);
+    public function configure(CommandConfigurationInterface $configuration): CommandConfigurationInterface;
 
 }

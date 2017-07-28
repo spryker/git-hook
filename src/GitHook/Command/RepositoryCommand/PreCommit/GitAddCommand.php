@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -9,6 +9,7 @@ namespace GitHook\Command\RepositoryCommand\PreCommit;
 
 use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandResult;
+use GitHook\Command\CommandResultInterface;
 use GitHook\Command\RepositoryCommand\RepositoryCommandInterface;
 use GitHook\Helper\ProcessBuilderHelper;
 use Symfony\Component\Process\ProcessBuilder;
@@ -23,7 +24,7 @@ class GitAddCommand implements RepositoryCommandInterface
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function configure(CommandConfigurationInterface $commandConfiguration)
+    public function configure(CommandConfigurationInterface $commandConfiguration): CommandConfigurationInterface
     {
         $commandConfiguration
             ->setName('Git add command')
@@ -33,9 +34,9 @@ class GitAddCommand implements RepositoryCommandInterface
     }
 
     /**
-     * @return \GitHook\Command\CommandResult
+     * @return \GitHook\Command\CommandResultInterface
      */
-    public function run()
+    public function run(): CommandResultInterface
     {
         $commandResult = new CommandResult();
 

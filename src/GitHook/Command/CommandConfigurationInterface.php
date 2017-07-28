@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -18,32 +18,32 @@ interface CommandConfigurationInterface
     /**
      * @param string $name
      *
-     * @return $this
+     * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function setName($name);
+    public function setName(string $name): CommandConfigurationInterface;
 
     /**
      * @return string
      */
-    public function getDescription();
+    public function getDescription(): string;
 
     /**
      * @param string $description
      *
-     * @return $this
+     * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function setDescription($description);
+    public function setDescription(string $description): CommandConfigurationInterface;
 
     /**
      * @return array
      */
-    public function getAcceptedFileExtensions();
+    public function getAcceptedFileExtensions(): array;
 
     /**
-     * @param string $fileExtensions
+     * @param string|array $fileExtensions
      *
-     * @return $this
+     * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function setAcceptedFileExtensions($fileExtensions);
+    public function setAcceptedFileExtensions($fileExtensions): CommandConfigurationInterface;
 
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -11,11 +11,8 @@ interface CommandExecutorInterface
 {
 
     /**
-     * @param \GitHook\Command\FileCommand\FileCommandInterface[] $fileCommands
-     * @param array $committedFiles
-     *
-     * @return void
+     * @return bool
      */
-    public function execute();
+    public function execute(): bool;
 
 }

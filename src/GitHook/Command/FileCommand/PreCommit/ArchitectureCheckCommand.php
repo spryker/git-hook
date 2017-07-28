@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -22,7 +22,7 @@ class ArchitectureCheckCommand implements FileCommandInterface
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function configure(CommandConfigurationInterface $commandConfiguration)
+    public function configure(CommandConfigurationInterface $commandConfiguration): CommandConfigurationInterface
     {
         $commandConfiguration
             ->setName('Architecture check')
@@ -37,7 +37,7 @@ class ArchitectureCheckCommand implements FileCommandInterface
      *
      * @return \GitHook\Command\CommandResult
      */
-    public function run($file)
+    public function run(string $file): CommandResult
     {
         $commandResult = new CommandResult();
 
