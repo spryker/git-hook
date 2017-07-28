@@ -8,15 +8,17 @@
 namespace GitHook\Hook;
 
 use Exception;
-use GitHook\Command\RepositoryCommand\PrePush\DependencyCheckCommand;
 use GitHook\Command\RepositoryCommand\RepositoryCommandExecutor;
 use GitHook\Helper\ConsoleHelper;
+use GitHook\Helper\ContextHelper;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SprykerPrePush extends Application
 {
+
+    use ContextHelper;
 
     public function __construct()
     {
@@ -36,8 +38,9 @@ class SprykerPrePush extends Application
         $consoleHelper = new ConsoleHelper($input, $output);
         $consoleHelper->gitHookHeader('Spryker Git pre-push hook');
 
-        $repositoryCommandExecutor = new RepositoryCommandExecutor($this->getRepositoryCommands(), $consoleHelper);
-        $repositoryCommandSuccess = $repositoryCommandExecutor->execute();
+        $context = $this->createContext();
+        $repositoryCommandExecutor = new RepositoryCommandExecutor($consoleHelper);
+        $repositoryCommandSuccess = $repositoryCommandExecutor->execute($context);
 
         if (!$repositoryCommandSuccess) {
             throw new Exception(PHP_EOL . PHP_EOL . 'There are some errors! If you can not fix them you can append "--no-verify (-n)" to your push command.');
@@ -45,16 +48,6 @@ class SprykerPrePush extends Application
 
         $consoleHelper->newLine(2);
         $consoleHelper->success('Good job dude!');
-    }
-
-    /**
-     * @return \GitHook\Command\RepositoryCommand\RepositoryCommandInterface[]
-     */
-    private function getRepositoryCommands()
-    {
-        return [
-            new DependencyCheckCommand(),
-        ];
     }
 
 }

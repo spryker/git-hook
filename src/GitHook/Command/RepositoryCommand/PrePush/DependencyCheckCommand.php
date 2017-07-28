@@ -8,13 +8,14 @@
 namespace GitHook\Command\RepositoryCommand\PrePush;
 
 use GitHook\Command\CommandConfigurationInterface;
+use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\CommandResultInterface;
-use GitHook\Command\RepositoryCommand\RepositoryCommandInterface;
+use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ProcessBuilderHelper;
 use Symfony\Component\Process\ProcessBuilder;
 
-class DependencyCheckCommand implements RepositoryCommandInterface
+class DependencyCheckCommand implements CommandInterface
 {
 
     use ProcessBuilderHelper;
@@ -34,9 +35,11 @@ class DependencyCheckCommand implements RepositoryCommandInterface
     }
 
     /**
+     * @param \GitHook\Command\Context\CommandContextInterface $context
+     *
      * @return \GitHook\Command\CommandResultInterface
      */
-    public function run(): CommandResultInterface
+    public function run(CommandContextInterface $context): CommandResultInterface
     {
         $commandResult = new CommandResult();
 

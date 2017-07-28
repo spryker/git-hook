@@ -7,6 +7,8 @@
 
 namespace GitHook\Command;
 
+use GitHook\Command\Context\CommandContextInterface;
+
 interface CommandInterface
 {
 
@@ -16,5 +18,12 @@ interface CommandInterface
      * @return \GitHook\Command\CommandConfigurationInterface
      */
     public function configure(CommandConfigurationInterface $configuration): CommandConfigurationInterface;
+
+    /**
+     * @param \GitHook\Command\Context\CommandContextInterface $context
+     *
+     * @return \GitHook\Command\CommandResultInterface
+     */
+    public function run(CommandContextInterface $context): CommandResultInterface;
 
 }

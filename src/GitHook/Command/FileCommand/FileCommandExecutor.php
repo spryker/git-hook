@@ -9,15 +9,12 @@ namespace GitHook\Command\FileCommand;
 
 use GitHook\Command\CommandConfiguration;
 use GitHook\Command\CommandConfigurationInterface;
+use GitHook\Command\CommandExecutorInterface;
+use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ConsoleHelper;
 
 class FileCommandExecutor implements CommandExecutorInterface
 {
-
-    /**
-     * @var \GitHook\Command\FileCommand\FileCommandInterface[]
-     */
-    protected $commands;
 
     /**
      * @var array
@@ -30,24 +27,24 @@ class FileCommandExecutor implements CommandExecutorInterface
     protected $consoleHelper;
 
     /**
-     * @param \GitHook\Command\FileCommand\FileCommandInterface[] $commands
      * @param array $committedFiles
      * @param \GitHook\Helper\ConsoleHelper $consoleHelper
      */
-    public function __construct(array $commands, array $committedFiles, ConsoleHelper $consoleHelper)
+    public function __construct(array $committedFiles, ConsoleHelper $consoleHelper)
     {
-        $this->commands = $commands;
         $this->committedFiles = $committedFiles;
         $this->consoleHelper = $consoleHelper;
     }
 
     /**
+     * @param \GitHook\Command\Context\CommandContextInterface $context
+     *
      * @return bool
      */
-    public function execute(): bool
+    public function execute(CommandContextInterface $context): bool
     {
         $success = true;
-        foreach ($this->commands as $command) {
+        foreach ($context->getConfig()->getFileCommands() as $command) {
             $configuration = new CommandConfiguration();
             $configuration = $command->configure($configuration);
 
@@ -62,7 +59,9 @@ class FileCommandExecutor implements CommandExecutorInterface
                     continue;
                 }
 
-                $commandResult = $command->run($committedFile);
+                $context->setFile($committedFile);
+
+                $commandResult = $command->run($context);
                 if (!$commandResult->isSuccess()) {
                     $messages[] = $commandResult->getMessage();
                     $success = false;

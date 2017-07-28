@@ -8,15 +8,18 @@
 namespace GitHook\Command\FileCommand\PreCommit;
 
 use GitHook\Command\CommandConfigurationInterface;
+use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
-use GitHook\Command\FileCommand\FileCommandInterface;
+use GitHook\Command\CommandResultInterface;
+use GitHook\Command\Context\CommandContextInterface;
+use GitHook\Command\FileCommand\PreCommit\PhpStan\PhpStanConfiguration;
 use GitHook\Helper\ProcessBuilderHelper;
 use Symfony\Component\Process\Process;
 
 /**
  * If you see an error about something can't be autoloaded, check if there is an alias for the given class.
  */
-class PhpStanCheckCommand implements FileCommandInterface
+class PhpStanCheckCommand implements CommandInterface
 {
 
     use ProcessBuilderHelper;
@@ -36,15 +39,21 @@ class PhpStanCheckCommand implements FileCommandInterface
     }
 
     /**
-     * @param string $file
+     * @param \GitHook\Command\Context\CommandContextInterface $context
      *
-     * @return \GitHook\Command\CommandResult
+     * @return \GitHook\Command\CommandResultInterface
      */
-    public function run(string $file): CommandResult
+    public function run(CommandContextInterface $context): CommandResultInterface
     {
+        $phpStanConfiguration = new PhpStanConfiguration($context->getCommandConfig());
         $commandResult = new CommandResult();
 
-        $process = new Process('vendor/bin/phpstan analyse --autoload-file=vendor/autoload.php ' . $file, PROJECT_ROOT);
+        $command = 'vendor/bin/phpstan analyse ' . $context->getFile() . ' -l=' . $phpStanConfiguration->getLevel();
+        if ($phpStanConfiguration->getConfigPath()) {
+            $command .= ' -c=' . $phpStanConfiguration->getConfigPath();
+        }
+
+        $process = new Process($command, PROJECT_ROOT);
         $process->run();
 
         if (!$process->isSuccessful()) {

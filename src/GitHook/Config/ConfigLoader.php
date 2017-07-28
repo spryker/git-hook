@@ -7,15 +7,24 @@
 
 namespace GitHook\Config;
 
+use Symfony\Component\Yaml\Yaml;
+
 class ConfigLoader
 {
 
     /**
-     * @return array
+     * @param string $pathToConfig
+     *
+     * @return \GitHook\Config\GitHookConfig
      */
-    public function parseConfig(string $pathToConfig): array
+    public function getConfig(string $pathToConfig): GitHookConfig
     {
-        $config = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($pathToConfig));
-        echo '<pre>' . PHP_EOL . \Symfony\Component\VarDumper\VarDumper::dump($config) . PHP_EOL . 'Line: ' . __LINE__ . PHP_EOL . 'File: ' . __FILE__ . die();
+        $config = [];
+        if (file_exists($pathToConfig)) {
+            $config = Yaml::parse(file_get_contents($pathToConfig));
+        }
+
+        return new GitHookConfig($config);
     }
+
 }

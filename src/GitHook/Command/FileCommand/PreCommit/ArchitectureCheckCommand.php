@@ -8,11 +8,13 @@
 namespace GitHook\Command\FileCommand\PreCommit;
 
 use GitHook\Command\CommandConfigurationInterface;
+use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
-use GitHook\Command\FileCommand\FileCommandInterface;
+use GitHook\Command\CommandResultInterface;
+use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ProcessBuilderHelper;
 
-class ArchitectureCheckCommand implements FileCommandInterface
+class ArchitectureCheckCommand implements CommandInterface
 {
 
     use ProcessBuilderHelper;
@@ -33,15 +35,15 @@ class ArchitectureCheckCommand implements FileCommandInterface
     }
 
     /**
-     * @param string $file
+     * @param \GitHook\Command\Context\CommandContextInterface $context
      *
-     * @return \GitHook\Command\CommandResult
+     * @return \GitHook\Command\CommandResultInterface
      */
-    public function run(string $file): CommandResult
+    public function run(CommandContextInterface $context): CommandResultInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['vendor/bin/phpmd', $file, 'xml', 'vendor/spryker/architecture-sniffer/src/ruleset.xml'];
+        $processDefinition = ['vendor/bin/phpmd', $context->getFile(), 'xml', 'vendor/spryker/architecture-sniffer/src/ruleset.xml'];
         $process = $this->buildProcess($processDefinition);
         $process->run();
 

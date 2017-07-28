@@ -8,15 +8,12 @@
 namespace GitHook\Command\RepositoryCommand;
 
 use GitHook\Command\CommandConfiguration;
+use GitHook\Command\CommandExecutorInterface;
+use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ConsoleHelper;
 
-class RepositoryCommandExecutor
+class RepositoryCommandExecutor implements CommandExecutorInterface
 {
-
-    /**
-     * @var \GitHook\Command\RepositoryCommand\RepositoryCommandInterface[]
-     */
-    protected $commands;
 
     /**
      * @var \GitHook\Helper\ConsoleHelper
@@ -24,28 +21,28 @@ class RepositoryCommandExecutor
     protected $consoleHelper;
 
     /**
-     * @param \GitHook\Command\RepositoryCommand\RepositoryCommandInterface[] $commands
      * @param \GitHook\Helper\ConsoleHelper $consoleHelper
      */
-    public function __construct(array $commands, ConsoleHelper $consoleHelper)
+    public function __construct(ConsoleHelper $consoleHelper)
     {
-        $this->commands = $commands;
         $this->consoleHelper = $consoleHelper;
     }
 
     /**
+     * @param \GitHook\Command\Context\CommandContextInterface $context
+     *
      * @return bool
      */
-    public function execute(): bool
+    public function execute(CommandContextInterface $context): bool
     {
         $success = true;
-        foreach ($this->commands as $command) {
+        foreach ($context->getConfig()->getRepositoryCommands() as $command) {
             $configuration = new CommandConfiguration();
             $configuration = $command->configure($configuration);
 
             $this->consoleHelper->commandInfo($configuration->getName(), $configuration->getDescription());
 
-            $commandResult = $command->run();
+            $commandResult = $command->run($context);
             if (!$commandResult->isSuccess()) {
                 $this->consoleHelper->errors((array)$commandResult->getMessage());
                 $success = false;

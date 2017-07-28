@@ -92,7 +92,7 @@ class HookInstaller
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
         $configLoader = new ConfigLoader();
-        $config = $configLoader->parseConfig($vendorDir . '/../.githook');
+        $config = $configLoader->getConfig($vendorDir . '/../.githook');
 
         $hookDirectory = $vendorDir . '/../hooks/git-hook/';
         $gitHookDirectory = $vendorDir . '/../.git/hooks/';
