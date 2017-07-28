@@ -11,7 +11,6 @@ use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\FileCommand\FileCommandInterface;
 use GitHook\Helper\ProcessBuilderHelper;
-use Symfony\Component\Process\ProcessBuilder;
 
 class CodeStyleFixCommand implements FileCommandInterface
 {

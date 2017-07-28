@@ -24,7 +24,8 @@ class HookInstaller
      */
     protected static $sprykerHooks = [
         'pre-commit',
-        'pre-push',
+        // This one is pretty expensive, do not use it for now.
+//        'pre-push',
     ];
 
     /**

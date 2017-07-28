@@ -1,0 +1,4 @@
+parameters:
+  bootstrap: %rootDir%/../../../.phpstan/bootstrap.php
+  excludes_analyse:
+    - %rootDir%/../../../src/GitHook/Composer/Scripts/*

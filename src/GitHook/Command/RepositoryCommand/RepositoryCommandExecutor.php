@@ -12,6 +12,7 @@ use GitHook\Helper\ConsoleHelper;
 
 class RepositoryCommandExecutor
 {
+
     /**
      * @var \GitHook\Command\RepositoryCommand\RepositoryCommandInterface[]
      */
@@ -23,7 +24,7 @@ class RepositoryCommandExecutor
     protected $consoleHelper;
 
     /**
-     * @param \GitHook\Command\FileCommand\FileCommandInterface[] $commands
+     * @param \GitHook\Command\RepositoryCommand\RepositoryCommandInterface[] $commands
      * @param \GitHook\Helper\ConsoleHelper $consoleHelper
      */
     public function __construct(array $commands, ConsoleHelper $consoleHelper)
@@ -53,4 +54,5 @@ class RepositoryCommandExecutor
 
         return $success;
     }
+
 }

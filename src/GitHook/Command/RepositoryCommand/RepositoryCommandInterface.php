@@ -7,7 +7,9 @@
 
 namespace GitHook\Command\RepositoryCommand;
 
-interface RepositoryCommandInterface
+use GitHook\Command\CommandInterface;
+
+interface RepositoryCommandInterface extends CommandInterface
 {
 
     /**
