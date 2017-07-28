@@ -1,0 +1,7 @@
+config:
+  phpstan:
+    level: 7
+    bootstrap: .phpstan/bootstrap.php
+
+excludedCommands:
+  - GitHook\Command\FileCommand\PreCommit\ArchitectureCheckCommand

@@ -25,11 +25,11 @@ class ConsoleHelper extends SymfonyStyle
 
     /**
      * @param string $name
-     * @param string|null $description
+     * @param string $description
      *
      * @return void
      */
-    public function commandInfo($name, $description = null)
+    public function commandInfo($name, $description)
     {
         $this->newLine(3);
         $this->section($name);

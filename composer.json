@@ -16,12 +16,14 @@
   },
   "require": {
     "php": ">=5.4.16",
-    "phpstan/phpstan": "^0.8"
+    "phpstan/phpstan": "^0.8",
+    "symfony/yaml": "^3.3"
   },
   "require-dev": {
     "spryker/code-sniffer": "*",
     "codeception/codeception": "^2.2.10",
-    "sebastian/phpcpd": "^3.0"
+    "sebastian/phpcpd": "^3.0",
+    "symfony/var-dumper": "^3.3"
   },
   "autoload": {
     "psr-0": {
@@ -29,6 +31,14 @@
     },
     "files": [
       "php-stan-autoload-shim.php"
+    ]
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "GitHook\\Composer\\Scripts\\HookInstaller::installGitHook"
+    ],
+    "post-update-cmd": [
+      "GitHook\\Composer\\Scripts\\HookInstaller::installGitHook"
     ]
   }
 }

@@ -18,7 +18,7 @@ class CommandConfiguration implements CommandConfigurationInterface
     /**
      * @var string
      */
-    protected $description;
+    protected $description = '';
 
     /**
      * @var array
