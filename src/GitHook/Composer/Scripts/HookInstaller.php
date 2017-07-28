@@ -48,7 +48,7 @@ class HookInstaller
 
         foreach (static::$projectHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
-            $dist = realpath($gitHookDirectory . $hook);
+            $dist = realpath($gitHookDirectory) . '/' . $hook;
 
             copy($src, $dist);
             chmod($dist, 0755);
@@ -72,7 +72,8 @@ class HookInstaller
 
         foreach (static::$sprykerHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
-            $dist = realpath($gitHookDirectory . $hook);
+            $dist = realpath($gitHookDirectory) . '/' . $hook;
+
             copy($src, $dist);
             chmod($dist, 0755);
 
@@ -96,7 +97,8 @@ class HookInstaller
 
         foreach (static::$gitHookHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
-            $dist = realpath($gitHookDirectory . $hook);
+            $dist = realpath($gitHookDirectory) . '/' . $hook;
+
             copy($src, $dist);
             chmod($dist, 0755);
 
