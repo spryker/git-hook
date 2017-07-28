@@ -53,8 +53,6 @@ class ArchitectureCheckCommand implements CommandInterface
                 ->setMessage(trim($process->getOutput()));
         }
 
-        var_dump($commandResult);
-
         return $commandResult;
     }
 
