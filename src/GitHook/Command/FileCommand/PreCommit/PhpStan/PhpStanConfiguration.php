@@ -20,9 +20,7 @@ class PhpStanConfiguration
      */
     public function __construct(array $config)
     {
-        if (isset($this->config['config']['phpstan'])) {
-            $this->config = $config['config']['phpstan'];
-        }
+        $this->config = $config;
     }
 
     /**

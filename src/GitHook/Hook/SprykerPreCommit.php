@@ -20,8 +20,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class SprykerPreCommit extends Application
 {
 
-    use ContextHelper;
     use CommittedFilesHelper;
+    use ContextHelper;
 
     public function __construct()
     {

@@ -35,18 +35,21 @@ class CommandContext implements CommandContextInterface
     }
 
     /**
+     * @return \GitHook\Config\GitHookConfig
+     */
+    public function getConfig(): GitHookConfig
+    {
+        return $this->config;
+    }
+
+    /**
      * @param string $commandName
      *
      * @return array
      */
     public function getCommandConfig($commandName): array
     {
-        $config = [];
-        if (isset($this->config['config'][$commandName])) {
-            $config = $this->config['config'][$commandName];
-        }
-
-        return $config;
+        return $this->config->getCommandConfig($commandName);
     }
 
     /**

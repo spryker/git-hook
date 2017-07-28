@@ -8,7 +8,6 @@
 namespace GitHook\Composer\Scripts;
 
 use Composer\Script\Event;
-use GitHook\Config\ConfigLoader;
 
 class HookInstaller
 {
@@ -48,8 +47,8 @@ class HookInstaller
         $gitHookDirectory = $vendorDir . '/../.git/hooks/';
 
         foreach (static::$projectHooks as $hook) {
-            $src = $hookDirectory . $hook;
-            $dist = $gitHookDirectory . $hook;
+            $src = realpath($hookDirectory . $hook);
+            $dist = realpath($gitHookDirectory . $hook);
 
             copy($src, $dist);
             chmod($dist, 0755);
@@ -72,8 +71,8 @@ class HookInstaller
         $gitHookDirectory = $vendorDir . '/spryker/spryker/.git/hooks/';
 
         foreach (static::$sprykerHooks as $hook) {
-            $src = $hookDirectory . $hook;
-            $dist = $gitHookDirectory . $hook;
+            $src = realpath($hookDirectory . $hook);
+            $dist = realpath($gitHookDirectory . $hook);
             copy($src, $dist);
             chmod($dist, 0755);
 
@@ -91,15 +90,13 @@ class HookInstaller
     public static function installGitHook(Event $event)
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
-        $configLoader = new ConfigLoader();
-        $config = $configLoader->getConfig($vendorDir . '/../.githook');
 
         $hookDirectory = $vendorDir . '/../hooks/git-hook/';
         $gitHookDirectory = $vendorDir . '/../.git/hooks/';
 
         foreach (static::$gitHookHooks as $hook) {
-            $src = $hookDirectory . $hook;
-            $dist = $gitHookDirectory . $hook;
+            $src = realpath($hookDirectory . $hook);
+            $dist = realpath($gitHookDirectory . $hook);
             copy($src, $dist);
             chmod($dist, 0755);
 

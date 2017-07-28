@@ -20,7 +20,7 @@ class ConfigLoader
     public function getConfig(string $pathToConfig): GitHookConfig
     {
         $config = [];
-        if (file_exists($pathToConfig)) {
+        if (is_file($pathToConfig)) {
             $config = Yaml::parse(file_get_contents($pathToConfig));
         }
 

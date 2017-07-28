@@ -31,7 +31,8 @@ class GitHookConfig
         $fileCommands = [];
         if (isset($this->config['includedFileCommands'])) {
             foreach ($this->config['includedFileCommands'] as $fileCommand) {
-                $fileCommands = new $fileCommand;
+                $fileCommand = '\\' . ltrim($fileCommand, '\\');
+                $fileCommands[] = new $fileCommand;
             }
         }
 
@@ -46,7 +47,8 @@ class GitHookConfig
         $repositoryCommands = [];
         if (isset($this->config['includedRepositoryCommands'])) {
             foreach ($this->config['includedRepositoryCommands'] as $repositoryCommand) {
-                $repositoryCommands = new $repositoryCommand;
+                $repositoryCommand = '\\' . ltrim($repositoryCommand, '\\');
+                $repositoryCommands[] = new $repositoryCommand;
             }
         }
 
@@ -64,6 +66,21 @@ class GitHookConfig
         }
 
         return $excludedCommands;
+    }
+
+    /**
+     * @param string $commandName
+     *
+     * @return array
+     */
+    public function getCommandConfig(string $commandName): array
+    {
+        $commandConfig = [];
+        if (isset($this->config['config'][$commandName])) {
+            $commandConfig = $this->config['config'][$commandName];
+        }
+
+        return $commandConfig;
     }
 
 }

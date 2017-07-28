@@ -45,12 +45,13 @@ class PhpStanCheckCommand implements CommandInterface
      */
     public function run(CommandContextInterface $context): CommandResultInterface
     {
-        $phpStanConfiguration = new PhpStanConfiguration($context->getCommandConfig());
+        $phpStanConfiguration = new PhpStanConfiguration($context->getCommandConfig('phpstan'));
         $commandResult = new CommandResult();
 
-        $command = 'vendor/bin/phpstan analyse ' . $context->getFile() . ' -l=' . $phpStanConfiguration->getLevel();
+        $command = 'vendor/bin/phpstan analyse ' . $context->getFile() . ' -l ' . $phpStanConfiguration->getLevel();
+
         if ($phpStanConfiguration->getConfigPath()) {
-            $command .= ' -c=' . $phpStanConfiguration->getConfigPath();
+            $command .= ' -c ' . $phpStanConfiguration->getConfigPath();
         }
 
         $process = new Process($command, PROJECT_ROOT);
