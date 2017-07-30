@@ -1,7 +1,6 @@
 config:
   phpstan:
     level: 7
-    bootstrap: .phpstan/bootstrap.php
     config: .phpstan/config.neon
 
 includedFileCommands:
