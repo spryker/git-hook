@@ -1,5 +1,5 @@
-#!/usr/bin/php
-<?php declare(strict_types=1);
+#!php
+<?php declare(strict_types = 1);
 
 define('PROJECT_ROOT', '/data/shop/development/current');
 define('PATH_PREFIX', DIRECTORY_SEPARATOR . 'vendor/spryker/spryker/');
