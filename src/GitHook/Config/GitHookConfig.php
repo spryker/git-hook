@@ -26,7 +26,7 @@ class GitHookConfig
     /**
      * @return \GitHook\Command\CommandInterface[]
      */
-    public function getFileCommands()
+    public function getPreCommitFileCommands()
     {
         $fileCommands = [];
         if (isset($this->config['preCommitFileCommands'])) {
@@ -42,7 +42,7 @@ class GitHookConfig
     /**
      * @return \GitHook\Command\CommandInterface[]
      */
-    public function getRepositoryCommands()
+    public function getPreCommitRepositoryCommands()
     {
         $repositoryCommands = [];
         if (isset($this->config['preCommitRepositoryCommands'])) {
