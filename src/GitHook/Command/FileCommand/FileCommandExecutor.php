@@ -44,7 +44,7 @@ class FileCommandExecutor implements CommandExecutorInterface
     public function execute(CommandContextInterface $context): bool
     {
         $success = true;
-        foreach ($context->getConfig()->getFileCommands() as $command) {
+        foreach ($context->getConfig()->getPreCommitFileCommands() as $command) {
             $configuration = new CommandConfiguration();
             $configuration = $command->configure($configuration);
 

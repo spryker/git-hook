@@ -26,11 +26,11 @@ class GitHookConfig
     /**
      * @return \GitHook\Command\CommandInterface[]
      */
-    public function getFileCommands(): array
+    public function getPreCommitFileCommands(): array
     {
         $fileCommands = [];
-        if (isset($this->config['includedFileCommands'])) {
-            foreach ($this->config['includedFileCommands'] as $fileCommand) {
+        if (isset($this->config['preCommitFileCommands'])) {
+            foreach ($this->config['preCommitFileCommands'] as $fileCommand) {
                 $fileCommand = '\\' . ltrim($fileCommand, '\\');
                 $fileCommands[] = new $fileCommand;
             }
@@ -42,30 +42,17 @@ class GitHookConfig
     /**
      * @return \GitHook\Command\CommandInterface[]
      */
-    public function getRepositoryCommands(): array
+    public function getPreCommitRepositoryCommands(): array
     {
         $repositoryCommands = [];
-        if (isset($this->config['includedRepositoryCommands'])) {
-            foreach ($this->config['includedRepositoryCommands'] as $repositoryCommand) {
+        if (isset($this->config['preCommitRepositoryCommands'])) {
+            foreach ($this->config['preCommitRepositoryCommands'] as $repositoryCommand) {
                 $repositoryCommand = '\\' . ltrim($repositoryCommand, '\\');
                 $repositoryCommands[] = new $repositoryCommand;
             }
         }
 
         return $repositoryCommands;
-    }
-
-    /**
-     * @return array
-     */
-    public function getExcludedCommands(): array
-    {
-        $excludedCommands = [];
-        if (isset($this->config['excludedCommands'])) {
-            $excludedCommands = $this->config['excludedCommands'];
-        }
-
-        return $excludedCommands;
     }
 
     /**

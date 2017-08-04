@@ -37,14 +37,14 @@ Place a `.githook` file into the root of your project. Inside of this file you c
 To enable commands you need to specify them. An example configuration could look like this:
 
 ```
-includedFileCommands:
+preCommitFileCommands:
     - GitHook\Command\FileCommand\PreCommit\ArchitectureCheckCommand
     - GitHook\Command\FileCommand\PreCommit\CodeStyleCheckCommand
     - GitHook\Command\FileCommand\PreCommit\CodeStyleFixCommand
     - GitHook\Command\FileCommand\PreCommit\PhpMdCheckCommand
     - GitHook\Command\FileCommand\PreCommit\PhpStanCheckCommand
 
-includedRepositoryCommands:
+preCommitRepositoryCommands:
     - GitHook\Command\RepositoryCommand\PreCommit\GitAddCommand
 ```
 
