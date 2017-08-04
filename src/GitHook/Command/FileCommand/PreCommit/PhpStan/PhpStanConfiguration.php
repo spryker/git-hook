@@ -26,7 +26,7 @@ class PhpStanConfiguration
     /**
      * @return int
      */
-    public function getLevel(): int
+    public function getLevel()
     {
         $defaultLevel = 0;
         if (!$this->config) {
@@ -39,7 +39,7 @@ class PhpStanConfiguration
     /**
      * @return string
      */
-    public function getConfigPath(): string
+    public function getConfigPath()
     {
         return (isset($this->config['config'])) ? $this->config['config'] : '';
     }

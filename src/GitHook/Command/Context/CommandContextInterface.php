@@ -17,30 +17,30 @@ interface CommandContextInterface
      *
      * @return \GitHook\Command\Context\CommandContextInterface
      */
-    public function setConfig(GitHookConfig $config): CommandContextInterface;
+    public function setConfig(GitHookConfig $config);
 
     /**
      * @return \GitHook\Config\GitHookConfig
      */
-    public function getConfig(): GitHookConfig;
+    public function getConfig();
 
     /**
      * @param string $commandName
      *
      * @return array
      */
-    public function getCommandConfig($commandName): array;
+    public function getCommandConfig($commandName);
 
     /**
      * @param string $file
      *
      * @return \GitHook\Command\Context\CommandContextInterface
      */
-    public function setFile(string $file): CommandContextInterface;
+    public function setFile($file);
 
     /**
      * @return string
      */
-    public function getFile(): string;
+    public function getFile();
 
 }

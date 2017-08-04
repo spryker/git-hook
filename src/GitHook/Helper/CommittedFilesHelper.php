@@ -13,7 +13,7 @@ trait CommittedFilesHelper
     /**
      * @return array
      */
-    public function getCommittedFiles(): array
+    public function getCommittedFiles()
     {
         $output = [];
         $check = 0;

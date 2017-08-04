@@ -27,7 +27,7 @@ class CommandContext implements CommandContextInterface
      *
      * @return \GitHook\Command\Context\CommandContextInterface
      */
-    public function setConfig(GitHookConfig $config): CommandContextInterface
+    public function setConfig(GitHookConfig $config)
     {
         $this->config = $config;
 
@@ -37,7 +37,7 @@ class CommandContext implements CommandContextInterface
     /**
      * @return \GitHook\Config\GitHookConfig
      */
-    public function getConfig(): GitHookConfig
+    public function getConfig()
     {
         return $this->config;
     }
@@ -47,7 +47,7 @@ class CommandContext implements CommandContextInterface
      *
      * @return array
      */
-    public function getCommandConfig($commandName): array
+    public function getCommandConfig($commandName)
     {
         return $this->config->getCommandConfig($commandName);
     }
@@ -57,7 +57,7 @@ class CommandContext implements CommandContextInterface
      *
      * @return \GitHook\Command\Context\CommandContextInterface
      */
-    public function setFile(string $file): CommandContextInterface
+    public function setFile($file)
     {
         $this->file = $file;
 
@@ -67,7 +67,7 @@ class CommandContext implements CommandContextInterface
     /**
      * @return string
      */
-    public function getFile(): string
+    public function getFile()
     {
         return $this->file;
     }

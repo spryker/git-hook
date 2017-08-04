@@ -26,7 +26,7 @@ class ArchitectureSniffConfiguration
     /**
      * @return int
      */
-    public function getMinimumPriority(): int
+    public function getMinimumPriority()
     {
         $defaultPriority = 2;
         if (!$this->config) {

@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -15,27 +15,28 @@ interface CommandResultInterface
      *
      * @return \GitHook\Command\CommandResultInterface
      */
-    public function setMessage(string $message): CommandResultInterface;
+    public function setMessage($message);
 
     /**
      * @return string
      */
     public function getMessage();
+
     /**
      * @param string $error
      *
      * @return \GitHook\Command\CommandResultInterface
      */
-    public function setError(string $error): CommandResultInterface;
+    public function setError($error);
 
     /**
      * @return string
      */
-    public function getError(): string;
+    public function getError();
 
     /**
      * @return bool
      */
-    public function isSuccess(): bool;
+    public function isSuccess();
 
 }

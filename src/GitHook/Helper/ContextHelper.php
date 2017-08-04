@@ -8,7 +8,6 @@
 namespace GitHook\Helper;
 
 use GitHook\Command\Context\CommandContext;
-use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Config\ConfigLoader;
 
 trait ContextHelper
@@ -17,7 +16,7 @@ trait ContextHelper
     /**
      * @return \GitHook\Command\Context\CommandContextInterface
      */
-    public function createContext(): CommandContextInterface
+    public function createContext()
     {
         $context = new CommandContext();
         $configLoader = new ConfigLoader();

@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -10,7 +10,6 @@ namespace GitHook\Command\FileCommand\PreCommit;
 use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
-use GitHook\Command\CommandResultInterface;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Command\FileCommand\PreCommit\ArchitectureSniff\ArchitectureSniffConfiguration;
 use GitHook\Helper\ProcessBuilderHelper;
@@ -25,7 +24,7 @@ class ArchitectureCheckCommand implements CommandInterface
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function configure(CommandConfigurationInterface $commandConfiguration): CommandConfigurationInterface
+    public function configure(CommandConfigurationInterface $commandConfiguration)
     {
         $commandConfiguration
             ->setName('Architecture check')
@@ -40,7 +39,7 @@ class ArchitectureCheckCommand implements CommandInterface
      *
      * @return \GitHook\Command\CommandResultInterface
      */
-    public function run(CommandContextInterface $context): CommandResultInterface
+    public function run(CommandContextInterface $context)
     {
         $configuration = new ArchitectureSniffConfiguration($context->getCommandConfig('architecture'));
         $commandResult = new CommandResult();
@@ -55,7 +54,7 @@ class ArchitectureCheckCommand implements CommandInterface
         ];
 
         $message = implode(' ', $processDefinition);
-        
+
         $process = $this->buildProcess($processDefinition);
         $process->run();
 

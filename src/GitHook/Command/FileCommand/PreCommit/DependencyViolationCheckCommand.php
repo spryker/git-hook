@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -10,7 +10,6 @@ namespace GitHook\Command\FileCommand\PreCommit;
 use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
-use GitHook\Command\CommandResultInterface;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ProcessBuilderHelper;
 use Symfony\Component\Process\ProcessBuilder;
@@ -30,7 +29,7 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function configure(CommandConfigurationInterface $commandConfiguration): CommandConfigurationInterface
+    public function configure(CommandConfigurationInterface $commandConfiguration)
     {
         $commandConfiguration
             ->setName('Dependency violation check.')
@@ -44,7 +43,7 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return \GitHook\Command\CommandResultInterface
      */
-    public function run(CommandContextInterface $context): CommandResultInterface
+    public function run(CommandContextInterface $context)
     {
         $commandResult = new CommandResult();
 

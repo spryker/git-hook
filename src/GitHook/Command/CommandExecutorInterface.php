@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -17,6 +17,6 @@ interface CommandExecutorInterface
      *
      * @return bool
      */
-    public function execute(CommandContextInterface $context): bool;
+    public function execute(CommandContextInterface $context);
 
 }

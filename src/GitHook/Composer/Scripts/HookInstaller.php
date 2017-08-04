@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -24,8 +24,6 @@ class HookInstaller
      */
     protected static $sprykerHooks = [
         'pre-commit',
-        // This one is pretty expensive, do not use it for now.
-//        'pre-push',
     ];
 
     /**

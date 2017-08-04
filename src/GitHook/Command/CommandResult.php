@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -25,7 +25,7 @@ class CommandResult implements CommandResultInterface
      *
      * @return \GitHook\Command\CommandResultInterface
      */
-    public function setMessage(string $message): CommandResultInterface
+    public function setMessage($message)
     {
         $this->message = $message;
 
@@ -35,7 +35,7 @@ class CommandResult implements CommandResultInterface
     /**
      * @return string
      */
-    public function getMessage(): string
+    public function getMessage()
     {
         return $this->message;
     }
@@ -45,7 +45,7 @@ class CommandResult implements CommandResultInterface
      *
      * @return \GitHook\Command\CommandResultInterface
      */
-    public function setError(string $error): CommandResultInterface
+    public function setError($error)
     {
         $this->error = $error;
 
@@ -55,7 +55,7 @@ class CommandResult implements CommandResultInterface
     /**
      * @return string
      */
-    public function getError(): string
+    public function getError()
     {
         return $this->error;
     }
@@ -63,7 +63,7 @@ class CommandResult implements CommandResultInterface
     /**
      * @return bool
      */
-    public function isSuccess(): bool
+    public function isSuccess()
     {
         return ($this->message === null && $this->error === null);
     }

@@ -17,7 +17,7 @@ class ConfigLoader
      *
      * @return \GitHook\Config\GitHookConfig
      */
-    public function getConfig(string $pathToConfig): GitHookConfig
+    public function getConfig($pathToConfig)
     {
         $config = [];
         if (is_file($pathToConfig)) {

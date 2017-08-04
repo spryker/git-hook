@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -28,7 +28,7 @@ class CommandConfiguration implements CommandConfigurationInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -38,7 +38,7 @@ class CommandConfiguration implements CommandConfigurationInterface
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function setName(string $name): CommandConfigurationInterface
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -48,7 +48,7 @@ class CommandConfiguration implements CommandConfigurationInterface
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
@@ -58,7 +58,7 @@ class CommandConfiguration implements CommandConfigurationInterface
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function setDescription(string $description): CommandConfigurationInterface
+    public function setDescription($description)
     {
         $this->description = $description;
 
@@ -68,7 +68,7 @@ class CommandConfiguration implements CommandConfigurationInterface
     /**
      * @return array
      */
-    public function getAcceptedFileExtensions(): array
+    public function getAcceptedFileExtensions()
     {
         return $this->acceptedFileExtensions;
     }
@@ -78,7 +78,7 @@ class CommandConfiguration implements CommandConfigurationInterface
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function setAcceptedFileExtensions($fileExtensions): CommandConfigurationInterface
+    public function setAcceptedFileExtensions($fileExtensions)
     {
         $this->acceptedFileExtensions = (array)$fileExtensions;
 

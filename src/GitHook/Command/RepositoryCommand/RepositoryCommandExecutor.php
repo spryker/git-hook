@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 
 /**
  * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
@@ -33,7 +33,7 @@ class RepositoryCommandExecutor implements CommandExecutorInterface
      *
      * @return bool
      */
-    public function execute(CommandContextInterface $context): bool
+    public function execute(CommandContextInterface $context)
     {
         $success = true;
         foreach ($context->getConfig()->getPreCommitRepositoryCommands() as $command) {
