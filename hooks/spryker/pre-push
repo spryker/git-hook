@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 
-define('PROJECT_ROOT', '/data/shop/development/current');
+define('PROJECT_ROOT', __DIR__ . '/../../../../..');
 define('PATH_PREFIX', DIRECTORY_SEPARATOR . 'vendor/spryker/spryker/');
 
 require PROJECT_ROOT . '/vendor/autoload.php';
