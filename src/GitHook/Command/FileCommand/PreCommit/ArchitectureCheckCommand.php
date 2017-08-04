@@ -12,6 +12,7 @@ use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\CommandResultInterface;
 use GitHook\Command\Context\CommandContextInterface;
+use GitHook\Command\FileCommand\PreCommit\ArchitectureSniff\ArchitectureSniffConfiguration;
 use GitHook\Helper\ProcessBuilderHelper;
 
 class ArchitectureCheckCommand implements CommandInterface
@@ -41,9 +42,20 @@ class ArchitectureCheckCommand implements CommandInterface
      */
     public function run(CommandContextInterface $context): CommandResultInterface
     {
+        $configuration = new ArchitectureSniffConfiguration($context->getCommandConfig('architecture'));
         $commandResult = new CommandResult();
 
-        $processDefinition = ['vendor/bin/phpmd', $context->getFile(), 'xml', 'vendor/spryker/architecture-sniffer/src/ruleset.xml'];
+        $processDefinition = [
+            'vendor/bin/phpmd',
+            $context->getFile(),
+            'xml',
+            'vendor/spryker/architecture-sniffer/src/ruleset.xml',
+            '--minimumpriority',
+            $configuration->getMinimumPriority(),
+        ];
+
+        $message = implode(' ', $processDefinition);
+        
         $process = $this->buildProcess($processDefinition);
         $process->run();
 
