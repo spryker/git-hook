@@ -61,8 +61,3 @@ config:
 ## Commands
 
 We have two different type of commands. FileCommands will be executed for each file of a given commit. RepositoryCommands will be executed on the whole repository.
-
-
-### PHP Version
-
-You need to have PHP7 installed on your machine. You can check your installed PHP Version by running `php -v` and `/usr/bin/php -v`.
