@@ -79,7 +79,7 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return string
      */
-    private function getModuleNameFromFile(string $fileName): string
+    private function getModuleNameFromFile($fileName)
     {
         $filePathParts = explode(DIRECTORY_SEPARATOR, $fileName);
         $namespacePosition = array_search('Bundles', $filePathParts);
@@ -92,7 +92,7 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return bool
      */
-    private function isCheckAble(string $fileName): bool
+    private function isCheckAble($fileName)
     {
         $filePathParts = explode(DIRECTORY_SEPARATOR, $fileName);
 
@@ -104,7 +104,7 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return bool
      */
-    private function isAlreadyChecked(string $module): bool
+    private function isAlreadyChecked($module)
     {
         return (in_array($module, $this->checkedModules));
     }
