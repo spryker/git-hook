@@ -56,6 +56,22 @@ class GitHookConfig
     }
 
     /**
+     * @return \GitHook\Command\CommandInterface[]
+     */
+    public function getPrePushRepositoryCommands()
+    {
+        $repositoryCommands = [];
+        if (isset($this->config['prePushRepositoryCommands'])) {
+            foreach ($this->config['prePushRepositoryCommands'] as $repositoryCommand) {
+                $repositoryCommand = '\\' . ltrim($repositoryCommand, '\\');
+                $repositoryCommands[] = new $repositoryCommand;
+            }
+        }
+
+        return $repositoryCommands;
+    }
+
+    /**
      * @param string $commandName
      *
      * @return array

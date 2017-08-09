@@ -23,6 +23,11 @@ class CommandContext implements CommandContextInterface
     protected $file;
 
     /**
+     * @var \GitHook\Command\CommandInterface[]
+     */
+    protected $commands;
+
+    /**
      * @param \GitHook\Config\GitHookConfig $config
      *
      * @return \GitHook\Command\Context\CommandContextInterface
@@ -70,6 +75,26 @@ class CommandContext implements CommandContextInterface
     public function getFile()
     {
         return $this->file;
+    }
+
+    /**
+     * @return \GitHook\Command\CommandInterface[]
+     */
+    public function getCommands()
+    {
+        return $this->commands;
+    }
+
+    /**
+     * @param \GitHook\Command\CommandInterface[] $commands
+     *
+     * @return $this
+     */
+    public function setCommands(array $commands)
+    {
+        $this->commands = $commands;
+
+        return $this;
     }
 
 }

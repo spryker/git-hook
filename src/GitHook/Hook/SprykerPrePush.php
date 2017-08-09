@@ -35,10 +35,18 @@ class SprykerPrePush extends Application
      */
     public function doRun(InputInterface $input, OutputInterface $output)
     {
+        $context = $this->createContext();
+        $commands = $context->getConfig()->getPrePushRepositoryCommands();
+        $context->setCommands($commands);
+
         $consoleHelper = new ConsoleHelper($input, $output);
+
+        if (count($commands) === 0) {
+            return;
+        }
+
         $consoleHelper->gitHookHeader('Spryker Git pre-push hook');
 
-        $context = $this->createContext();
         $repositoryCommandExecutor = new RepositoryCommandExecutor($consoleHelper);
         $repositoryCommandSuccess = $repositoryCommandExecutor->execute($context);
 
