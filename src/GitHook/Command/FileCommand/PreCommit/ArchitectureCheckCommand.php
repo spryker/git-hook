@@ -53,8 +53,6 @@ class ArchitectureCheckCommand implements CommandInterface
             $configuration->getMinimumPriority(),
         ];
 
-        $message = implode(' ', $processDefinition);
-
         $process = $this->buildProcess($processDefinition);
         $process->run();
 

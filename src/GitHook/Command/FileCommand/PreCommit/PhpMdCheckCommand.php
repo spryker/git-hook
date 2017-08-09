@@ -11,6 +11,7 @@ use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\Context\CommandContextInterface;
+use GitHook\Command\FileCommand\PreCommit\PhpMd\PhpMdCheckConfiguration;
 use GitHook\Helper\ProcessBuilderHelper;
 
 class PhpMdCheckCommand implements CommandInterface
@@ -40,9 +41,18 @@ class PhpMdCheckCommand implements CommandInterface
      */
     public function run(CommandContextInterface $context)
     {
+        $configuration = new PhpMdCheckConfiguration($context->getCommandConfig('phpmd'));
         $commandResult = new CommandResult();
 
-        $processDefinition = ['vendor/bin/phpmd', $context->getFile(), 'xml', 'vendor/spryker/spryker/Bundles/Development/src/Spryker/Zed/Development/Business/PhpMd/ruleset.xml'];
+        $processDefinition = [
+            'vendor/bin/phpmd',
+            $context->getFile(),
+            'xml',
+            'vendor/spryker/spryker/Bundles/Development/src/Spryker/Zed/Development/Business/PhpMd/ruleset.xml',
+            '--minimumpriority',
+            $configuration->getMinimumPriority(),
+        ];
+
         $process = $this->buildProcess($processDefinition);
         $process->run();
 
