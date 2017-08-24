@@ -41,7 +41,7 @@ class PhpStanConfiguration
      */
     public function getConfigPath()
     {
-        return (isset($this->config['config'])) ? $this->config['config'] : '';
+        return (isset($this->config['config'])) ? '.' . PATH_PREFIX . $this->config['config'] : '';
     }
 
 }
