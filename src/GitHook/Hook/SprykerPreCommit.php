@@ -38,15 +38,22 @@ class SprykerPreCommit extends Application
      */
     public function doRun(InputInterface $input, OutputInterface $output)
     {
+        $context = $this->createContext();
+        $fileCommands = $context->getConfig()->getPreCommitFileCommands();
+        $repositoryCommands = $context->getConfig()->getPreCommitRepositoryCommands();
+
+        if (count($fileCommands) === 0 && count($repositoryCommands) === 0) {
+            return;
+        }
+
         $consoleHelper = new ConsoleHelper($input, $output);
         $consoleHelper->gitHookHeader('Spryker Git pre-commit hook');
 
-        $context = $this->createContext();
-        $committedFiles = $this->getCommittedFiles();
-
-        $fileCommandExecutor = new FileCommandExecutor($committedFiles, $consoleHelper);
+        $context->setCommands($fileCommands);
+        $fileCommandExecutor = new FileCommandExecutor($this->getCommittedFiles(), $consoleHelper);
         $fileCommandSuccess = $fileCommandExecutor->execute($context);
 
+        $context->setCommands($repositoryCommands);
         $repositoryCommandExecutor = new RepositoryCommandExecutor($consoleHelper);
         $repositoryCommandSuccess = $repositoryCommandExecutor->execute($context);
 

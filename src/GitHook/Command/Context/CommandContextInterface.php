@@ -43,4 +43,16 @@ interface CommandContextInterface
      */
     public function getFile();
 
+    /**
+     * @return \GitHook\Command\CommandInterface[]
+     */
+    public function getCommands();
+
+    /**
+     * @param \GitHook\Command\CommandInterface[] $commands
+     *
+     * @return $this
+     */
+    public function setCommands(array $commands);
+
 }

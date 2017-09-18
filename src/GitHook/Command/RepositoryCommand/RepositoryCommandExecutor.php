@@ -36,7 +36,7 @@ class RepositoryCommandExecutor implements CommandExecutorInterface
     public function execute(CommandContextInterface $context)
     {
         $success = true;
-        foreach ($context->getConfig()->getPreCommitRepositoryCommands() as $command) {
+        foreach ($context->getCommands() as $command) {
             $configuration = new CommandConfiguration();
             $configuration = $command->configure($configuration);
 
