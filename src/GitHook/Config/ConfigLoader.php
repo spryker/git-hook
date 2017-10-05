@@ -13,15 +13,22 @@ class ConfigLoader
 {
 
     /**
-     * @param string $pathToConfig
-     *
      * @return \GitHook\Config\GitHookConfig
      */
-    public function getConfig($pathToConfig)
+    public function getConfig()
     {
+        $configLocal = PROJECT_ROOT . '/.githook_local';
+        $configDefault = PROJECT_ROOT . '/.githook';
+
+        if (is_file($configLocal)) {
+            $config = Yaml::parse(file_get_contents($configLocal));
+
+            return new GitHookConfig($config);
+        }
         $config = [];
-        if (is_file($pathToConfig)) {
-            $config = Yaml::parse(file_get_contents($pathToConfig));
+
+        if (is_file($configDefault)) {
+            $config = Yaml::parse(file_get_contents($configDefault));
         }
 
         return new GitHookConfig($config);

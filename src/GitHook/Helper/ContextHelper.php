@@ -29,7 +29,7 @@ trait ContextHelper
             throw new Exception('Could not load ".githook" configuration file. Please add one to the root of your project.');
         }
 
-        $config = $configLoader->getConfig(PROJECT_ROOT . '/.githook');
+        $config = $configLoader->getConfig();
 
         $context->setConfig($config);
 

@@ -31,6 +31,7 @@ This will copy the git hooks to your .git/hooks directory.
 
 Place a `.githook` file into the root of your project. Inside of this file you can configure the commands.
 
+You can also use your private configuration by creating a `.githook_local` file and ignore it in your projects .gitignore` file.
 
 ### Enable commands
 
