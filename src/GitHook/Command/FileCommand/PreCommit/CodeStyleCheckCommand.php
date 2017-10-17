@@ -42,7 +42,7 @@ class CodeStyleCheckCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['vendor/bin/phpcs', $context->getFile(), '--standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml'];
+        $processDefinition = ['vendor/bin/phpcs', $context->getFile(), '--standard=config/ruleset.xml'];
         $process = $this->buildProcess($processDefinition);
         $process->run();
 
