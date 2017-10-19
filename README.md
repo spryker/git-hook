@@ -16,11 +16,13 @@ Add the Composer Scripts to your composer.json
   "scripts": {
     "post-install-cmd": [
       "GitHook\\Composer\\Scripts\\HookInstaller::installProjectHooks"
-      "GitHook\\Composer\\Scripts\\HookInstaller::installSprykerHooks"
+      "GitHook\\Composer\\Scripts\\HookInstaller::installSprykerHooks",
+      "GitHook\\Composer\\Scripts\\HookInstaller::installEcoHooks"
     ],
     "post-update-cmd": [
       "GitHook\\Composer\\Scripts\\HookInstaller::installProjectHooks"
-      "GitHook\\Composer\\Scripts\\HookInstaller::installSprykerHooks"
+      "GitHook\\Composer\\Scripts\\HookInstaller::installSprykerHooks",
+      "GitHook\\Composer\\Scripts\\HookInstaller::installEcoHooks"
     ]
   }
 ```
