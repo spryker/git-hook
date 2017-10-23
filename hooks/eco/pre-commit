@@ -1,0 +1,13 @@
+#!/usr/bin/php
+<?php
+
+define('MODULE_NAME', basename(dirname(__DIR__, 2)));
+define('PROJECT_ROOT', __DIR__ . '/../../../../..');
+define('PATH_PREFIX', DIRECTORY_SEPARATOR . 'vendor/spryker-eco/' . MODULE_NAME . DIRECTORY_SEPARATOR);
+
+require PROJECT_ROOT . '/vendor/autoload.php';
+
+use GitHook\Hook\SprykerPreCommit;
+
+$console = new SprykerPreCommit();
+$console->run();

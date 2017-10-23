@@ -29,6 +29,13 @@ class HookInstaller
     /**
      * @var array
      */
+    protected static $ecoHooks = [
+        'pre-commit'
+    ];
+
+    /**
+     * @var array
+     */
     protected static $gitHookHooks = [
         'pre-commit',
     ];
@@ -101,6 +108,34 @@ class HookInstaller
             chmod($dist, 0755);
 
             $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
+        }
+
+        return true;
+    }
+
+    /**
+     * @param \Composer\Script\Event $event
+     *
+     * @return bool
+     */
+    public static function installEcoHooks(Event $event)
+    {
+        $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
+
+        $ecoBaseDirectory = $vendorDir . '/spryker-eco/';
+        $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/eco/';
+        $modulesDirs = array_filter(glob($ecoBaseDirectory . '*'), 'is_dir');
+
+        foreach (static::$ecoHooks as $hook) {
+            $src = realpath($hookDirectory . DIRECTORY_SEPARATOR . $hook);
+            foreach ($modulesDirs as $dirname) {
+                $dist = realpath($dirname . '/.git/hooks') . DIRECTORY_SEPARATOR . $hook;
+
+                copy($src, $dist);
+                chmod($dist, 0755);
+
+                $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
+            }
         }
 
         return true;
