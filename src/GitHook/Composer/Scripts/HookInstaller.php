@@ -127,8 +127,8 @@ class HookInstaller
         $modulesDirs = array_filter(glob($ecoBaseDirectory . '*'), 'is_dir');
 
         foreach (static::$ecoHooks as $hook) {
+            $src = realpath($hookDirectory . DIRECTORY_SEPARATOR . $hook);
             foreach ($modulesDirs as $dirname) {
-                $src = realpath($hookDirectory . DIRECTORY_SEPARATOR . $hook);
                 $dist = realpath($dirname . '/.git/hooks') . DIRECTORY_SEPARATOR . $hook;
 
                 copy($src, $dist);
