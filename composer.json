@@ -29,10 +29,7 @@
   "autoload": {
     "psr-0": {
       "GitHook": "src"
-    },
-    "files": [
-      "php-stan-autoload-shim.php"
-    ]
+    }
   },
   "scripts": {
     "post-install-cmd": [
