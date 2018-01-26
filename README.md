@@ -12,17 +12,29 @@ Currently we have only one hook `pre-commit` this will execute on every commit t
 ### Setup
 Add the Composer Scripts to your composer.json
 
+#### For core
+
 ```
   "scripts": {
     "post-install-cmd": [
-      "GitHook\\Composer\\Scripts\\HookInstaller::installProjectHooks"
       "GitHook\\Composer\\Scripts\\HookInstaller::installSprykerHooks",
       "GitHook\\Composer\\Scripts\\HookInstaller::installEcoHooks"
     ],
     "post-update-cmd": [
-      "GitHook\\Composer\\Scripts\\HookInstaller::installProjectHooks"
       "GitHook\\Composer\\Scripts\\HookInstaller::installSprykerHooks",
       "GitHook\\Composer\\Scripts\\HookInstaller::installEcoHooks"
+    ]
+  }
+```
+#### For projects
+
+```
+  "scripts": {
+    "post-install-cmd": [
+      "GitHook\\Composer\\Scripts\\HookInstaller::installProjectHooks"
+    ],
+    "post-update-cmd": [
+      "GitHook\\Composer\\Scripts\\HookInstaller::installProjectHooks"
     ]
   }
 ```
