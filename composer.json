@@ -16,11 +16,11 @@
   },
   "require": {
     "php": ">=7.1",
-    "phpstan/phpstan": "^0.8",
-    "symfony/yaml": "^2.8|^3",
-    "phpmd/phpmd": "^2.6"
+    "symfony/yaml": "^2.8|^3"
   },
   "require-dev": {
+    "phpstan/phpstan": "^0.8",
+    "phpmd/phpmd": "^2.6",
     "spryker/code-sniffer": "*",
     "codeception/codeception": "^2.2.10",
     "sebastian/phpcpd": "^3.0",
