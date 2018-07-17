@@ -16,7 +16,6 @@ use Symfony\Component\Process\ProcessBuilder;
 
 class GitAddCommand implements CommandInterface
 {
-
     use ProcessBuilderHelper;
 
     /**
@@ -56,5 +55,4 @@ class GitAddCommand implements CommandInterface
 
         return $commandResult;
     }
-
 }

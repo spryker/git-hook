@@ -13,7 +13,6 @@ use GitHook\Config\ConfigLoader;
 
 trait ContextHelper
 {
-
     /**
      * @throws \Exception
      *
@@ -35,5 +34,4 @@ trait ContextHelper
 
         return $context;
     }
-
 }

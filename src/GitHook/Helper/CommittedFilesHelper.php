@@ -9,7 +9,6 @@ namespace GitHook\Helper;
 
 trait CommittedFilesHelper
 {
-
     /**
      * @return array
      */
@@ -41,5 +40,4 @@ trait CommittedFilesHelper
 
         return $committedFiles;
     }
-
 }

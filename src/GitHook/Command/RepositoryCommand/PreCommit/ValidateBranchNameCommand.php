@@ -5,15 +5,16 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace GitHook\Command\FileCommand\PreCommit;
+namespace GitHook\Command\RepositoryCommand\PreCommit;
 
 use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ProcessBuilderHelper;
+use Symfony\Component\Process\ProcessBuilder;
 
-class CodeStyleFixCommand implements CommandInterface
+class ValidateBranchNameCommand implements CommandInterface
 {
     use ProcessBuilderHelper;
 
@@ -25,9 +26,8 @@ class CodeStyleFixCommand implements CommandInterface
     public function configure(CommandConfigurationInterface $commandConfiguration)
     {
         $commandConfiguration
-            ->setName('CodeStyle fixer')
-            ->setDescription('Fixes all fixable CodeStyle bugs.')
-            ->setAcceptedFileExtensions('php');
+            ->setName('Validate git branch name to be lowercased')
+            ->setDescription('Abort commit if branch name is not lowercased.');
 
         return $commandConfiguration;
     }
@@ -40,10 +40,23 @@ class CodeStyleFixCommand implements CommandInterface
     public function run(CommandContextInterface $context)
     {
         $commandResult = new CommandResult();
-
-        $processDefinition = ['vendor/bin/phpcbf', $context->getFile(), '--standard=config/ruleset.xml'];
-        $process = $this->buildProcess($processDefinition);
+        $processDefinition = ['git', 'rev-parse', '--abbrev-ref', 'HEAD'];
+        $processBuilder = new ProcessBuilder($processDefinition);
+        $processBuilder->setWorkingDirectory(PROJECT_ROOT . PATH_PREFIX);
+        $process = $processBuilder->getProcess();
         $process->run();
+
+        if (!$process->isSuccessful()) {
+            $commandResult
+                ->setError(trim($process->getErrorOutput()))
+                ->setMessage(trim($process->getOutput()));
+        }
+
+        $branchName = trim($process->getOutput());
+        if ($branchName !== mb_strtolower($branchName)) {
+            $commandResult
+                ->setMessage(sprintf('The branch "%s" must contain only lowercase letters. Please create a new branch with a valid name.', $branchName));
+        }
 
         return $commandResult;
     }

@@ -9,7 +9,6 @@ namespace GitHook\Command;
 
 class CommandConfiguration implements CommandConfigurationInterface
 {
-
     /**
      * @var string
      */
@@ -84,5 +83,4 @@ class CommandConfiguration implements CommandConfigurationInterface
 
         return $this;
     }
-
 }

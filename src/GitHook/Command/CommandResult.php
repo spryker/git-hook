@@ -9,7 +9,6 @@ namespace GitHook\Command;
 
 class CommandResult implements CommandResultInterface
 {
-
     /**
      * @var string
      */
@@ -67,5 +66,4 @@ class CommandResult implements CommandResultInterface
     {
         return ($this->message === null && $this->error === null);
     }
-
 }

@@ -9,7 +9,6 @@ namespace GitHook\Command;
 
 interface CommandResultInterface
 {
-
     /**
      * @param string $message
      *
@@ -38,5 +37,4 @@ interface CommandResultInterface
      * @return bool
      */
     public function isSuccess();
-
 }

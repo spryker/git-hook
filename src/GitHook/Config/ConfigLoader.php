@@ -11,7 +11,6 @@ use Symfony\Component\Yaml\Yaml;
 
 class ConfigLoader
 {
-
     /**
      * @return \GitHook\Config\GitHookConfig
      */
@@ -33,5 +32,4 @@ class ConfigLoader
 
         return new GitHookConfig($config);
     }
-
 }

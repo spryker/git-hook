@@ -19,7 +19,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SprykerPreCommit extends Application
 {
-
     use CommittedFilesHelper;
     use ContextHelper;
 
@@ -64,5 +63,4 @@ class SprykerPreCommit extends Application
         $consoleHelper->newLine(2);
         $consoleHelper->success('Good job dude!');
     }
-
 }

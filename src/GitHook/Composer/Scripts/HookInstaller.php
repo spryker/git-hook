@@ -11,7 +11,6 @@ use Composer\Script\Event;
 
 class HookInstaller
 {
-
     /**
      * @var array
      */
@@ -30,7 +29,7 @@ class HookInstaller
      * @var array
      */
     protected static $ecoHooks = [
-        'pre-commit'
+        'pre-commit',
     ];
 
     /**
@@ -140,5 +139,4 @@ class HookInstaller
 
         return true;
     }
-
 }

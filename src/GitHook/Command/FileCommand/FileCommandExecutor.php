@@ -15,7 +15,6 @@ use GitHook\Helper\ConsoleHelper;
 
 class FileCommandExecutor implements CommandExecutorInterface
 {
-
     /**
      * @var array
      */
@@ -54,7 +53,6 @@ class FileCommandExecutor implements CommandExecutorInterface
 
             $messages = [];
             foreach ($this->committedFiles as $committedFile) {
-
                 if (!$this->acceptsFileExtension($committedFile, $configuration)) {
                     continue;
                 }
@@ -102,5 +100,4 @@ class FileCommandExecutor implements CommandExecutorInterface
 
         return false;
     }
-
 }
