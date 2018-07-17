@@ -15,7 +15,6 @@ use GitHook\Helper\ProcessBuilderHelper;
 
 class CodeStyleFixCommand implements CommandInterface
 {
-
     use ProcessBuilderHelper;
 
     /**
@@ -48,5 +47,4 @@ class CodeStyleFixCommand implements CommandInterface
 
         return $commandResult;
     }
-
 }

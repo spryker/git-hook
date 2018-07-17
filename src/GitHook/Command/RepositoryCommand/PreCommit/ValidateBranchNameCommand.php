@@ -16,7 +16,6 @@ use Symfony\Component\Process\ProcessBuilder;
 
 class ValidateBranchNameCommand implements CommandInterface
 {
-
     use ProcessBuilderHelper;
 
     /**
@@ -61,5 +60,4 @@ class ValidateBranchNameCommand implements CommandInterface
 
         return $commandResult;
     }
-
 }

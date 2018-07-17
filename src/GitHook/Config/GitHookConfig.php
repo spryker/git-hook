@@ -9,7 +9,6 @@ namespace GitHook\Config;
 
 class GitHookConfig
 {
-
     /**
      * @var array
      */
@@ -85,5 +84,4 @@ class GitHookConfig
 
         return $commandConfig;
     }
-
 }

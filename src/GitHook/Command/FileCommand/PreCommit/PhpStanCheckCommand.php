@@ -20,7 +20,6 @@ use Symfony\Component\Process\Process;
  */
 class PhpStanCheckCommand implements CommandInterface
 {
-
     use ProcessBuilderHelper;
 
     /**
@@ -64,5 +63,4 @@ class PhpStanCheckCommand implements CommandInterface
 
         return $commandResult;
     }
-
 }

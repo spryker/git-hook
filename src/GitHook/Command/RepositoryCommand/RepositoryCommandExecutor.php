@@ -14,7 +14,6 @@ use GitHook\Helper\ConsoleHelper;
 
 class RepositoryCommandExecutor implements CommandExecutorInterface
 {
-
     /**
      * @var \GitHook\Helper\ConsoleHelper
      */
@@ -51,5 +50,4 @@ class RepositoryCommandExecutor implements CommandExecutorInterface
 
         return $success;
     }
-
 }

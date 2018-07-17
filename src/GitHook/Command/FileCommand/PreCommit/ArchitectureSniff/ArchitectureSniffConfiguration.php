@@ -9,7 +9,6 @@ namespace GitHook\Command\FileCommand\PreCommit\ArchitectureSniff;
 
 class ArchitectureSniffConfiguration
 {
-
     /**
      * @var array
      */
@@ -35,5 +34,4 @@ class ArchitectureSniffConfiguration
 
         return (isset($this->config['priority'])) ? $this->config['priority'] : $defaultPriority;
     }
-
 }

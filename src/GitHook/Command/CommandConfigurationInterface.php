@@ -9,7 +9,6 @@ namespace GitHook\Command;
 
 interface CommandConfigurationInterface
 {
-
     /**
      * @return string
      */
@@ -45,5 +44,4 @@ interface CommandConfigurationInterface
      * @return \GitHook\Command\CommandConfigurationInterface
      */
     public function setAcceptedFileExtensions($fileExtensions);
-
 }

@@ -15,7 +15,6 @@ use GitHook\Helper\ProcessBuilderHelper;
 
 class CodeStyleCheckCommand implements CommandInterface
 {
-
     use ProcessBuilderHelper;
 
     /**
@@ -54,5 +53,4 @@ class CodeStyleCheckCommand implements CommandInterface
 
         return $commandResult;
     }
-
 }

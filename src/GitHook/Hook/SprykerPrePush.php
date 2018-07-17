@@ -17,7 +17,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SprykerPrePush extends Application
 {
-
     use ContextHelper;
 
     public function __construct()
@@ -57,5 +56,4 @@ class SprykerPrePush extends Application
         $consoleHelper->newLine(2);
         $consoleHelper->success('Good job dude!');
     }
-
 }

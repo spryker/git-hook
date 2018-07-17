@@ -9,7 +9,6 @@ namespace GitHook\Command\FileCommand\PreCommit\PhpStan;
 
 class PhpStanConfiguration
 {
-
     /**
      * @var array
      */
@@ -43,5 +42,4 @@ class PhpStanConfiguration
     {
         return (isset($this->config['config'])) ? '.' . PATH_PREFIX . $this->config['config'] : '';
     }
-
 }

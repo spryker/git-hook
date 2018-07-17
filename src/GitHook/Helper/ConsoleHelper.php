@@ -11,7 +11,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ConsoleHelper extends SymfonyStyle
 {
-
     /**
      * @param string $hookName
      *
@@ -52,5 +51,4 @@ class ConsoleHelper extends SymfonyStyle
             $this->writeln(sprintf('<fg=white;bg=red>%s</fg=white;bg=red>', $message));
         }
     }
-
 }

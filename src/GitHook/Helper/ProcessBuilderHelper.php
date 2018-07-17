@@ -11,7 +11,6 @@ use Symfony\Component\Process\ProcessBuilder;
 
 trait ProcessBuilderHelper
 {
-
     /**
      * @param array $processDefinition
      *
@@ -25,5 +24,4 @@ trait ProcessBuilderHelper
 
         return $process;
     }
-
 }

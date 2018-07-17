@@ -11,12 +11,10 @@ use GitHook\Command\Context\CommandContextInterface;
 
 interface CommandExecutorInterface
 {
-
     /**
      * @param \GitHook\Command\Context\CommandContextInterface $context
      *
      * @return bool
      */
     public function execute(CommandContextInterface $context);
-
 }

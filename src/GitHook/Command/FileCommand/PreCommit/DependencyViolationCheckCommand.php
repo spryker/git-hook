@@ -16,7 +16,6 @@ use Symfony\Component\Process\ProcessBuilder;
 
 class DependencyViolationCheckCommand implements CommandInterface
 {
-
     use ProcessBuilderHelper;
 
     /**
@@ -108,5 +107,4 @@ class DependencyViolationCheckCommand implements CommandInterface
     {
         return (in_array($module, $this->checkedModules));
     }
-
 }

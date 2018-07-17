@@ -9,7 +9,6 @@ namespace GitHook\Command\FileCommand\PreCommit\PhpMd;
 
 class PhpMdCheckConfiguration
 {
-
     /**
      * @var array
      */
@@ -35,5 +34,4 @@ class PhpMdCheckConfiguration
 
         return (isset($this->config['priority'])) ? $this->config['priority'] : $defaultPriority;
     }
-
 }

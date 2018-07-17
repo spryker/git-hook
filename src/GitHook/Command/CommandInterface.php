@@ -11,7 +11,6 @@ use GitHook\Command\Context\CommandContextInterface;
 
 interface CommandInterface
 {
-
     /**
      * @param \GitHook\Command\CommandConfigurationInterface $configuration
      *
@@ -25,5 +24,4 @@ interface CommandInterface
      * @return \GitHook\Command\CommandResultInterface
      */
     public function run(CommandContextInterface $context);
-
 }

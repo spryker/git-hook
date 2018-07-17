@@ -11,7 +11,6 @@ use GitHook\Config\GitHookConfig;
 
 interface CommandContextInterface
 {
-
     /**
      * @param \GitHook\Config\GitHookConfig $config
      *
@@ -54,5 +53,4 @@ interface CommandContextInterface
      * @return $this
      */
     public function setCommands(array $commands);
-
 }

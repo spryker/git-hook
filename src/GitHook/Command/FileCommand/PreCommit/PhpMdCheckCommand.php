@@ -16,7 +16,6 @@ use GitHook\Helper\ProcessBuilderHelper;
 
 class PhpMdCheckCommand implements CommandInterface
 {
-
     use ProcessBuilderHelper;
 
     /**
@@ -64,5 +63,4 @@ class PhpMdCheckCommand implements CommandInterface
 
         return $commandResult;
     }
-
 }

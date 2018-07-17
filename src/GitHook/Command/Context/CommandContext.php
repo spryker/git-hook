@@ -11,7 +11,6 @@ use GitHook\Config\GitHookConfig;
 
 class CommandContext implements CommandContextInterface
 {
-
     /**
      * @var \GitHook\Config\GitHookConfig
      */
@@ -96,5 +95,4 @@ class CommandContext implements CommandContextInterface
 
         return $this;
     }
-
 }

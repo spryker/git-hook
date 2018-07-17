@@ -16,7 +16,6 @@ use GitHook\Helper\ProcessBuilderHelper;
 
 class ArchitectureCheckCommand implements CommandInterface
 {
-
     use ProcessBuilderHelper;
 
     /**
@@ -64,5 +63,4 @@ class ArchitectureCheckCommand implements CommandInterface
 
         return $commandResult;
     }
-
 }
