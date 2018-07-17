@@ -52,10 +52,10 @@ class ValidateBranchNameCommand implements CommandInterface
                 ->setMessage(trim($process->getOutput()));
         }
 
-        $branchName = $process->getOutput();
-        if ($branchName !== strtolower($branchName)) {
+        $branchName = trim($process->getOutput());
+        if ($branchName !== mb_strtolower($branchName)) {
             $commandResult
-                ->setMessage(sprintf('The branch "%s" must contain only lowercase letters. Please create a new branch with a valid name.', trim($branchName)));
+                ->setMessage(sprintf('The branch "%s" must contain only lowercase letters. Please create a new branch with a valid name.', $branchName));
         }
 
         return $commandResult;
