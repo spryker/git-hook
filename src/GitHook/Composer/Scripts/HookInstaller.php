@@ -28,6 +28,13 @@ class HookInstaller
     /**
      * @var array
      */
+    protected static $sprykerShopHooks = [
+        'pre-commit',
+    ];
+
+    /**
+     * @var array
+     */
     protected static $ecoHooks = [
         'pre-commit',
     ];
@@ -75,6 +82,30 @@ class HookInstaller
         $gitHookDirectory = $vendorDir . '/spryker/spryker/.git/hooks/';
 
         foreach (static::$sprykerHooks as $hook) {
+            $src = realpath($hookDirectory . $hook);
+            $dist = realpath($gitHookDirectory) . '/' . $hook;
+
+            copy($src, $dist);
+            chmod($dist, 0755);
+
+            $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
+        }
+
+        return true;
+    }
+
+    /**
+     * @param \Composer\Script\Event $event
+     *
+     * @return bool
+     */
+    public static function installSprykerShopHooks(Event $event)
+    {
+        $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
+        $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker-shop/';
+        $gitHookDirectory = $vendorDir . '/spryker/spryker-shop/.git/hooks/';
+
+        foreach (static::$sprykerShopHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
             $dist = realpath($gitHookDirectory) . '/' . $hook;
 
