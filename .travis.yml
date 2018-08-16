@@ -1,6 +1,7 @@
 language: php
 php:
   - 7.1
+  - 7.2
 
 cache:
   directories:
@@ -11,7 +12,7 @@ install:
   - composer install --no-interaction --prefer-dist --no-autoloader
 
 script:
-  - vendor/bin/phpcs -p --extensions=php --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src
+  - vendor/bin/phpcs -p --extensions=php --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/
 
 notifications:
   email: false
