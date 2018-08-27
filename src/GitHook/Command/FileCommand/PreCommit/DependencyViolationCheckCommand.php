@@ -56,7 +56,7 @@ class DependencyViolationCheckCommand implements CommandInterface
             return $commandResult;
         }
 
-        $processDefinition = ['vendor/bin/console', 'dev:dependency:find-violations', $module];
+        $processDefinition = ['vendor/bin/console', 'dev:dependency:find', $module];
         $processBuilder = new ProcessBuilder($processDefinition);
         $processBuilder->setWorkingDirectory(PROJECT_ROOT);
         $process = $processBuilder->getProcess();
