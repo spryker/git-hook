@@ -13,6 +13,8 @@ use GitHook\Command\CommandResult;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ProcessBuilderHelper;
 use Symfony\Component\Process\ProcessBuilder;
+use Zend\Filter\FilterChain;
+use Zend\Filter\Word\DashToCamelCase;
 
 class DependencyViolationCheckCommand implements CommandInterface
 {
@@ -56,7 +58,9 @@ class DependencyViolationCheckCommand implements CommandInterface
             return $commandResult;
         }
 
-        $processDefinition = ['vendor/bin/console', 'dev:dependency:find-violations', $module];
+        $organization = $this->getOrganizationNameFromFile($context->getFile());
+
+        $processDefinition = ['vendor/bin/console', 'dev:dependency:find', sprintf('%s.%s', $organization, $module), '-e'];
         $processBuilder = new ProcessBuilder($processDefinition);
         $processBuilder->setWorkingDirectory(PROJECT_ROOT);
         $process = $processBuilder->getProcess();
@@ -78,12 +82,29 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return string
      */
-    private function getModuleNameFromFile($fileName)
+    private function getModuleNameFromFile($fileName): string
     {
         $filePathParts = explode(DIRECTORY_SEPARATOR, $fileName);
         $namespacePosition = array_search('Bundles', $filePathParts);
 
         return $filePathParts[$namespacePosition + 1];
+    }
+
+    /**
+     * @param string $fileName
+     *
+     * @return string
+     */
+    private function getOrganizationNameFromFile($fileName): string
+    {
+        $filePathParts = explode(DIRECTORY_SEPARATOR, $fileName);
+        $vendorPosition = array_search('vendor', $filePathParts);
+
+        $organizationName = $filePathParts[$vendorPosition + 1];
+        $filterChain = new FilterChain();
+        $filterChain->attach(new DashToCamelCase());
+
+        return $filterChain->filter($organizationName);
     }
 
     /**
