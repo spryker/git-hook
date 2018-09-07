@@ -73,25 +73,47 @@ class GitHookConfig
     }
 
     /**
-     * @return string[]
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string[]
      */
-    public function getExcludedPaths(): array
+    public function getExcludedDirs(): array
     {
-        $excludedPaths = [];
+        $excludedDirs = [];
 
-        if (isset($this->config['excludedPaths'])) {
-            $configExcludedPaths = $this->config['excludedPaths'];
+        if (isset($this->config['excludedDirs'])) {
+            $configExcludedDirs = $this->config['excludedDirs'];
 
-            if (!is_array($configExcludedPaths)) {
-                throw new InvalidArgumentException("Param 'excludedPaths' should be an array.");
+            if (!is_array($configExcludedDirs)) {
+                throw new InvalidArgumentException("Param 'excludedDirs' should be an array.");
             }
 
-            $excludedPaths = $configExcludedPaths;
+            $excludedDirs = $configExcludedDirs;
         }
 
-        return $excludedPaths;
+        return $excludedDirs;
+    }
+
+    /**
+     * @throws \InvalidArgumentException
+     *
+     * @return string[]
+     */
+    public function getExcludedFiles(): array
+    {
+        $excludedFiles = [];
+
+        if (isset($this->config['excludedFiles'])) {
+            $configExcludedFiles = $this->config['excludedFiles'];
+
+            if (!is_array($configExcludedFiles)) {
+                throw new InvalidArgumentException("Param 'excludedFiles' should be an array.");
+            }
+
+            $excludedFiles = $configExcludedFiles;
+        }
+
+        return $excludedFiles;
     }
 
     /**

@@ -42,38 +42,46 @@ trait CommittedFilesHelper
     }
 
     /**
-     * @param array $committedFiles
-     * @param array $excludedPaths
+     * @param array $configExcludedDirs
+     * @param array $configExcludedFiles
      *
      * @return array
      */
-    public function filterCommittedFiles(array $committedFiles, array $excludedPaths): array
+    public function getFilteredCommittedFiles(array $configExcludedDirs, array $configExcludedFiles): array
     {
+        $committedFiles = $this->getCommittedFiles();
+        $excludedFiles = [];
+
         foreach ($committedFiles as $key => $committedFile) {
-            if ($this->isFileExcluded($committedFile, $excludedPaths)) {
+            if ($this->isFileExcluded($committedFile, $configExcludedDirs, $configExcludedFiles)) {
+                $excludedFiles[] = $committedFiles[$key];
                 unset($committedFiles[$key]);
             }
         }
 
-        return $committedFiles;
+        return [$committedFiles, $excludedFiles];
     }
 
     /**
      * @param string $filePath
-     * @param array $excludedPaths
+     * @param array $excludedDirs
+     * @param array $excludedFiles
      *
      * @return bool
      */
-    protected function isFileExcluded(string $filePath, array $excludedPaths): bool
+    protected function isFileExcluded(string $filePath, array $excludedDirs, array $excludedFiles): bool
     {
-        foreach ($excludedPaths as $excludedPath) {
-            $foundFiles = glob($excludedPath);
+        $fileRealPath = realpath($filePath);
+        $fileDir = dirname($fileRealPath);
 
-            if ($foundFiles === false) {
-                continue;
+        foreach ($excludedDirs as $excludedDir) {
+            if (realpath($excludedDir) === $fileDir) {
+                return true;
             }
+        }
 
-            if (in_array(realpath($filePath), array_map('realpath', $foundFiles))) {
+        foreach ($excludedFiles as $excludedFile) {
+            if (realpath($excludedFile) === $fileRealPath) {
                 return true;
             }
         }
