@@ -40,4 +40,44 @@ trait CommittedFilesHelper
 
         return $committedFiles;
     }
+
+    /**
+     * @param array $committedFiles
+     * @param array $excludedPaths
+     *
+     * @return array
+     */
+    public function filterCommittedFiles(array $committedFiles, array $excludedPaths): array
+    {
+        foreach ($committedFiles as $key => $committedFile) {
+            if ($this->isFileExcluded($committedFile, $excludedPaths)) {
+                unset($committedFiles[$key]);
+            }
+        }
+
+        return $committedFiles;
+    }
+
+    /**
+     * @param string $filePath
+     * @param array $excludedPaths
+     *
+     * @return bool
+     */
+    protected function isFileExcluded(string $filePath, array $excludedPaths): bool
+    {
+        foreach ($excludedPaths as $excludedPath) {
+            $foundFiles = glob($excludedPath);
+
+            if ($foundFiles === false) {
+                continue;
+            }
+
+            if (in_array(realpath($filePath), array_map('realpath', $foundFiles))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
