@@ -74,6 +74,8 @@ class GitHookConfig
 
     /**
      * @return string[]
+     *
+     * @throws \InvalidArgumentException
      */
     public function getExcludedPaths(): array
     {
