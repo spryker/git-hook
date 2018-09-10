@@ -7,8 +7,6 @@
 
 namespace GitHook\Config;
 
-use InvalidArgumentException;
-
 class GitHookConfig
 {
     /**
@@ -70,28 +68,6 @@ class GitHookConfig
         }
 
         return $repositoryCommands;
-    }
-
-    /**
-     * @throws \InvalidArgumentException
-     *
-     * @return string[]
-     */
-    public function getExcludedPaths(): array
-    {
-        $excludedPaths = [];
-
-        if (isset($this->config['excludedPaths'])) {
-            $configExcludedPaths = $this->config['excludedPaths'];
-
-            if (!is_array($configExcludedPaths)) {
-                throw new InvalidArgumentException('Param \'excludedPaths\' should be an array.');
-            }
-
-            $excludedPaths = $configExcludedPaths;
-        }
-
-        return $excludedPaths;
     }
 
     /**

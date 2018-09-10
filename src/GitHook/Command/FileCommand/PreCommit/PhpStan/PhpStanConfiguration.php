@@ -48,7 +48,7 @@ class PhpStanConfiguration
      */
     public function getSourceDirectory(): string
     {
-        return 'src';
+        return 'src' . DIRECTORY_SEPARATOR;
     }
 
     /**
