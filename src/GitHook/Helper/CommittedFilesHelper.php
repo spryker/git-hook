@@ -24,7 +24,7 @@ trait CommittedFilesHelper
             $against = 'HEAD';
         }
 
-        exec('git diff-index --cached --name-status ' . $against . ' | egrep \'^(A|M)\' | awk \'{print $2;}\'', $committedFiles);
+        exec('git diff-index --name-status ' . $against . ' | egrep \'^(A|M)\' | awk \'{print $2;}\'', $committedFiles);
 
         $prepareFilePathCallback = function ($file) {
             return '.' . PATH_PREFIX . $file;

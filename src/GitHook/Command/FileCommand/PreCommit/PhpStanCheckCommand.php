@@ -77,10 +77,10 @@ class PhpStanCheckCommand implements CommandInterface
      */
     protected function isFileAllowed(string $filePath, array $allowedDirectories): bool
     {
-        $fileDir = dirname(realpath($filePath));
+        $fileDirectory = dirname(realpath($filePath));
 
-        foreach ($allowedDirectories as $excludedPath) {
-            if (realpath($excludedPath) === $fileDir) {
+        foreach ($allowedDirectories as $allowedDirectory) {
+            if (strpos($fileDirectory, realpath($allowedDirectory)) === 0) {
                 return true;
             }
         }
