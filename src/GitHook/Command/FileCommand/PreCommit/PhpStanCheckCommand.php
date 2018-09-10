@@ -45,8 +45,13 @@ class PhpStanCheckCommand implements CommandInterface
     {
         $phpStanConfiguration = new PhpStanConfiguration($context->getCommandConfig('phpstan'));
         $commandResult = new CommandResult();
+        $fileName = $context->getFile();
 
-        $command = 'vendor/bin/phpstan analyse ' . $context->getFile() . ' -l ' . $phpStanConfiguration->getLevel();
+        if (!$this->isFileAllowed($fileName, $phpStanConfiguration->getDirectories())) {
+            return $commandResult;
+        }
+
+        $command = 'vendor/bin/phpstan analyse ' . $fileName . ' -l ' . $phpStanConfiguration->getLevel();
 
         if ($phpStanConfiguration->getConfigPath()) {
             $command .= ' -c ' . $phpStanConfiguration->getConfigPath();
@@ -62,5 +67,24 @@ class PhpStanCheckCommand implements CommandInterface
         }
 
         return $commandResult;
+    }
+
+    /**
+     * @param string $filePath
+     * @param array $allowedDirectories
+     *
+     * @return bool
+     */
+    protected function isFileAllowed(string $filePath, array $allowedDirectories): bool
+    {
+        $fileDir = dirname(realpath($filePath));
+
+        foreach ($allowedDirectories as $excludedPath) {
+            if (realpath($excludedPath) === $fileDir) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

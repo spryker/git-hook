@@ -40,48 +40,4 @@ trait CommittedFilesHelper
 
         return $committedFiles;
     }
-
-    /**
-     * @param array $excludedPaths
-     *
-     * @return array
-     */
-    public function getFilteredCommittedFiles(array $excludedPaths): array
-    {
-        $committedFiles = $this->getCommittedFiles();
-        $excludedFiles = [];
-
-        foreach ($committedFiles as $key => $committedFile) {
-            if ($this->isPathExcluded($committedFile, $excludedPaths)) {
-                $excludedFiles[] = $committedFiles[$key];
-                unset($committedFiles[$key]);
-            }
-        }
-
-        return [$committedFiles, $excludedFiles];
-    }
-
-    /**
-     * @param string $filePath
-     * @param array $excludedPaths
-     *
-     * @return bool
-     */
-    protected function isPathExcluded(string $filePath, array $excludedPaths): bool
-    {
-        $fileRealPath = realpath($filePath);
-        $fileDir = dirname($fileRealPath);
-
-        foreach ($excludedPaths as $excludedPath) {
-            if (realpath($excludedPath) === $fileRealPath) {
-                return true;
-            }
-
-            if (realpath($excludedPath) === $fileDir) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }

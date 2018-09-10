@@ -50,15 +50,7 @@ class SprykerPreCommit extends Application
 
         $context->setCommands($fileCommands);
 
-        [$committedFiles, $excludedFiles] = $this->getFilteredCommittedFiles(
-            $context->getConfig()->getExcludedPaths()
-        );
-
-        if ($excludedFiles) {
-            $consoleHelper->note(sprintf('File(s) %s were excluded from the check.', implode(', ', $excludedFiles)));
-        }
-
-        $fileCommandExecutor = new FileCommandExecutor($committedFiles, $consoleHelper);
+        $fileCommandExecutor = new FileCommandExecutor($this->getCommittedFiles(), $consoleHelper);
 
         $fileCommandSuccess = $fileCommandExecutor->execute($context);
 
