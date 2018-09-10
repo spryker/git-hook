@@ -42,18 +42,17 @@ trait CommittedFilesHelper
     }
 
     /**
-     * @param array $configExcludedDirs
-     * @param array $configExcludedFiles
+     * @param array $excludedPaths
      *
      * @return array
      */
-    public function getFilteredCommittedFiles(array $configExcludedDirs, array $configExcludedFiles): array
+    public function getFilteredCommittedFiles(array $excludedPaths): array
     {
         $committedFiles = $this->getCommittedFiles();
         $excludedFiles = [];
 
         foreach ($committedFiles as $key => $committedFile) {
-            if ($this->isFileExcluded($committedFile, $configExcludedDirs, $configExcludedFiles)) {
+            if ($this->isPathExcluded($committedFile, $excludedPaths)) {
                 $excludedFiles[] = $committedFiles[$key];
                 unset($committedFiles[$key]);
             }
@@ -64,24 +63,21 @@ trait CommittedFilesHelper
 
     /**
      * @param string $filePath
-     * @param array $excludedDirs
-     * @param array $excludedFiles
+     * @param array $excludedPaths
      *
      * @return bool
      */
-    protected function isFileExcluded(string $filePath, array $excludedDirs, array $excludedFiles): bool
+    protected function isPathExcluded(string $filePath, array $excludedPaths): bool
     {
         $fileRealPath = realpath($filePath);
         $fileDir = dirname($fileRealPath);
 
-        foreach ($excludedDirs as $excludedDir) {
-            if (realpath($excludedDir) === $fileDir) {
+        foreach ($excludedPaths as $excludedPath) {
+            if (realpath($excludedPath) === $fileRealPath) {
                 return true;
             }
-        }
 
-        foreach ($excludedFiles as $excludedFile) {
-            if (realpath($excludedFile) === $fileRealPath) {
+            if (realpath($excludedPath) === $fileDir) {
                 return true;
             }
         }

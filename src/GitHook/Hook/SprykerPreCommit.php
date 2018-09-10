@@ -51,8 +51,7 @@ class SprykerPreCommit extends Application
         $context->setCommands($fileCommands);
 
         [$committedFiles, $excludedFiles] = $this->getFilteredCommittedFiles(
-            $context->getConfig()->getExcludedDirs(),
-            $context->getConfig()->getExcludedFiles()
+            $context->getConfig()->getExcludedPaths()
         );
 
         if ($excludedFiles) {
