@@ -36,6 +36,30 @@ class PhpStanConfiguration
     }
 
     /**
+     * @return string[]
+     */
+    public function getDirectories(): array
+    {
+        return array_merge([$this->getSourceDirectory()], $this->getAdditionalDirectories());
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceDirectory(): string
+    {
+        return 'src' . DIRECTORY_SEPARATOR;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getAdditionalDirectories(): array
+    {
+        return $this->config['additionalDirectories'] ?? [];
+    }
+
+    /**
      * @return string
      */
     public function getConfigPath()
