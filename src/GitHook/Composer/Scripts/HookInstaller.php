@@ -127,7 +127,7 @@ class HookInstaller
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
 
-        $hookDirectory = $vendorDir . '/../hooks/git-hook/';
+        $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/git-hook/';
         $gitHookDirectory = $vendorDir . '/../.git/hooks/';
 
         foreach (static::$gitHookHooks as $hook) {
