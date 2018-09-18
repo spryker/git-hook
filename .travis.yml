@@ -9,7 +9,7 @@ cache:
     - $HOME/.composer/cache
 
 install:
-  - composer install --no-interaction --prefer-dist --no-autoloader
+  - composer install --no-interaction --prefer-dist --no-autoloader --no-scripts
 
 script:
   - vendor/bin/phpcs -p --extensions=php --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/
