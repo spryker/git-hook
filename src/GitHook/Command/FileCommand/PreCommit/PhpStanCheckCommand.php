@@ -7,13 +7,11 @@
 
 namespace GitHook\Command\FileCommand\PreCommit;
 
-use GitHook\Command\AbstractCommand;
 use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Command\FileCommand\PreCommit\PhpStan\PhpStanConfiguration;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Process\Process;
 
 /**
@@ -87,8 +85,8 @@ class PhpStanCheckCommand implements CommandInterface
     }
 
     /**
-     * @param PhpStanConfiguration $phpStanConfiguration
-     * @param CommandContextInterface $context
+     * @param \GitHook\Command\FileCommand\PreCommit\PhpStan\PhpStanConfiguration $phpStanConfiguration
+     * @param \GitHook\Command\Context\CommandContextInterface $context
      *
      * @return int
      */
@@ -111,8 +109,8 @@ class PhpStanCheckCommand implements CommandInterface
     }
 
     /**
-     * @param PhpStanConfiguration $phpStanConfiguration
-     * @param CommandContextInterface $context
+     * @param \GitHook\Command\FileCommand\PreCommit\PhpStan\PhpStanConfiguration $phpStanConfiguration
+     * @param \GitHook\Command\Context\CommandContextInterface $context
      *
      * @return string
      */
