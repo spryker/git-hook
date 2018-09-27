@@ -7,12 +7,13 @@
 
 namespace GitHook\Command\FileCommand\PreCommit;
 
+use GitHook\Command\AbstractCommand;
 use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Command\FileCommand\PreCommit\PhpStan\PhpStanConfiguration;
-use GitHook\Helper\ProcessBuilderHelper;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Process\Process;
 
 /**
@@ -20,8 +21,6 @@ use Symfony\Component\Process\Process;
  */
 class PhpStanCheckCommand implements CommandInterface
 {
-    use ProcessBuilderHelper;
-
     /**
      * @param \GitHook\Command\CommandConfigurationInterface $commandConfiguration
      *
@@ -45,17 +44,16 @@ class PhpStanCheckCommand implements CommandInterface
     {
         $phpStanConfiguration = new PhpStanConfiguration($context->getCommandConfig('phpstan'));
         $commandResult = new CommandResult();
-        $fileName = $context->getFile();
+        $filePath = $context->getFile();
 
-        if (!$this->isFileAllowed($fileName, $phpStanConfiguration->getDirectories())) {
+        if (!$this->isFileAllowed($filePath, $phpStanConfiguration->getDirectories())) {
             return $commandResult;
         }
 
-        $command = 'vendor/bin/phpstan analyse ' . $fileName . ' -l ' . $phpStanConfiguration->getLevel();
+        $level = $this->getLevel($phpStanConfiguration, $context);
+        $config = $this->getConfig($phpStanConfiguration, $context);
 
-        if ($phpStanConfiguration->getConfigPath()) {
-            $command .= ' -c ' . $phpStanConfiguration->getConfigPath();
-        }
+        $command = sprintf('vendor/bin/phpstan analyse %s -l %s -c %s', $filePath, $level, $config);
 
         $process = new Process($command, PROJECT_ROOT);
         $process->run();
@@ -77,14 +75,59 @@ class PhpStanCheckCommand implements CommandInterface
      */
     protected function isFileAllowed(string $filePath, array $allowedDirectories): bool
     {
-        $fileDirectory = dirname(realpath($filePath));
+        $fileDirectory = dirname($filePath);
 
         foreach ($allowedDirectories as $allowedDirectory) {
-            if (strpos($fileDirectory, realpath($allowedDirectory)) === 0) {
+            if (strpos($fileDirectory, $allowedDirectory) !== false) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * @param PhpStanConfiguration $phpStanConfiguration
+     * @param CommandContextInterface $context
+     *
+     * @return int
+     */
+    protected function getLevel(PhpStanConfiguration $phpStanConfiguration, CommandContextInterface $context): int
+    {
+        $level = $phpStanConfiguration->getLevel();
+
+        if ($context->isModuleFile()) {
+            $modulePath = $context->getModulePath();
+            $modulePhpstanConfigurationPath = $modulePath . 'phpstan.json';
+            if (file_exists($modulePhpstanConfigurationPath)) {
+                $moduleConfig = json_decode(file_get_contents($modulePhpstanConfigurationPath), true);
+                if (isset($moduleConfig['defaultLevel'])) {
+                    $level = $moduleConfig['defaultLevel'];
+                }
+            }
+        }
+
+        return $level;
+    }
+
+    /**
+     * @param PhpStanConfiguration $phpStanConfiguration
+     * @param CommandContextInterface $context
+     *
+     * @return string
+     */
+    protected function getConfig(PhpStanConfiguration $phpStanConfiguration, CommandContextInterface $context): string
+    {
+        $config = $phpStanConfiguration->getConfigPath();
+
+        if ($context->isModuleFile()) {
+            $modulePath = $context->getModulePath();
+            $modulePhpstanConfigurationPath = $modulePath . 'phpstan.neon';
+            if (file_exists($modulePhpstanConfigurationPath)) {
+                $config = $modulePhpstanConfigurationPath;
+            }
+        }
+
+        return $config;
     }
 }

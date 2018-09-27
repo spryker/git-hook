@@ -16,41 +16,70 @@ interface CommandContextInterface
      *
      * @return \GitHook\Command\Context\CommandContextInterface
      */
-    public function setConfig(GitHookConfig $config);
+    public function setConfig(GitHookConfig $config): CommandContextInterface;
 
     /**
      * @return \GitHook\Config\GitHookConfig
      */
-    public function getConfig();
+    public function getConfig(): GitHookConfig;
 
     /**
      * @param string $commandName
      *
      * @return array
      */
-    public function getCommandConfig($commandName);
+    public function getCommandConfig(string $commandName): array;
 
     /**
      * @param string $file
      *
      * @return \GitHook\Command\Context\CommandContextInterface
      */
-    public function setFile($file);
+    public function setFile(string $file): CommandContextInterface;
+
+    /**
+     * Returns an absolute file path.
+     *
+     * @return string
+     */
+    public function getFile(): string;
+
+    /**
+     * @return bool
+     */
+    public function isModuleFile(): bool;
 
     /**
      * @return string
      */
-    public function getFile();
+    public function getModuleName(): string;
+
+    /**
+     * @return string
+     */
+    public function getOrganizationName(): string;
+
+    /**
+     * @return string
+     */
+    public function getModuleKey(): string;
+
+    /**
+     * Returns an absolute path to the module.
+     *
+     * @return string
+     */
+    public function getModulePath(): string;
 
     /**
      * @return \GitHook\Command\CommandInterface[]
      */
-    public function getCommands();
+    public function getCommands(): array;
 
     /**
      * @param \GitHook\Command\CommandInterface[] $commands
      *
-     * @return $this
+     * @return \GitHook\Command\Context\CommandContextInterface
      */
-    public function setCommands(array $commands);
+    public function setCommands(array $commands): CommandContextInterface;
 }
