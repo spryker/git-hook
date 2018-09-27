@@ -14,7 +14,7 @@ interface CommandContextInterface
     /**
      * @param \GitHook\Config\GitHookConfig $config
      *
-     * @return \GitHook\Command\Context\CommandContextInterface
+     * @return $this
      */
     public function setConfig(GitHookConfig $config): self;
 
@@ -33,7 +33,7 @@ interface CommandContextInterface
     /**
      * @param string $file
      *
-     * @return \GitHook\Command\Context\CommandContextInterface
+     * @return $this
      */
     public function setFile(string $file): self;
 
@@ -79,7 +79,7 @@ interface CommandContextInterface
     /**
      * @param \GitHook\Command\CommandInterface[] $commands
      *
-     * @return \GitHook\Command\Context\CommandContextInterface
+     * @return $this
      */
     public function setCommands(array $commands): self;
 }
