@@ -93,17 +93,22 @@ class PhpStanCheckCommand implements CommandInterface
     {
         $level = $phpStanConfiguration->getLevel();
 
-        if ($context->isModuleFile()) {
-            $modulePath = $context->getModulePath();
-            $modulePhpstanConfigurationPath = $modulePath . 'phpstan.json';
-            if (file_exists($modulePhpstanConfigurationPath)) {
-                $moduleConfig = json_decode(file_get_contents($modulePhpstanConfigurationPath), true);
-                if (isset($moduleConfig['defaultLevel'])) {
-                    $level = $moduleConfig['defaultLevel'];
-                }
-            }
+        if (!$context->isModuleFile()) {
+            return $level;
         }
 
-        return $level;
+        $modulePath = $context->getModulePath();
+        $modulePhpstanConfigurationPath = $modulePath . 'phpstan.json';
+
+        if (!file_exists($modulePhpstanConfigurationPath)) {
+            return $level;
+        }
+
+        $moduleConfig = json_decode(file_get_contents($modulePhpstanConfigurationPath), true);
+        if (!isset($moduleConfig['defaultLevel'])) {
+            return $level;
+        }
+
+        return $moduleConfig['defaultLevel'];
     }
 }
