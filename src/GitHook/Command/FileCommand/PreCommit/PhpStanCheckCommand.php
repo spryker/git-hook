@@ -49,9 +49,8 @@ class PhpStanCheckCommand implements CommandInterface
         }
 
         $level = $this->getLevel($phpStanConfiguration, $context);
-        $config = $this->getConfig($phpStanConfiguration, $context);
 
-        $command = sprintf('vendor/bin/phpstan analyse %s -l %s -c %s', $filePath, $level, $config);
+        $command = sprintf('vendor/bin/phpstan analyse %s -l %s -c %s', $filePath, $level, $phpStanConfiguration->getConfigPath());
 
         $process = new Process($command, PROJECT_ROOT);
         $process->run();
@@ -106,26 +105,5 @@ class PhpStanCheckCommand implements CommandInterface
         }
 
         return $level;
-    }
-
-    /**
-     * @param \GitHook\Command\FileCommand\PreCommit\PhpStan\PhpStanConfiguration $phpStanConfiguration
-     * @param \GitHook\Command\Context\CommandContextInterface $context
-     *
-     * @return string
-     */
-    protected function getConfig(PhpStanConfiguration $phpStanConfiguration, CommandContextInterface $context): string
-    {
-        $config = $phpStanConfiguration->getConfigPath();
-
-        if ($context->isModuleFile()) {
-            $modulePath = $context->getModulePath();
-            $modulePhpstanConfigurationPath = $modulePath . 'phpstan.neon';
-            if (file_exists($modulePhpstanConfigurationPath)) {
-                $config = $modulePhpstanConfigurationPath;
-            }
-        }
-
-        return $config;
     }
 }
