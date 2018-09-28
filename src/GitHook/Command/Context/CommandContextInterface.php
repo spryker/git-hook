@@ -45,33 +45,6 @@ interface CommandContextInterface
     public function getFile(): string;
 
     /**
-     * @return bool
-     */
-    public function isModuleFile(): bool;
-
-    /**
-     * @return string
-     */
-    public function getModuleName(): string;
-
-    /**
-     * @return string
-     */
-    public function getOrganizationName(): string;
-
-    /**
-     * @return string
-     */
-    public function getModuleKey(): string;
-
-    /**
-     * Returns an absolute path to the module.
-     *
-     * @return string
-     */
-    public function getModulePath(): string;
-
-    /**
      * @return \GitHook\Command\CommandInterface[]
      */
     public function getCommands(): array;

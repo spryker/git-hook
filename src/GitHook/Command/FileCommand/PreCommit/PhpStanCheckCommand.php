@@ -92,23 +92,40 @@ class PhpStanCheckCommand implements CommandInterface
     protected function getLevel(PhpStanConfiguration $phpStanConfiguration, CommandContextInterface $context): int
     {
         $level = $phpStanConfiguration->getLevel();
+        $phpStanConfigFilePath = $this->findPhpStanJson($context->getFile());
 
-        if (!$context->isModuleFile()) {
+        if (!$phpStanConfigFilePath) {
             return $level;
         }
 
-        $modulePath = $context->getModulePath();
-        $modulePhpstanConfigurationPath = $modulePath . 'phpstan.json';
-
-        if (!file_exists($modulePhpstanConfigurationPath)) {
-            return $level;
-        }
-
-        $moduleConfig = json_decode(file_get_contents($modulePhpstanConfigurationPath), true);
+        $moduleConfig = json_decode(file_get_contents($phpStanConfigFilePath), true);
         if (!isset($moduleConfig['defaultLevel'])) {
             return $level;
         }
 
         return $moduleConfig['defaultLevel'];
+    }
+
+    /**
+     * @param string $filePath
+     *
+     * @return bool|string
+     */
+    protected function findPhpStanJson(string $filePath)
+    {
+        $srcDirectoryPosition = strrpos($filePath, '/src/');
+
+        if (!$srcDirectoryPosition) {
+            return false;
+        }
+
+        $path = substr($filePath, 0, $srcDirectoryPosition);
+        $phpStanConfigFilePath = $path . DIRECTORY_SEPARATOR . 'phpstan.json';
+
+        if (file_exists($phpStanConfigFilePath)) {
+            return $phpStanConfigFilePath;
+        }
+
+        return false;
     }
 }

@@ -29,7 +29,7 @@ class CommandContext implements CommandContextInterface
     /**
      * @param \GitHook\Config\GitHookConfig $config
      *
-     * @return \GitHook\Command\Context\CommandContextInterface
+     * @return $this
      */
     public function setConfig(GitHookConfig $config): CommandContextInterface
     {
@@ -59,7 +59,7 @@ class CommandContext implements CommandContextInterface
     /**
      * @param string $file
      *
-     * @return \GitHook\Command\Context\CommandContextInterface
+     * @return $this
      */
     public function setFile(string $file): CommandContextInterface
     {
@@ -80,65 +80,6 @@ class CommandContext implements CommandContextInterface
         }
 
         return $this->file;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isModuleFile(): bool
-    {
-        $pathFragments = explode(DIRECTORY_SEPARATOR, $this->getFile());
-        $bundlePosition = array_search('Bundles', $pathFragments, true);
-        if ($bundlePosition === false) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @return string
-     */
-    public function getModuleName(): string
-    {
-        $pathFragments = explode(DIRECTORY_SEPARATOR, $this->getFile());
-        $bundlePosition = array_search('Bundles', $pathFragments, true);
-        $moduleName = $pathFragments[$bundlePosition + 1];
-
-        return $moduleName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getOrganizationName(): string
-    {
-        $pathFragments = explode(DIRECTORY_SEPARATOR, $this->getFile());
-        $bundlePosition = array_search('Bundles', $pathFragments, true);
-        $moduleName = $pathFragments[$bundlePosition + 3];
-
-        return $moduleName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getModuleKey(): string
-    {
-        return sprintf('%s.%s', $this->getOrganizationName(), $this->getModuleName());
-    }
-
-    /**
-     * @return string
-     */
-    public function getModulePath(): string
-    {
-        $pathFragments = explode(DIRECTORY_SEPARATOR, $this->getFile());
-        $bundlePosition = array_search('Bundles', $pathFragments, true);
-
-        $pathFragments = array_slice($pathFragments, 0, $bundlePosition + 2);
-
-        return implode(DIRECTORY_SEPARATOR, $pathFragments) . DIRECTORY_SEPARATOR;
     }
 
     /**
