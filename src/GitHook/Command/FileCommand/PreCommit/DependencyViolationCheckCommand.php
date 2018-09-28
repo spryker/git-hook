@@ -11,15 +11,12 @@ use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\Context\CommandContextInterface;
-use GitHook\Helper\ProcessBuilderHelper;
 use Symfony\Component\Process\Process;
 use Zend\Filter\FilterChain;
 use Zend\Filter\Word\DashToCamelCase;
 
 class DependencyViolationCheckCommand implements CommandInterface
 {
-    use ProcessBuilderHelper;
-
     /**
      * @var array
      */

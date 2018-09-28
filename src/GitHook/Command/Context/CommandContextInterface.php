@@ -14,43 +14,45 @@ interface CommandContextInterface
     /**
      * @param \GitHook\Config\GitHookConfig $config
      *
-     * @return \GitHook\Command\Context\CommandContextInterface
+     * @return $this
      */
-    public function setConfig(GitHookConfig $config);
+    public function setConfig(GitHookConfig $config): self;
 
     /**
      * @return \GitHook\Config\GitHookConfig
      */
-    public function getConfig();
+    public function getConfig(): GitHookConfig;
 
     /**
      * @param string $commandName
      *
      * @return array
      */
-    public function getCommandConfig($commandName);
+    public function getCommandConfig(string $commandName): array;
 
     /**
      * @param string $file
      *
-     * @return \GitHook\Command\Context\CommandContextInterface
+     * @return $this
      */
-    public function setFile($file);
+    public function setFile(string $file): self;
 
     /**
+     * Returns an absolute file path.
+     *
      * @return string
      */
-    public function getFile();
+    public function getFile(): string;
 
     /**
      * @return \GitHook\Command\CommandInterface[]
      */
-    public function getCommands();
+    public function getCommands(): array;
 
     /**
      * @param \GitHook\Command\CommandInterface[] $commands
      *
      * @return $this
      */
-    public function setCommands(array $commands);
+    public function setCommands(array $commands): self;
 }

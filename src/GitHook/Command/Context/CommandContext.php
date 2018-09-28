@@ -29,9 +29,9 @@ class CommandContext implements CommandContextInterface
     /**
      * @param \GitHook\Config\GitHookConfig $config
      *
-     * @return \GitHook\Command\Context\CommandContextInterface
+     * @return $this
      */
-    public function setConfig(GitHookConfig $config)
+    public function setConfig(GitHookConfig $config): CommandContextInterface
     {
         $this->config = $config;
 
@@ -41,7 +41,7 @@ class CommandContext implements CommandContextInterface
     /**
      * @return \GitHook\Config\GitHookConfig
      */
-    public function getConfig()
+    public function getConfig(): GitHookConfig
     {
         return $this->config;
     }
@@ -51,7 +51,7 @@ class CommandContext implements CommandContextInterface
      *
      * @return array
      */
-    public function getCommandConfig($commandName)
+    public function getCommandConfig(string $commandName): array
     {
         return $this->config->getCommandConfig($commandName);
     }
@@ -59,9 +59,9 @@ class CommandContext implements CommandContextInterface
     /**
      * @param string $file
      *
-     * @return \GitHook\Command\Context\CommandContextInterface
+     * @return $this
      */
-    public function setFile($file)
+    public function setFile(string $file): CommandContextInterface
     {
         $this->file = $file;
 
@@ -69,17 +69,31 @@ class CommandContext implements CommandContextInterface
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return string
      */
-    public function getFile()
+    public function getFile(): string
     {
+        if (strpos($this->file, './') === 0) {
+            $this->file = $this->getProjectPath() . substr($this->file, 2);
+        }
+
         return $this->file;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getProjectPath(): string
+    {
+        return realpath(PROJECT_ROOT) . DIRECTORY_SEPARATOR;
     }
 
     /**
      * @return \GitHook\Command\CommandInterface[]
      */
-    public function getCommands()
+    public function getCommands(): array
     {
         return $this->commands;
     }
@@ -87,9 +101,9 @@ class CommandContext implements CommandContextInterface
     /**
      * @param \GitHook\Command\CommandInterface[] $commands
      *
-     * @return $this
+     * @return \GitHook\Command\Context\CommandContextInterface
      */
-    public function setCommands(array $commands)
+    public function setCommands(array $commands): CommandContextInterface
     {
         $this->commands = $commands;
 
