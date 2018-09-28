@@ -109,14 +109,14 @@ class PhpStanCheckCommand implements CommandInterface
     /**
      * @param string $filePath
      *
-     * @return bool|string
+     * @return string|null
      */
-    protected function findPhpStanJson(string $filePath)
+    protected function findPhpStanJson(string $filePath): ?string
     {
         $srcDirectoryPosition = strrpos($filePath, '/src/');
 
         if (!$srcDirectoryPosition) {
-            return false;
+            return null;
         }
 
         $path = substr($filePath, 0, $srcDirectoryPosition);
@@ -126,6 +126,6 @@ class PhpStanCheckCommand implements CommandInterface
             return $phpStanConfigFilePath;
         }
 
-        return false;
+        return null;
     }
 }
