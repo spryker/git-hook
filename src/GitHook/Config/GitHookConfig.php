@@ -31,7 +31,7 @@ class GitHookConfig
         if (isset($this->config['preCommitFileCommands'])) {
             foreach ($this->config['preCommitFileCommands'] as $fileCommand) {
                 $fileCommand = '\\' . ltrim($fileCommand, '\\');
-                $fileCommands[] = new $fileCommand;
+                $fileCommands[] = new $fileCommand();
             }
         }
 
@@ -47,7 +47,7 @@ class GitHookConfig
         if (isset($this->config['preCommitRepositoryCommands'])) {
             foreach ($this->config['preCommitRepositoryCommands'] as $repositoryCommand) {
                 $repositoryCommand = '\\' . ltrim($repositoryCommand, '\\');
-                $repositoryCommands[] = new $repositoryCommand;
+                $repositoryCommands[] = new $repositoryCommand();
             }
         }
 
@@ -63,7 +63,7 @@ class GitHookConfig
         if (isset($this->config['prePushRepositoryCommands'])) {
             foreach ($this->config['prePushRepositoryCommands'] as $repositoryCommand) {
                 $repositoryCommand = '\\' . ltrim($repositoryCommand, '\\');
-                $repositoryCommands[] = new $repositoryCommand;
+                $repositoryCommands[] = new $repositoryCommand();
             }
         }
 
