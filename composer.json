@@ -17,7 +17,8 @@
   "require": {
     "php": ">=7.1",
     "symfony/yaml": "^2.8|^3",
-    "zendframework/zend-filter": "^2.0.0"
+    "zendframework/zend-filter": "^2.0.0",
+    "symfony/process": "^3.0.0"
   },
   "require-dev": {
     "phpstan/phpstan": "^0.8 || ^0.9",
