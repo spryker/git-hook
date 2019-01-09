@@ -20,7 +20,7 @@
     "zendframework/zend-filter": "^2.0.0"
   },
   "require-dev": {
-    "phpstan/phpstan": "^0.8 || ^0.9",
+    "phpstan/phpstan": "^0.10.0",
     "phpmd/phpmd": "^2.6",
     "spryker/code-sniffer": "*",
     "codeception/codeception": "^2.2.10",
