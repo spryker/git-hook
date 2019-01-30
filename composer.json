@@ -4,11 +4,11 @@
   "type": "library",
   "license": "MIT",
   "keywords": ["framework", "sniffer", "architecture", "standards"],
-  "homepage": "http://spryker.com",
+  "homepage": "https://spryker.com",
   "authors": [
     {
       "name": "Spryker",
-      "homepage": "http://spryker.com"
+      "homepage": "https://spryker.com"
     }
   ],
   "support": {
