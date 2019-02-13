@@ -16,7 +16,7 @@ interface CommandContextInterface
      *
      * @return $this
      */
-    public function setConfig(GitHookConfig $config): self;
+    public function setConfig(GitHookConfig $config);
 
     /**
      * @return \GitHook\Config\GitHookConfig
@@ -35,7 +35,7 @@ interface CommandContextInterface
      *
      * @return $this
      */
-    public function setFile(string $file): self;
+    public function setFile(string $file);
 
     /**
      * Returns an absolute file path.
@@ -54,5 +54,5 @@ interface CommandContextInterface
      *
      * @return $this
      */
-    public function setCommands(array $commands): self;
+    public function setCommands(array $commands);
 }
