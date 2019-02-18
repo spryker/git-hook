@@ -170,4 +170,28 @@ class HookInstaller
 
         return true;
     }
+
+    /**
+     * @param \Composer\Script\Event $event
+     *
+     * @return bool
+     */
+    public static function installSprykerMerchantPortalHooks(Event $event)
+    {
+        $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
+        $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker/';
+        $gitHookDirectory = $vendorDir . '/spryker/spryker-merchant-portal/.git/hooks/';
+
+        foreach (static::$sprykerHooks as $hook) {
+            $src = realpath($hookDirectory . $hook);
+            $dist = realpath($gitHookDirectory) . '/' . $hook;
+
+            copy($src, $dist);
+            chmod($dist, 0755);
+
+            $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
+        }
+
+        return true;
+    }
 }
