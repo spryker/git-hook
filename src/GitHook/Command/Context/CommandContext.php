@@ -118,7 +118,7 @@ class CommandContext implements CommandContextInterface
     /**
      * @return string
      */
-    public function getBranch()
+    public function getBranch(): string
     {
         return $this->branch;
     }
