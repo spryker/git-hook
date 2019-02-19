@@ -10,6 +10,7 @@ namespace GitHook\Hook;
 use Exception;
 use GitHook\Command\FileCommand\FileCommandExecutor;
 use GitHook\Command\RepositoryCommand\RepositoryCommandExecutor;
+use GitHook\Helper\BranchHelper;
 use GitHook\Helper\CommittedFilesHelper;
 use GitHook\Helper\ConsoleHelper;
 use GitHook\Helper\ContextHelper;
@@ -21,6 +22,7 @@ class SprykerPreCommit extends Application
 {
     use CommittedFilesHelper;
     use ContextHelper;
+    use BranchHelper;
 
     public function __construct()
     {
@@ -49,6 +51,7 @@ class SprykerPreCommit extends Application
         $consoleHelper->gitHookHeader('Spryker Git pre-commit hook');
 
         $context->setCommands($fileCommands);
+        $context->setBranch($this->getBranch());
 
         $fileCommandExecutor = new FileCommandExecutor($this->getCommittedFiles(), $consoleHelper);
 

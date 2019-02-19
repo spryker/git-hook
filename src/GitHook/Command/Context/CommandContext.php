@@ -27,6 +27,11 @@ class CommandContext implements CommandContextInterface
     protected $commands;
 
     /**
+     * @var string
+     */
+    protected $branch;
+
+    /**
      * @param \GitHook\Config\GitHookConfig $config
      *
      * @return $this
@@ -106,6 +111,26 @@ class CommandContext implements CommandContextInterface
     public function setCommands(array $commands): CommandContextInterface
     {
         $this->commands = $commands;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBranch()
+    {
+        return $this->branch;
+    }
+
+    /**
+     * @param string $branch
+     *
+     * @return \GitHook\Command\Context\CommandContextInterface
+     */
+    public function setBranch(string $branch)
+    {
+        $this->branch = $branch;
 
         return $this;
     }
