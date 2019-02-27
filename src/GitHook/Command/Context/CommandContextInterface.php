@@ -55,4 +55,16 @@ interface CommandContextInterface
      * @return $this
      */
     public function setCommands(array $commands);
+
+    /**
+     * @return string
+     */
+    public function getBranch(): string;
+
+    /**
+     * @param string $branch
+     *
+     * @return \GitHook\Command\Context\CommandContextInterface
+     */
+    public function setBranch(string $branch);
 }
