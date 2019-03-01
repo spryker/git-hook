@@ -179,7 +179,7 @@ class HookInstaller
     public static function installSprykerMerchantPortalHooks(Event $event)
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
-        $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker/';
+        $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker-merchant-portal/';
         $gitHookDirectory = $vendorDir . '/spryker/spryker-merchant-portal/.git/hooks/';
 
         foreach (static::$sprykerHooks as $hook) {

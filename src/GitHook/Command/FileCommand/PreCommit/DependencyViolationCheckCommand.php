@@ -95,7 +95,7 @@ class DependencyViolationCheckCommand implements CommandInterface
         $filePathParts = explode(DIRECTORY_SEPARATOR, $fileName);
         $vendorPosition = array_search('vendor', $filePathParts);
 
-        $organizationName = $filePathParts[$vendorPosition + 1];
+        $organizationName = $filePathParts[$vendorPosition + 2];
         $filterChain = new FilterChain();
         $filterChain->attach(new DashToCamelCase());
 

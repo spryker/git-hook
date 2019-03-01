@@ -1,0 +1,12 @@
+#!/usr/bin/php
+<?php
+
+define('PROJECT_ROOT', __DIR__ . '/../../../../..');
+define('PATH_PREFIX', DIRECTORY_SEPARATOR . 'vendor/spryker/spryker-merchant-portal/');
+
+require PROJECT_ROOT . '/vendor/autoload.php';
+
+use GitHook\Hook\SprykerPreCommit;
+
+$console = new SprykerPreCommit();
+$console->run();
