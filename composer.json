@@ -16,7 +16,7 @@
   },
   "require": {
     "php": ">=7.1",
-    "symfony/process": "^3.0.0",
+    "symfony/process": "^3.0.0 || ^4.0.0",
     "symfony/yaml": "^3.0.0 || ^4.0.0",
     "zendframework/zend-filter": "^2.0.0"
   },
