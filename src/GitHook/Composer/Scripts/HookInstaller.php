@@ -57,7 +57,10 @@ class HookInstaller
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/project/';
         $gitHookDirectory = $vendorDir . '/../.git/hooks/';
 
-        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) return true;
+        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+            return true;
+        }
+
         foreach (static::$projectHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
             $dist = realpath($gitHookDirectory) . '/' . $hook;
@@ -82,7 +85,10 @@ class HookInstaller
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker/';
         $gitHookDirectory = $vendorDir . '/spryker/spryker/.git/hooks/';
 
-        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) return true;
+        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+            return true;
+        }
+
         foreach (static::$sprykerHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
             $dist = realpath($gitHookDirectory) . '/' . $hook;
@@ -107,7 +113,10 @@ class HookInstaller
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker-shop/';
         $gitHookDirectory = $vendorDir . '/spryker/spryker-shop/.git/hooks/';
 
-        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) return true;
+        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+            return true;
+        }
+
         foreach (static::$sprykerShopHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
             $dist = realpath($gitHookDirectory) . '/' . $hook;
@@ -133,7 +142,10 @@ class HookInstaller
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/git-hook/';
         $gitHookDirectory = $vendorDir . '/../.git/hooks/';
 
-        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) return true;
+        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+            return true;
+        }
+
         foreach (static::$gitHookHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
             $dist = realpath($gitHookDirectory) . '/' . $hook;
@@ -189,7 +201,10 @@ class HookInstaller
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker-merchant-portal/';
         $gitHookDirectory = $vendorDir . '/spryker/spryker-merchant-portal/.git/hooks/';
 
-        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) return true;
+        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+            return true;
+        }
+
         foreach (static::$sprykerHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
             $dist = realpath($gitHookDirectory) . '/' . $hook;
