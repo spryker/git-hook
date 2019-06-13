@@ -228,10 +228,12 @@ class HookInstaller
     {
         if (!is_dir($path)) {
             $event->getIO()->write(sprintf('<info>Path "%s" does not exist</info>', $path));
+
             return false;
         }
         if (!is_writable($path)) {
             $event->getIO()->write(sprintf('<info>Path "%s" is not writable</info>', $path));
+
             return false;
         }
 
