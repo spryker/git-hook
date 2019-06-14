@@ -57,6 +57,10 @@ class HookInstaller
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/project/';
         $gitHookDirectory = $vendorDir . '/../.git/hooks/';
 
+        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+            return true;
+        }
+
         foreach (static::$projectHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
             $dist = realpath($gitHookDirectory) . '/' . $hook;
@@ -80,6 +84,10 @@ class HookInstaller
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker/';
         $gitHookDirectory = $vendorDir . '/spryker/spryker/.git/hooks/';
+
+        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+            return true;
+        }
 
         foreach (static::$sprykerHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
@@ -105,6 +113,10 @@ class HookInstaller
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker-shop/';
         $gitHookDirectory = $vendorDir . '/spryker/spryker-shop/.git/hooks/';
 
+        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+            return true;
+        }
+
         foreach (static::$sprykerShopHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
             $dist = realpath($gitHookDirectory) . '/' . $hook;
@@ -129,6 +141,10 @@ class HookInstaller
 
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/git-hook/';
         $gitHookDirectory = $vendorDir . '/../.git/hooks/';
+
+        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+            return true;
+        }
 
         foreach (static::$gitHookHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
@@ -159,12 +175,15 @@ class HookInstaller
         foreach (static::$ecoHooks as $hook) {
             $src = realpath($hookDirectory . DIRECTORY_SEPARATOR . $hook);
             foreach ($modulesDirs as $dirname) {
-                $dist = realpath($dirname . '/.git/hooks') . DIRECTORY_SEPARATOR . $hook;
+                $destinationDirectory = realpath($dirname . '/.git/hooks');
+                if (self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+                    $dist = $destinationDirectory . DIRECTORY_SEPARATOR . $hook;
 
-                copy($src, $dist);
-                chmod($dist, 0755);
+                    copy($src, $dist);
+                    chmod($dist, 0755);
 
-                $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
+                    $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
+                }
             }
         }
 
@@ -182,6 +201,10 @@ class HookInstaller
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker-merchant-portal/';
         $gitHookDirectory = $vendorDir . '/spryker/spryker-merchant-portal/.git/hooks/';
 
+        if (!self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+            return true;
+        }
+
         foreach (static::$sprykerHooks as $hook) {
             $src = realpath($hookDirectory . $hook);
             $dist = realpath($gitHookDirectory) . '/' . $hook;
@@ -190,6 +213,28 @@ class HookInstaller
             chmod($dist, 0755);
 
             $event->getIO()->write(sprintf('<info>Copied "%s" to "%s"</info>', $src, $dist));
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $path
+     * @param \Composer\Script\Event $event
+     *
+     * @return bool
+     */
+    protected static function checkDirectoryPermissions(string $path, Event $event)
+    {
+        if (!is_dir($path)) {
+            $event->getIO()->write(sprintf('<info>Path "%s" does not exist</info>', $path));
+
+            return false;
+        }
+        if (!is_writable($path)) {
+            $event->getIO()->write(sprintf('<info>Path "%s" is not writable</info>', $path));
+
+            return false;
         }
 
         return true;
