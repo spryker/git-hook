@@ -17,7 +17,7 @@ interface CommandConfigurationInterface
     /**
      * @param string $name
      *
-     * @return \GitHook\Command\CommandConfigurationInterface
+     * @return $this
      */
     public function setName($name);
 
@@ -29,7 +29,7 @@ interface CommandConfigurationInterface
     /**
      * @param string $description
      *
-     * @return \GitHook\Command\CommandConfigurationInterface
+     * @return $this
      */
     public function setDescription($description);
 
@@ -41,7 +41,7 @@ interface CommandConfigurationInterface
     /**
      * @param string|array $fileExtensions
      *
-     * @return \GitHook\Command\CommandConfigurationInterface
+     * @return $this
      */
     public function setAcceptedFileExtensions($fileExtensions);
 }

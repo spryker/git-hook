@@ -64,7 +64,7 @@ interface CommandContextInterface
     /**
      * @param string $branch
      *
-     * @return \GitHook\Command\Context\CommandContextInterface
+     * @return $this
      */
     public function setBranch(string $branch);
 }

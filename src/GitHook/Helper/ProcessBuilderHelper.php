@@ -7,7 +7,7 @@
 
 namespace GitHook\Helper;
 
-use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Process\Process;
 
 trait ProcessBuilderHelper
 {
@@ -18,9 +18,7 @@ trait ProcessBuilderHelper
      */
     public function buildProcess(array $processDefinition)
     {
-        $processBuilder = new ProcessBuilder($processDefinition);
-        $processBuilder->setWorkingDirectory(PROJECT_ROOT);
-        $process = $processBuilder->getProcess();
+        $process = new Process($processDefinition, PROJECT_ROOT);
 
         return $process;
     }
