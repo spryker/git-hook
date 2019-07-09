@@ -13,12 +13,13 @@ trait ProcessBuilderHelper
 {
     /**
      * @param array $processDefinition
+     * @param string $projectRoot
      *
      * @return \Symfony\Component\Process\Process
      */
-    public function buildProcess(array $processDefinition)
+    public function buildProcess(array $processDefinition, string $projectRoot = PROJECT_ROOT)
     {
-        $process = new Process($processDefinition, PROJECT_ROOT);
+        $process = new Process($processDefinition, $projectRoot);
 
         return $process;
     }
