@@ -19,6 +19,11 @@ class ArchitectureCheckCommand implements CommandInterface
     use ProcessBuilderHelper;
 
     /**
+     * @var string[]
+     */
+    protected $processedDirectories;
+
+    /**
      * @param \GitHook\Command\CommandConfigurationInterface $commandConfiguration
      *
      * @return \GitHook\Command\CommandConfigurationInterface
@@ -43,9 +48,15 @@ class ArchitectureCheckCommand implements CommandInterface
         $configuration = new ArchitectureSniffConfiguration($context->getCommandConfig('architecture'));
         $commandResult = new CommandResult();
 
+        $directory = dirname($context->getFile());
+
+        if (isset($this->processedDirectories[$directory])) {
+            return $commandResult;
+        }
+
         $processDefinition = [
             'vendor/bin/phpmd',
-            $context->getFile(),
+            $directory,
             'xml',
             'vendor/spryker/architecture-sniffer/src/ruleset.xml',
             '--minimumpriority',
@@ -60,6 +71,8 @@ class ArchitectureCheckCommand implements CommandInterface
                 ->setError(trim($process->getErrorOutput()))
                 ->setMessage(trim($process->getOutput()));
         }
+
+        $this->processedDirectories[$directory] = true;
 
         return $commandResult;
     }
