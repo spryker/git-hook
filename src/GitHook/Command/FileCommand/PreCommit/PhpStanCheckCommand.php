@@ -13,14 +13,12 @@ use GitHook\Command\CommandResult;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Command\FileCommand\PreCommit\PhpStan\PhpStanConfiguration;
 use GitHook\Helper\ProcessBuilderHelper;
-use Symfony\Component\Process\Process;
 
 /**
  * If you see an error about something can't be autoloaded, check if there is an alias for the given class.
  */
 class PhpStanCheckCommand implements CommandInterface
 {
-
     use ProcessBuilderHelper;
 
     /**
