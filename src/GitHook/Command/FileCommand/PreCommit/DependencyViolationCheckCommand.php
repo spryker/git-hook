@@ -11,12 +11,15 @@ use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\Context\CommandContextInterface;
+use GitHook\Helper\ProcessBuilderHelper;
 use Symfony\Component\Process\Process;
 use Zend\Filter\FilterChain;
 use Zend\Filter\Word\DashToCamelCase;
 
 class DependencyViolationCheckCommand implements CommandInterface
 {
+    use ProcessBuilderHelper;
+
     /**
      * @var array
      */
@@ -57,8 +60,8 @@ class DependencyViolationCheckCommand implements CommandInterface
 
         $organization = $this->getOrganizationNameFromFile($context->getFile());
 
-        $commandLine = sprintf('vendor/bin/console dev:dependency:find %s.%s -vv', $organization, $module);
-        $process = new Process($commandLine, PROJECT_ROOT);
+        $processDefinition = ['vendor/bin/console', 'dev:dependency:find', sprintf('%s.%s', $organization, $module), '-vv'];
+        $process = $this->buildProcess($processDefinition, PROJECT_ROOT);
         $process->run();
 
         if (!$process->isSuccessful()) {
