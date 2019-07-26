@@ -12,7 +12,6 @@ use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ProcessBuilderHelper;
-use Symfony\Component\Process\ProcessBuilder;
 
 class ValidateBranchNameCommand implements CommandInterface
 {
@@ -40,10 +39,8 @@ class ValidateBranchNameCommand implements CommandInterface
     public function run(CommandContextInterface $context)
     {
         $commandResult = new CommandResult();
-        $processDefinition = ['git', 'rev-parse', '--abbrev-ref', 'HEAD'];
-        $processBuilder = new ProcessBuilder($processDefinition);
-        $processBuilder->setWorkingDirectory(PROJECT_ROOT . PATH_PREFIX);
-        $process = $processBuilder->getProcess();
+
+        $process = $this->buildProcess(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], PROJECT_ROOT . PATH_PREFIX);
         $process->run();
 
         if (!$process->isSuccessful()) {

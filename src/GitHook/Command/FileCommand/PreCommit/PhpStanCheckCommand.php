@@ -12,13 +12,15 @@ use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Command\FileCommand\PreCommit\PhpStan\PhpStanConfiguration;
-use Symfony\Component\Process\Process;
+use GitHook\Helper\ProcessBuilderHelper;
 
 /**
  * If you see an error about something can't be autoloaded, check if there is an alias for the given class.
  */
 class PhpStanCheckCommand implements CommandInterface
 {
+    use ProcessBuilderHelper;
+
     /**
      * @param \GitHook\Command\CommandConfigurationInterface $commandConfiguration
      *
@@ -50,9 +52,8 @@ class PhpStanCheckCommand implements CommandInterface
 
         $level = $this->getLevel($phpStanConfiguration, $context);
 
-        $command = sprintf('vendor/bin/phpstan analyse %s -l %s -c %s', $filePath, $level, $phpStanConfiguration->getConfigPath());
-
-        $process = new Process($command, PROJECT_ROOT);
+        $processDefinition = ['vendor/bin/phpstan', 'analyse', $filePath, '-l', $level, '-c', $phpStanConfiguration->getConfigPath()];
+        $process = $this->buildProcess($processDefinition, PROJECT_ROOT);
         $process->run();
 
         if (!$process->isSuccessful()) {

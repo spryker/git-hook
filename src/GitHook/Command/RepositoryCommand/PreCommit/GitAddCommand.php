@@ -12,7 +12,6 @@ use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ProcessBuilderHelper;
-use Symfony\Component\Process\ProcessBuilder;
 
 class GitAddCommand implements CommandInterface
 {
@@ -41,10 +40,7 @@ class GitAddCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['git', 'add', '.'];
-        $processBuilder = new ProcessBuilder($processDefinition);
-        $processBuilder->setWorkingDirectory(PROJECT_ROOT . PATH_PREFIX);
-        $process = $processBuilder->getProcess();
+        $process = $this->buildProcess(['git', 'add', '.'], PROJECT_ROOT . PATH_PREFIX);
         $process->run();
 
         if (!$process->isSuccessful()) {
