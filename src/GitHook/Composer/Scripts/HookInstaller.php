@@ -176,7 +176,7 @@ class HookInstaller
             $src = realpath($hookDirectory . DIRECTORY_SEPARATOR . $hook);
             foreach ($modulesDirs as $dirname) {
                 $destinationDirectory = realpath($dirname . '/.git/hooks');
-                if (self::checkDirectoryPermissions($gitHookDirectory, $event)) {
+                if (self::checkDirectoryPermissions($destinationDirectory, $event)) {
                     $dist = $destinationDirectory . DIRECTORY_SEPARATOR . $hook;
 
                     copy($src, $dist);
