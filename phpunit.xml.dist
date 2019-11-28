@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="true"
-         colors="false"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         mapTestClassNameToCoveredClassName="false"
-         strict="false"
-         verbose="false"
-         bootstrap="./Spryker/tests/bootstrap.php">
+<phpunit bootstrap="Spryker/tests/bootstrap.php">
     <testsuites>
         <testsuite name="phpcs">
-            <file>./tests/SprykerStandardTest.php</file>
+            <file>tests/SprykerStandardTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
