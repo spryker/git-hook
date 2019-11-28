@@ -74,7 +74,7 @@ class CommandContext implements CommandContextInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return string
      */
