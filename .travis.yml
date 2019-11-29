@@ -1,17 +1,34 @@
 language: php
-php:
-  - 7.1
-  - 7.3
 
+php:
+  - 7.2
+
+env:
+  global:
+    - DEFAULT=1
+
+matrix:
+  include:
+    - php: 7.2
+      env: VALIDATION=1 DEFAULT=0
+
+    - php: 7.4snapshot
+      env: VALIDATION=1 DEFAULT=0
+
+  fast_finish: true
 cache:
   directories:
     - $HOME/.composer/cache
+
+before_install:
+  - if [[ ${TRAVIS_PHP_VERSION} != "7.4snapshot" ]]; then phpenv config-rm xdebug.ini ; fi
 
 install:
   - composer install --no-interaction --prefer-dist --no-scripts
 
 script:
-  - vendor/bin/phpcs -p --extensions=php --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/
+  - if [[ $VALIDATION == 1 ]]; then vendor/bin/phpcs -p --extensions=php --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/; fi
+  - if [[ $VALIDATION == 1 ]]; then composer phpstan; fi
 
 notifications:
   email: false

@@ -15,18 +15,19 @@
     "source": "https://github.com/spryker/git-hook"
   },
   "require": {
-    "php": ">=7.1",
-    "symfony/process": "^3.0.0 || ^4.0.0",
-    "symfony/yaml": "^3.0.0 || ^4.0.0",
+    "php": ">=7.2",
+    "symfony/process": "^3.0.0 || ^4.0.0 || ^5.0.0",
+    "symfony/yaml": "^3.0.0 || ^4.0.0 || ^5.0.0",
     "zendframework/zend-filter": "^2.0.0"
   },
   "require-dev": {
-    "phpstan/phpstan": "^0.11.2",
-    "phpmd/phpmd": "^2.6",
+    "phpstan/phpstan": "*",
+    "phpmd/phpmd": "*",
     "spryker/code-sniffer": "*",
     "codeception/codeception": "*",
-    "sebastian/phpcpd": "^3.0",
-    "symfony/var-dumper": "*"
+    "sebastian/phpcpd": "*",
+    "symfony/var-dumper": "*",
+    "sllh/composer-versions-check": "*"
   },
   "autoload": {
     "psr-4": {
@@ -34,13 +35,8 @@
     }
   },
   "scripts": {
-    "post-install-cmd": [
-      "GitHook\\Composer\\Scripts\\HookInstaller::installGitHook"
-    ],
-    "post-update-cmd": [
-      "GitHook\\Composer\\Scripts\\HookInstaller::installGitHook"
-    ],
     "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -p -s src/",
-    "cs-fix": "phpcbf --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -p src/"
+    "cs-fix": "phpcbf --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -p src/",
+    "phpstan": "vendor/bin/phpstan analyse -c tests/phpstan.neon -l 5 Spryker/Sniffs/ SprykerStrict/Sniffs/"
   }
 }
