@@ -30,7 +30,7 @@ class SprykerPrePush extends Application
      *
      * @throws \Exception
      *
-     * @return void
+     * @return int
      */
     public function doRun(InputInterface $input, OutputInterface $output)
     {
@@ -41,7 +41,7 @@ class SprykerPrePush extends Application
         $consoleHelper = new ConsoleHelper($input, $output);
 
         if (count($commands) === 0) {
-            return;
+            return 0;
         }
 
         $consoleHelper->gitHookHeader('Spryker Git pre-push hook');
@@ -55,5 +55,7 @@ class SprykerPrePush extends Application
 
         $consoleHelper->newLine(2);
         $consoleHelper->success('Good job dude!');
+
+        return 0;
     }
 }

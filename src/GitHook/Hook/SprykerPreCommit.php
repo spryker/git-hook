@@ -35,7 +35,7 @@ class SprykerPreCommit extends Application
      *
      * @throws \Exception
      *
-     * @return void
+     * @return int
      */
     public function doRun(InputInterface $input, OutputInterface $output)
     {
@@ -44,7 +44,7 @@ class SprykerPreCommit extends Application
         $repositoryCommands = $context->getConfig()->getPreCommitRepositoryCommands();
 
         if (count($fileCommands) === 0 && count($repositoryCommands) === 0) {
-            return;
+            return 0;
         }
 
         $consoleHelper = new ConsoleHelper($input, $output);
@@ -67,5 +67,7 @@ class SprykerPreCommit extends Application
 
         $consoleHelper->newLine(2);
         $consoleHelper->success('Good job dude!');
+
+        return 0;
     }
 }

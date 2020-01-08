@@ -19,7 +19,7 @@ class ArchitectureCheckCommand implements CommandInterface
     use ProcessBuilderHelper;
 
     /**
-     * @var string[]
+     * @var bool[]
      */
     protected $processedDirectories;
 
