@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace GitHook\Command;
@@ -16,12 +16,12 @@ interface CommandInterface
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function configure(CommandConfigurationInterface $configuration);
+    public function configure(CommandConfigurationInterface $configuration): CommandConfigurationInterface;
 
     /**
      * @param \GitHook\Command\Context\CommandContextInterface $context
      *
      * @return \GitHook\Command\CommandResultInterface
      */
-    public function run(CommandContextInterface $context);
+    public function run(CommandContextInterface $context): CommandResultInterface;
 }

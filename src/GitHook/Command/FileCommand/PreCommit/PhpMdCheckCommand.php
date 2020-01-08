@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace GitHook\Command\FileCommand\PreCommit;
@@ -10,6 +10,7 @@ namespace GitHook\Command\FileCommand\PreCommit;
 use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
+use GitHook\Command\CommandResultInterface;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Command\FileCommand\PreCommit\PhpMd\PhpMdCheckConfiguration;
 use GitHook\Helper\ProcessBuilderHelper;
@@ -28,7 +29,7 @@ class PhpMdCheckCommand implements CommandInterface
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function configure(CommandConfigurationInterface $commandConfiguration)
+    public function configure(CommandConfigurationInterface $commandConfiguration): CommandConfigurationInterface
     {
         $commandConfiguration
             ->setName('PHP Mess detector check.')
@@ -43,7 +44,7 @@ class PhpMdCheckCommand implements CommandInterface
      *
      * @return \GitHook\Command\CommandResultInterface
      */
-    public function run(CommandContextInterface $context)
+    public function run(CommandContextInterface $context): CommandResultInterface
     {
         $configuration = new PhpMdCheckConfiguration($context->getCommandConfig('phpmd'));
         $commandResult = new CommandResult();

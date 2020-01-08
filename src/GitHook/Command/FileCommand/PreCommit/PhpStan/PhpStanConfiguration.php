@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace GitHook\Command\FileCommand\PreCommit\PhpStan;
@@ -25,7 +25,7 @@ class PhpStanConfiguration
     /**
      * @return int
      */
-    public function getLevel()
+    public function getLevel(): int
     {
         $defaultLevel = 0;
         if (!$this->config) {
@@ -62,7 +62,7 @@ class PhpStanConfiguration
     /**
      * @return string
      */
-    public function getConfigPath()
+    public function getConfigPath(): string
     {
         return (isset($this->config['config'])) ? '.' . PATH_PREFIX . $this->config['config'] : '';
     }
