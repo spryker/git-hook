@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace GitHook\Config;
@@ -25,7 +25,7 @@ class GitHookConfig
     /**
      * @return \GitHook\Command\CommandInterface[]
      */
-    public function getPreCommitFileCommands()
+    public function getPreCommitFileCommands(): array
     {
         $fileCommands = [];
         if (isset($this->config['preCommitFileCommands'])) {
@@ -41,7 +41,7 @@ class GitHookConfig
     /**
      * @return \GitHook\Command\CommandInterface[]
      */
-    public function getPreCommitRepositoryCommands()
+    public function getPreCommitRepositoryCommands(): array
     {
         $repositoryCommands = [];
         if (isset($this->config['preCommitRepositoryCommands'])) {
@@ -57,7 +57,7 @@ class GitHookConfig
     /**
      * @return \GitHook\Command\CommandInterface[]
      */
-    public function getPrePushRepositoryCommands()
+    public function getPrePushRepositoryCommands(): array
     {
         $repositoryCommands = [];
         if (isset($this->config['prePushRepositoryCommands'])) {
@@ -75,7 +75,7 @@ class GitHookConfig
      *
      * @return array
      */
-    public function getCommandConfig($commandName)
+    public function getCommandConfig(string $commandName): array
     {
         $commandConfig = [];
         if (isset($this->config['config'][$commandName])) {

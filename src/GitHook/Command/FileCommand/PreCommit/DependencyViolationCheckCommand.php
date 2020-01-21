@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace GitHook\Command\FileCommand\PreCommit;
@@ -10,6 +10,7 @@ namespace GitHook\Command\FileCommand\PreCommit;
 use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
+use GitHook\Command\CommandResultInterface;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ProcessBuilderHelper;
 use Zend\Filter\FilterChain;
@@ -29,7 +30,7 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */
-    public function configure(CommandConfigurationInterface $commandConfiguration)
+    public function configure(CommandConfigurationInterface $commandConfiguration): CommandConfigurationInterface
     {
         $commandConfiguration
             ->setName('Dependency violation check.')
@@ -43,7 +44,7 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return \GitHook\Command\CommandResultInterface
      */
-    public function run(CommandContextInterface $context)
+    public function run(CommandContextInterface $context): CommandResultInterface
     {
         $commandResult = new CommandResult();
 
@@ -79,7 +80,7 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return string
      */
-    private function getModuleNameFromFile($fileName): string
+    private function getModuleNameFromFile(string $fileName): string
     {
         $filePathParts = explode(DIRECTORY_SEPARATOR, $fileName);
         $namespacePosition = array_search('Bundles', $filePathParts);
@@ -92,7 +93,7 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return string
      */
-    private function getOrganizationNameFromFile($fileName): string
+    private function getOrganizationNameFromFile(string $fileName): string
     {
         $filePathParts = explode(DIRECTORY_SEPARATOR, $fileName);
         $vendorPosition = array_search('vendor', $filePathParts);
@@ -109,7 +110,7 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return bool
      */
-    private function isCheckAble($fileName)
+    private function isCheckAble(string $fileName): bool
     {
         $filePathParts = explode(DIRECTORY_SEPARATOR, $fileName);
 
@@ -121,7 +122,7 @@ class DependencyViolationCheckCommand implements CommandInterface
      *
      * @return bool
      */
-    private function isAlreadyChecked($module)
+    private function isAlreadyChecked(string $module): bool
     {
         return (in_array($module, $this->checkedModules));
     }

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace GitHook\Hook;
@@ -30,9 +30,9 @@ class SprykerPrePush extends Application
      *
      * @throws \Exception
      *
-     * @return void
+     * @return int
      */
-    public function doRun(InputInterface $input, OutputInterface $output)
+    public function doRun(InputInterface $input, OutputInterface $output): int
     {
         $context = $this->createContext();
         $commands = $context->getConfig()->getPrePushRepositoryCommands();
@@ -41,7 +41,7 @@ class SprykerPrePush extends Application
         $consoleHelper = new ConsoleHelper($input, $output);
 
         if (count($commands) === 0) {
-            return;
+            return 0;
         }
 
         $consoleHelper->gitHookHeader('Spryker Git pre-push hook');
@@ -55,5 +55,7 @@ class SprykerPrePush extends Application
 
         $consoleHelper->newLine(2);
         $consoleHelper->success('Good job dude!');
+
+        return 0;
     }
 }

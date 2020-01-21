@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace GitHook\Command\RepositoryCommand;
@@ -32,7 +32,7 @@ class RepositoryCommandExecutor implements CommandExecutorInterface
      *
      * @return bool
      */
-    public function execute(CommandContextInterface $context)
+    public function execute(CommandContextInterface $context): bool
     {
         $success = true;
         foreach ($context->getCommands() as $command) {

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace GitHook\Command;
@@ -12,31 +12,31 @@ interface CommandConfigurationInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * @param string $name
      *
      * @return $this
      */
-    public function setName($name);
+    public function setName(string $name);
 
     /**
      * @return string
      */
-    public function getDescription();
+    public function getDescription(): string;
 
     /**
      * @param string $description
      *
      * @return $this
      */
-    public function setDescription($description);
+    public function setDescription(string $description);
 
     /**
      * @return array
      */
-    public function getAcceptedFileExtensions();
+    public function getAcceptedFileExtensions(): array;
 
     /**
      * @param string|array $fileExtensions

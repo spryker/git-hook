@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace GitHook\Composer\Scripts;
@@ -51,7 +51,7 @@ class HookInstaller
      *
      * @return bool
      */
-    public static function installProjectHooks(Event $event)
+    public static function installProjectHooks(Event $event): bool
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/project/';
@@ -79,7 +79,7 @@ class HookInstaller
      *
      * @return bool
      */
-    public static function installSprykerHooks(Event $event)
+    public static function installSprykerHooks(Event $event): bool
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker/';
@@ -107,7 +107,7 @@ class HookInstaller
      *
      * @return bool
      */
-    public static function installSprykerShopHooks(Event $event)
+    public static function installSprykerShopHooks(Event $event): bool
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker-shop/';
@@ -135,7 +135,7 @@ class HookInstaller
      *
      * @return bool
      */
-    public static function installGitHook(Event $event)
+    public static function installGitHook(Event $event): bool
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
 
@@ -164,7 +164,7 @@ class HookInstaller
      *
      * @return bool
      */
-    public static function installEcoHooks(Event $event)
+    public static function installEcoHooks(Event $event): bool
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
 
@@ -195,7 +195,7 @@ class HookInstaller
      *
      * @return bool
      */
-    public static function installSprykerMerchantPortalHooks(Event $event)
+    public static function installSprykerMerchantPortalHooks(Event $event): bool
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/spryker-merchant-portal/';
@@ -224,7 +224,7 @@ class HookInstaller
      *
      * @return bool
      */
-    protected static function checkDirectoryPermissions(string $path, Event $event)
+    protected static function checkDirectoryPermissions(string $path, Event $event): bool
     {
         if (!is_dir($path)) {
             $event->getIO()->write(sprintf('<info>Path "%s" does not exist</info>', $path));

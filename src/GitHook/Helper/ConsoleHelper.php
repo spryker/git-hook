@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright © 2017-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * MIT License
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace GitHook\Helper;
@@ -16,7 +16,7 @@ class ConsoleHelper extends SymfonyStyle
      *
      * @return void
      */
-    public function gitHookHeader($hookName)
+    public function gitHookHeader(string $hookName): void
     {
         $output = PHP_EOL . PHP_EOL . '  ' . $hookName . PHP_EOL;
         $this->writeln(sprintf('<fg=white;options=bold;bg=green>%s</fg=white;options=bold;bg=green>', $output));
@@ -28,7 +28,7 @@ class ConsoleHelper extends SymfonyStyle
      *
      * @return void
      */
-    public function commandInfo($name, $description)
+    public function commandInfo(string $name, string $description): void
     {
         $this->newLine(3);
         $this->section($name);
@@ -43,7 +43,7 @@ class ConsoleHelper extends SymfonyStyle
      *
      * @return void
      */
-    public function errors(array $messages)
+    public function errors(array $messages): void
     {
         $this->newLine(2);
         foreach ($messages as $message) {
