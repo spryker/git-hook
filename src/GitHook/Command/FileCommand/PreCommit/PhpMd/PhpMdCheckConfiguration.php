@@ -46,6 +46,8 @@ class PhpMdCheckConfiguration
     }
 
     /**
+     * @throws \Exception
+     *
      * @return string
      */
     protected function getDefaultRulesetPath(): string
@@ -53,7 +55,7 @@ class PhpMdCheckConfiguration
         $defaultRuleSetPathsByPriority = [
             'config/phpmd-ruleset.xml',
             'vendor/spryker/spryker/Bundles/Development/src/Spryker/Zed/Development/Business/PhpMd/ruleset.xml',
-            'vendor/spryker/development/src/Spryker/Zed/Development/Business/PhpMd/ruleset.xml'
+            'vendor/spryker/development/src/Spryker/Zed/Development/Business/PhpMd/ruleset.xml',
         ];
 
         foreach ($defaultRuleSetPathsByPriority as $ruleSetPath) {
