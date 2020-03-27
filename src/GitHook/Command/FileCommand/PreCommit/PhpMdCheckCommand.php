@@ -59,7 +59,7 @@ class PhpMdCheckCommand implements CommandInterface
             'vendor/bin/phpmd',
             $directory,
             'xml',
-            'vendor/spryker/spryker/Bundles/Development/src/Spryker/Zed/Development/Business/PhpMd/ruleset.xml',
+            $configuration->getRulesetPath(),
             '--minimumpriority',
             $configuration->getMinimumPriority(),
         ];
@@ -70,7 +70,7 @@ class PhpMdCheckCommand implements CommandInterface
         if (!$process->isSuccessful()) {
             $commandResult
                 ->setError(trim($process->getErrorOutput()))
-                ->setMessage(trim($process->getOutput()));
+                ->setMessage(trim($process->getOutput() ?: $process->getErrorOutput()));
         }
 
         $this->processedDirectories[$directory] = true;
