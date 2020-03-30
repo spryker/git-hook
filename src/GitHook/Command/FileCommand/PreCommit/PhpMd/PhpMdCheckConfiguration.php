@@ -17,6 +17,15 @@ class PhpMdCheckConfiguration
     protected $config;
 
     /**
+     * @var string[]
+     */
+    protected $defaultRuleSetPathsByPriority = [
+        'config/phpmd-ruleset.xml',
+        'vendor/spryker/spryker/Bundles/Development/src/Spryker/Zed/Development/Business/PhpMd/ruleset.xml',
+        'vendor/spryker/development/src/Spryker/Zed/Development/Business/PhpMd/ruleset.xml',
+    ];
+
+    /**
      * @param array $config
      */
     public function __construct(array $config)
@@ -52,18 +61,12 @@ class PhpMdCheckConfiguration
      */
     protected function getDefaultRulesetPath(): string
     {
-        $defaultRuleSetPathsByPriority = [
-            'config/phpmd-ruleset.xml',
-            'vendor/spryker/spryker/Bundles/Development/src/Spryker/Zed/Development/Business/PhpMd/ruleset.xml',
-            'vendor/spryker/development/src/Spryker/Zed/Development/Business/PhpMd/ruleset.xml',
-        ];
-
-        foreach ($defaultRuleSetPathsByPriority as $ruleSetPath) {
+        foreach ($this->defaultRuleSetPathsByPriority as $ruleSetPath) {
             if (file_exists(PROJECT_ROOT . DIRECTORY_SEPARATOR . $ruleSetPath)) {
                 return $ruleSetPath;
             }
         }
 
-        throw new Exception('Ruleset file was not found in any location: ' . PHP_EOL . implode(PHP_EOL, $defaultRuleSetPathsByPriority));
+        throw new Exception('Ruleset file was not found in any location: ' . PHP_EOL . implode(PHP_EOL, $this->defaultRuleSetPathsByPriority));
     }
 }
