@@ -71,7 +71,7 @@ preCommitRepositoryCommands:
 ```
 config:
     phpstan:
-        level: 7
+        level: 8
         config: .phpstan.neon
 ```
 
