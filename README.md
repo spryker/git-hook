@@ -1,9 +1,9 @@
 # GitHook
 [![Build Status](https://travis-ci.org/spryker/git-hook.svg?branch=master)](https://travis-ci.org/spryker/git-hook)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg)](https://php.net/)
 [![License](https://img.shields.io/github/license/spryker/git-hook.svg)](https://packagist.org/packages/spryker/git-hook)
 
-GitHook for Spryker. This tool will add git hooks to your .git/hooks directory. 
+GitHook for Spryker. This tool will add git hooks to your .git/hooks directory.
 
 Currently we have only one hook `pre-commit` this will execute on every commit the applied commands.
 
