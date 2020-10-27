@@ -13,8 +13,8 @@ use GitHook\Command\CommandResult;
 use GitHook\Command\CommandResultInterface;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ProcessBuilderHelper;
-use Zend\Filter\FilterChain;
-use Zend\Filter\Word\DashToCamelCase;
+use Laminas\Filter\FilterChain;
+use Laminas\Filter\Word\DashToCamelCase;
 
 class DependencyViolationCheckCommand implements CommandInterface
 {
