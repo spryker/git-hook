@@ -27,7 +27,7 @@ class FormatterCommand implements CommandInterface
     {
         $commandConfiguration
             ->setName('Formatter')
-            ->setDescription('Formated files according to prettier rules.')
+            ->setDescription('Format files according to prettier rules.')
             ->setAcceptedFileExtensions(['scss', 'css', 'less', 'js', 'ts', 'json', 'html']);
 
         return $commandConfiguration;
