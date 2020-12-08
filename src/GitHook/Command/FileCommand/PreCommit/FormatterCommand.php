@@ -42,7 +42,7 @@ class FormatterCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['npx', 'prettier', '--config', 'node_modules/@spryker/frontend-config.prettier/.prettierrc.json', '--write', $context->getFile()];
+        $processDefinition = ['node', './frontend/libs/formatter', '--write', $context->getFile()];
         $process = $this->buildProcess($processDefinition);
         $process->run();
 

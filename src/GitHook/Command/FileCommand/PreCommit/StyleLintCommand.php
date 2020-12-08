@@ -42,7 +42,7 @@ class StyleLintCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['npx', 'stylelint', $context->getFile(), '--config', 'node_modules/@spryker/frontend-config.stylelint/.stylelintrc', '--fix'];
+        $processDefinition = ['node', './frontend/libs/stylelint', 'NODE_ENV=development', 'development', 'fix', $context->getFile()];
         $process = $this->buildProcess($processDefinition);
         $process->run();
 
