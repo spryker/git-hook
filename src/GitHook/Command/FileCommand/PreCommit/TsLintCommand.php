@@ -27,7 +27,7 @@ class TsLintCommand implements CommandInterface
     {
         $commandConfiguration
             ->setName('TsLint')
-            ->setDescription('Fix ts files according to typescript rules.')
+            ->setDescription('Fix style/formatting of ts files according to typescript rules.')
             ->setAcceptedFileExtensions('ts');
 
         return $commandConfiguration;
