@@ -27,7 +27,7 @@ class StyleLintCommand implements CommandInterface
     {
         $commandConfiguration
             ->setName('StyleLint')
-            ->setDescription('Fix style files according to stylelint rules.')
+            ->setDescription('Fix style/formatting of files according to stylelint rules.')
             ->setAcceptedFileExtensions(['scss', 'css', 'less']);
 
         return $commandConfiguration;
