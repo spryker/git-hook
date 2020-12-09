@@ -42,7 +42,7 @@ class StyleLintCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['node', './frontend/libs/stylelint', 'NODE_ENV=development', 'development', 'fix', $context->getFile()];
+        $processDefinition = ['node', './frontend/libs/stylelint', '--fix', '--file-path', $context->getFile()];
         $process = $this->buildProcess($processDefinition);
         $process->run();
 

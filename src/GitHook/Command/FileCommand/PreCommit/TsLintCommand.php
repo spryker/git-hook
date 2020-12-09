@@ -42,7 +42,7 @@ class TsLintCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['node', './frontend/libs/tslint', 'fix', $context->getFile()];
+        $processDefinition = ['node', './frontend/libs/tslint', '--fix', '--file-path',  $context->getFile()];
         $process = $this->buildProcess($processDefinition);
         $process->run();
 
