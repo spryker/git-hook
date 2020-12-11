@@ -41,15 +41,18 @@ class StyleLintCommand implements CommandInterface
     public function run(CommandContextInterface $context): CommandResultInterface
     {
         $commandResult = new CommandResult();
+        $isZedModule = strpos($context->getFile(), 'Zed');
 
-        $processDefinition = ['node', './frontend/libs/stylelint', '--fix', '--file-path', $context->getFile()];
-        $process = $this->buildProcess($processDefinition);
-        $process->run();
+        if (!$isZedModule) {
+            $processDefinition = ['node', './frontend/libs/stylelint', '--fix', '--file-path', $context->getFile()];
+            $process = $this->buildProcess($processDefinition);
+            $process->run();
 
-        if (!$process->isSuccessful()) {
-            $commandResult
-                ->setError(trim($process->getErrorOutput()))
-                ->setMessage(trim($process->getOutput()));
+            if (!$process->isSuccessful()) {
+                $commandResult
+                    ->setError(trim($process->getErrorOutput()))
+                    ->setMessage(trim($process->getOutput()));
+            }
         }
 
         return $commandResult;

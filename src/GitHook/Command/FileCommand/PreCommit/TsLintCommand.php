@@ -41,8 +41,16 @@ class TsLintCommand implements CommandInterface
     public function run(CommandContextInterface $context): CommandResultInterface
     {
         $commandResult = new CommandResult();
+        $isZedUiModule = strpos($context->getFile(), 'ZedUi');
+        $isMerchantPortalModule = strpos($context->getFile(), 'MerchantPortalGui');
 
-        $processDefinition = ['node', './frontend/libs/tslint', '--fix', '--file-path',  $context->getFile()];
+        if ($isZedUiModule || $isMerchantPortalModule) {
+            $processDefinition = ['node', './frontend/libs/tslint', '--fix', '--config', 'tsconfig.mp.json', '--config-lint', 'tslint.mp-githook.json', '--file-path',  $context->getFile()];
+        }
+        else {
+            $processDefinition = ['node', './frontend/libs/tslint', '--fix', '--config-lint', 'tslint-githook.json', '--file-path',  $context->getFile()];
+        }
+
         $process = $this->buildProcess($processDefinition);
         $process->run();
 

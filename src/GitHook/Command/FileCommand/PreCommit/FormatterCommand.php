@@ -42,7 +42,7 @@ class FormatterCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['node', './frontend/libs/formatter', '--fix', '--file-path', $context->getFile()];
+        $processDefinition = ['node', './frontend/libs/formatter', '--fix', '--ignore-path', './.prettierignore-githook', '--file-path', $context->getFile()];
         $process = $this->buildProcess($processDefinition);
         $process->run();
 
