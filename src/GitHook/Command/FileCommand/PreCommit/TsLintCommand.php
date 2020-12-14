@@ -18,6 +18,8 @@ class TsLintCommand implements CommandInterface
 {
     use ProcessBuilderHelper;
 
+    protected const ANGULAR_MODULES = ['ZedUi', 'MerchantPortalGui'];
+
     /**
      * @param \GitHook\Command\CommandConfigurationInterface $commandConfiguration
      *
@@ -41,17 +43,9 @@ class TsLintCommand implements CommandInterface
     public function run(CommandContextInterface $context): CommandResultInterface
     {
         $commandResult = new CommandResult();
-        $isZedUiModule = strpos($context->getFile(), 'ZedUi');
-        $isMerchantPortalModule = strpos($context->getFile(), 'MerchantPortalGui');
-
-        if ($isZedUiModule || $isMerchantPortalModule) {
-            $processDefinition = ['node', './frontend/libs/tslint', '--fix', '--config', 'tsconfig.mp.json', '--config-lint', 'tslint.mp-githook.json', '--file-path',  $context->getFile()];
-        }
-        else {
-            $processDefinition = ['node', './frontend/libs/tslint', '--fix', '--config-lint', 'tslint-githook.json', '--file-path',  $context->getFile()];
-        }
-
-        $process = $this->buildProcess($processDefinition);
+        $process = $this->buildProcess(
+            $this->getProcessDefinition($context)
+        );
         $process->run();
 
         if (!$process->isSuccessful()) {
@@ -61,5 +55,53 @@ class TsLintCommand implements CommandInterface
         }
 
         return $commandResult;
+    }
+
+    /**
+     * @param \GitHook\Command\Context\CommandContextInterface $context
+     *
+     * @return string[]
+     */
+    protected function getProcessDefinition(CommandContextInterface $context): array
+    {
+        if ($this->isAngularContext($context)) {
+            return [
+                'node',
+                './frontend/libs/tslint',
+                '--fix',
+                '--config',
+                'tsconfig.mp.json',
+                '--config-lint',
+                'tslint.mp-githook.json',
+                '--file-path',
+                $context->getFile(),
+            ];
+        }
+
+        return [
+            'node',
+            './frontend/libs/tslint',
+            '--fix',
+            '--config-lint',
+            'tslint-githook.json',
+            '--file-path',
+            $context->getFile(),
+        ];
+    }
+
+    /**
+     * @param \GitHook\Command\Context\CommandContextInterface $context
+     *
+     * @return bool
+     */
+    protected function isAngularContext(CommandContextInterface $context): bool
+    {
+        foreach (static::ANGULAR_MODULES as $moduleName) {
+            if (strpos($context->getFile(), $moduleName) !== false) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
