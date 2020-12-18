@@ -18,7 +18,7 @@ class TsLintCommand implements CommandInterface
 {
     use ProcessBuilderHelper;
 
-    protected const ANGULAR_MODULES = ['ZedUi', 'MerchantPortalGui'];
+    protected const MERCHANT_PORTAL_MODULES = ['ZedUi', 'MerchantPortalGui'];
 
     /**
      * @param \GitHook\Command\CommandConfigurationInterface $commandConfiguration
@@ -64,7 +64,7 @@ class TsLintCommand implements CommandInterface
      */
     protected function getProcessDefinition(CommandContextInterface $context): array
     {
-        if ($this->isAngularContext($context)) {
+        if ($this->isMerchantPortalContext($context)) {
             return [
                 'node',
                 './frontend/libs/tslint',
@@ -94,9 +94,9 @@ class TsLintCommand implements CommandInterface
      *
      * @return bool
      */
-    protected function isAngularContext(CommandContextInterface $context): bool
+    protected function isMerchantPortalContext(CommandContextInterface $context): bool
     {
-        foreach (static::ANGULAR_MODULES as $moduleName) {
+        foreach (static::MERCHANT_PORTAL_MODULES as $moduleName) {
             if (strpos($context->getFile(), $moduleName) !== false) {
                 return true;
             }
