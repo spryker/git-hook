@@ -14,7 +14,7 @@ use GitHook\Command\CommandResultInterface;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ProcessBuilderHelper;
 
-class FormatterCommand implements CommandInterface
+class FrontendFormatterCommand implements CommandInterface
 {
     use ProcessBuilderHelper;
 

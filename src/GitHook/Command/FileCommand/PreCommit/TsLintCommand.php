@@ -18,7 +18,7 @@ class TsLintCommand implements CommandInterface
 {
     use ProcessBuilderHelper;
 
-    protected const MERCHANT_PORTAL_MODULES = ['ZedUi', 'MerchantPortalGui'];
+    protected const MERCHANT_PORTAL_PATTERNS = ['ZedUi', 'MerchantPortalGui'];
 
     /**
      * @param \GitHook\Command\CommandConfigurationInterface $commandConfiguration
@@ -96,7 +96,7 @@ class TsLintCommand implements CommandInterface
      */
     protected function isMerchantPortalContext(CommandContextInterface $context): bool
     {
-        foreach (static::MERCHANT_PORTAL_MODULES as $moduleName) {
+        foreach (static::MERCHANT_PORTAL_PATTERNS as $moduleName) {
             if (strpos($context->getFile(), $moduleName) !== false) {
                 return true;
             }
