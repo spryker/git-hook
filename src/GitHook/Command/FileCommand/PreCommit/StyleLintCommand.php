@@ -42,7 +42,7 @@ class StyleLintCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        if (str_contains($context->getFile(), 'Zed')) {
+        if (strpos($context->getFile(), 'Zed') !== false) {
             return $commandResult;
         }
 
