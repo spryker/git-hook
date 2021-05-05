@@ -1,32 +1,32 @@
 # GitHook
-[![Build Status](https://travis-ci.org/spryker/git-hook.svg?branch=master)](https://travis-ci.org/spryker/git-hook)
+[![CI](https://github.com/spryker/git-hook/actions/workflows/ci.yml/badge.svg)](https://github.com/spryker/git-hook/actions/workflows/ci.yml)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg)](https://php.net/)
 [![License](https://img.shields.io/github/license/spryker/git-hook.svg)](https://packagist.org/packages/spryker/git-hook)
 
-GitHook for Spryker. This tool will add git hooks to your .git/hooks directory.
+GitHook for Spryker. This tool will add Git hooks to your local hooks directory.
 
-Currently we have only one hook `pre-commit` this will execute on every commit the applied commands.
+Currently, we have only one hook named `pre-commit`.
+This will execute on every commit the applied commands.
 
 ## Installation
-
-`composer require --dev spryker/git-hook`
-
+```
+composer require --dev spryker/git-hook
+```
 ### Setup
-Add the Composer Scripts to your composer.json
+Add the Composer scripts to your composer.json
 
 #### For core
 
 ```
-  "scripts": {
-    "post-install-cmd": [
-      "GitHook\\Composer\\Scripts\\HookInstaller::installSprykerHooks",
-      "GitHook\\Composer\\Scripts\\HookInstaller::installEcoHooks"
+    "scripts": {
+        "post-install-cmd": [
+        "GitHook\\Composer\\Scripts\\HookInstaller::installSprykerHooks",
+        "GitHook\\Composer\\Scripts\\HookInstaller::installEcoHooks"
     ],
     "post-update-cmd": [
-      "GitHook\\Composer\\Scripts\\HookInstaller::installSprykerHooks",
-      "GitHook\\Composer\\Scripts\\HookInstaller::installEcoHooks"
+        "GitHook\\Composer\\Scripts\\HookInstaller::installSprykerHooks",
+        "GitHook\\Composer\\Scripts\\HookInstaller::installEcoHooks"
     ]
-  }
 ```
 #### For projects
 
@@ -41,7 +41,7 @@ Add the Composer Scripts to your composer.json
   }
 ```
 
-This will copy the git hooks to your .git/hooks directory.
+This will copy the git hooks to your `.git/hooks/` directory.
 
 ## Configuration
 
