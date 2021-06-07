@@ -24,7 +24,7 @@ trait CommittedFilesHelper
             $against = 'HEAD';
         }
 
-        exec('git diff-index --name-status ' . $against . ' | egrep \'^(A|M)\' | awk \'{print $2;}\'', $committedFiles);
+        $committedFiles = $this->getAffectedFiles($against);
 
         $prepareFilePathCallback = function ($file) {
             return '.' . PATH_PREFIX . $file;
@@ -36,8 +36,33 @@ trait CommittedFilesHelper
             return is_file(PROJECT_ROOT . DIRECTORY_SEPARATOR . $file);
         };
 
-        $committedFiles = array_filter($committedFiles, $filterFilesCallback);
+        return array_filter($committedFiles, $filterFilesCallback);
+    }
 
-        return $committedFiles;
+    /**
+     * @param string $revision
+     *
+     * @return string[]
+     */
+    protected function getAffectedFiles(string $revision): array
+    {
+        exec(sprintf('git diff --name-only --diff-filter=AM %s', $revision), $committedFiles);
+
+        if (!$this->isMergeInProcess()) {
+            return $committedFiles;
+        }
+
+        exec(sprintf('git diff --name-only --diff-filter=AM MERGE_HEAD...%s', $revision), $mergeConflictFiles);
+        exec(sprintf('git diff --name-only --diff-filter=AM %s MERGE_HEAD', $revision), $mergeFiles);
+
+        return array_merge(array_diff($committedFiles, $mergeFiles), $mergeConflictFiles);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isMergeInProcess(): bool
+    {
+        return trim(exec('git rev-parse -q --verify MERGE_HEAD')) !== '';
     }
 }
