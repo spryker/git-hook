@@ -62,9 +62,13 @@ preCommitFileCommands:
     - GitHook\Command\FileCommand\PreCommit\PhpStanCheckCommand
 
 preCommitRepositoryCommands:
+    - GitHook\Command\RepositoryCommand\PreCommit\ValidateBranchNameCommand
     - GitHook\Command\RepositoryCommand\PreCommit\GitAddCommand
 ```
 
+See the full list of available commands in the `src/GitHook/Command/FileCommand` and `src/GitHook/Command/RepositoryCommand`.
+
+Note: `GitHook\Command\RepositoryCommand\PreCommit\GitAddCommand` will automatically add all new files into commit, when other commands changed the files ( `CodeStyleFixCommand` does it for example), so use it only when you really need it!
 
 ### PhpStanCheckCommand configuration
 
