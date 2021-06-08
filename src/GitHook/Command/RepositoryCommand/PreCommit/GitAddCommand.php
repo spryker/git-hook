@@ -41,7 +41,7 @@ class GitAddCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $process = $this->buildProcess(['git', 'add', '.'], PROJECT_ROOT . PATH_PREFIX);
+        $process = $this->buildProcess(['git', 'add', '--update'], PROJECT_ROOT . PATH_PREFIX);
         $process->run();
 
         if (!$process->isSuccessful()) {
