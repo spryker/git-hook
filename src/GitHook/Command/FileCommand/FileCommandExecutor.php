@@ -10,6 +10,7 @@ namespace GitHook\Command\FileCommand;
 use GitHook\Command\CommandConfiguration;
 use GitHook\Command\CommandConfigurationInterface;
 use GitHook\Command\CommandExecutorInterface;
+use GitHook\Command\CommandResultInterface;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ConsoleHelper;
 
@@ -61,7 +62,12 @@ class FileCommandExecutor implements CommandExecutorInterface
 
                 $commandResult = $command->run($context);
                 if (!$commandResult->isSuccess()) {
-                    $messages[] = $commandResult->getMessage();
+                    $messages[] = sprintf(
+                        '[Command "%s" (file: %s) fails] %s',
+                        $configuration->getName(),
+                        $committedFile,
+                        $this->getCommandResultErrorMessage($commandResult)
+                    );
                     $success = false;
                 }
 
@@ -75,6 +81,24 @@ class FileCommandExecutor implements CommandExecutorInterface
         }
 
         return $success;
+    }
+
+    /**
+     * @param \GitHook\Command\CommandResultInterface $commandResult
+     *
+     * @return string
+     */
+    protected function getCommandResultErrorMessage(CommandResultInterface $commandResult): string
+    {
+        if ($commandResult->getError()) {
+            return $commandResult->getError();
+        }
+
+        if ($commandResult->getMessage()) {
+            return $commandResult->getMessage();
+        }
+
+        return 'Undefined error';
     }
 
     /**
