@@ -8,6 +8,3 @@ includedFileCommands:
   - GitHook\Command\FileCommand\PreCommit\CodeStyleFixCommand
   - GitHook\Command\FileCommand\PreCommit\PhpStanCheckCommand
 
-includedRepositoryCommands:
-  - GitHook\Command\RepositoryCommand\PreCommit\GitAddCommand
-
