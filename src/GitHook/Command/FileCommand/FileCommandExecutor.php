@@ -90,6 +90,10 @@ class FileCommandExecutor implements CommandExecutorInterface
      */
     protected function getCommandResultErrorMessage(CommandResultInterface $commandResult): string
     {
+        if ($commandResult->getError() && $commandResult->getMessage()) {
+            return sprintf("%s\n%s", $commandResult->getError(), $commandResult->getMessage());
+        }
+
         if ($commandResult->getError()) {
             return $commandResult->getError();
         }
