@@ -20,7 +20,7 @@ class ArchitectureCheckCommand implements CommandInterface
     use ProcessBuilderHelper;
 
     /**
-     * @var bool[]
+     * @var array<bool>
      */
     protected $processedDirectories;
 
@@ -69,7 +69,6 @@ class ArchitectureCheckCommand implements CommandInterface
             $configuration->getMinimumPriority(),
         ];
 
-        throw new \Exception(__CLASS__ . ':' . __LINE__ . ' dir: ' . $directory);
         $process = $this->buildProcess($processDefinition);
         $process->run();
 
@@ -78,8 +77,6 @@ class ArchitectureCheckCommand implements CommandInterface
                 ->setError(trim($process->getErrorOutput()))
                 ->setMessage(trim($process->getOutput()));
         }
-
-
 
         $this->processedDirectories[$directory] = true;
 

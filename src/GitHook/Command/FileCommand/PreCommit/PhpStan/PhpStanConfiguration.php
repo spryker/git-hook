@@ -36,7 +36,7 @@ class PhpStanConfiguration
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getDirectories(): array
     {
@@ -52,7 +52,7 @@ class PhpStanConfiguration
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getAdditionalDirectories(): array
     {

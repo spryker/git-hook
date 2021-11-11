@@ -22,7 +22,7 @@ class CommandContext implements CommandContextInterface
     protected $file;
 
     /**
-     * @var \GitHook\Command\CommandInterface[]
+     * @var array<\GitHook\Command\CommandInterface>
      */
     protected $commands;
 
@@ -96,7 +96,7 @@ class CommandContext implements CommandContextInterface
     }
 
     /**
-     * @return \GitHook\Command\CommandInterface[]
+     * @return array<\GitHook\Command\CommandInterface>
      */
     public function getCommands(): array
     {
@@ -104,7 +104,7 @@ class CommandContext implements CommandContextInterface
     }
 
     /**
-     * @param \GitHook\Command\CommandInterface[] $commands
+     * @param array<\GitHook\Command\CommandInterface> $commands
      *
      * @return \GitHook\Command\Context\CommandContextInterface
      */

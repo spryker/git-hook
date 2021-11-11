@@ -18,6 +18,9 @@ class TsLintCommand implements CommandInterface
 {
     use ProcessBuilderHelper;
 
+    /**
+     * @var array
+     */
     protected const MERCHANT_PORTAL_PATTERNS = ['ZedUi', 'MerchantPortalGui'];
 
     /**
@@ -44,7 +47,7 @@ class TsLintCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
         $process = $this->buildProcess(
-            $this->getProcessDefinition($context)
+            $this->getProcessDefinition($context),
         );
         $process->run();
 
@@ -60,7 +63,7 @@ class TsLintCommand implements CommandInterface
     /**
      * @param \GitHook\Command\Context\CommandContextInterface $context
      *
-     * @return string[]
+     * @return array<string>
      */
     protected function getProcessDefinition(CommandContextInterface $context): array
     {

@@ -73,7 +73,7 @@ class CommandConfiguration implements CommandConfigurationInterface
     }
 
     /**
-     * @param string|array $fileExtensions
+     * @param array|string $fileExtensions
      *
      * @return \GitHook\Command\CommandConfigurationInterface
      */

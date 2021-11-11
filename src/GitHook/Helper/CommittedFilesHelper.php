@@ -42,7 +42,7 @@ trait CommittedFilesHelper
     /**
      * @param string $revision
      *
-     * @return string[]
+     * @return array<string>
      */
     protected function getAffectedFiles(string $revision): array
     {
