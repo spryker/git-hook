@@ -51,6 +51,11 @@ class ArchitectureCheckCommand implements CommandInterface
 
         $directory = dirname($context->getFile());
 
+        // Don't check files on root level. Those do not need to follow Sprykers architecture rules.
+        if ($directory === getcwd()) {
+            return $commandResult;
+        }
+
         if (isset($this->processedDirectories[$directory])) {
             return $commandResult;
         }
@@ -64,6 +69,7 @@ class ArchitectureCheckCommand implements CommandInterface
             $configuration->getMinimumPriority(),
         ];
 
+        throw new \Exception(__CLASS__ . ':' . __LINE__ . ' dir: ' . $directory);
         $process = $this->buildProcess($processDefinition);
         $process->run();
 
@@ -72,6 +78,8 @@ class ArchitectureCheckCommand implements CommandInterface
                 ->setError(trim($process->getErrorOutput()))
                 ->setMessage(trim($process->getOutput()));
         }
+
+
 
         $this->processedDirectories[$directory] = true;
 
