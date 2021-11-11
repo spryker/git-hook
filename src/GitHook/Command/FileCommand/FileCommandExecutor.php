@@ -66,7 +66,7 @@ class FileCommandExecutor implements CommandExecutorInterface
                         '[Command "%s" (file: %s) fails] %s',
                         $configuration->getName(),
                         $committedFile,
-                        $this->getCommandResultErrorMessage($commandResult)
+                        $this->getCommandResultErrorMessage($commandResult),
                     );
                     $success = false;
                 }

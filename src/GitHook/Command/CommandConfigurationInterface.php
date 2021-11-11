@@ -39,7 +39,7 @@ interface CommandConfigurationInterface
     public function getAcceptedFileExtensions(): array;
 
     /**
-     * @param string|array $fileExtensions
+     * @param array|string $fileExtensions
      *
      * @return $this
      */

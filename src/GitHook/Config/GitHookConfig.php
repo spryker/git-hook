@@ -23,7 +23,7 @@ class GitHookConfig
     }
 
     /**
-     * @return \GitHook\Command\CommandInterface[]
+     * @return array<\GitHook\Command\CommandInterface>
      */
     public function getPreCommitFileCommands(): array
     {
@@ -39,7 +39,7 @@ class GitHookConfig
     }
 
     /**
-     * @return \GitHook\Command\CommandInterface[]
+     * @return array<\GitHook\Command\CommandInterface>
      */
     public function getPreCommitRepositoryCommands(): array
     {
@@ -55,7 +55,7 @@ class GitHookConfig
     }
 
     /**
-     * @return \GitHook\Command\CommandInterface[]
+     * @return array<\GitHook\Command\CommandInterface>
      */
     public function getPrePushRepositoryCommands(): array
     {

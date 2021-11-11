@@ -20,7 +20,7 @@ class ArchitectureCheckCommand implements CommandInterface
     use ProcessBuilderHelper;
 
     /**
-     * @var bool[]
+     * @var array<bool>
      */
     protected $processedDirectories;
 
@@ -50,6 +50,11 @@ class ArchitectureCheckCommand implements CommandInterface
         $commandResult = new CommandResult();
 
         $directory = dirname($context->getFile());
+
+        // Don't check files on root level. Those do not need to follow Sprykers architecture rules.
+        if ($directory === getcwd()) {
+            return $commandResult;
+        }
 
         if (isset($this->processedDirectories[$directory])) {
             return $commandResult;

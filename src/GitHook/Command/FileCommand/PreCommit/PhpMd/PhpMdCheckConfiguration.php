@@ -17,7 +17,7 @@ class PhpMdCheckConfiguration
     protected $config;
 
     /**
-     * @var string[]
+     * @var array<string>
      */
     protected $defaultRuleSetPathsByPriority = [
         'config/phpmd-ruleset.xml',

@@ -20,7 +20,7 @@ class PhpMdCheckCommand implements CommandInterface
     use ProcessBuilderHelper;
 
     /**
-     * @var bool[]
+     * @var array<bool>
      */
     protected $processedDirectories;
 
