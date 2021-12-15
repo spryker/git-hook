@@ -20,6 +20,11 @@ class CodeStyleSniffConfiguration
     /**
      * @var string
      */
+    protected const MODULE_CONFIG_LEVEL = 'level';
+
+    /**
+     * @var string
+     */
     protected const CORE_MODULE_PATH_REGEX = '#.*/vendor/spryker/.+/Bundles/.+/src/#';
 
     /**
@@ -62,14 +67,17 @@ class CodeStyleSniffConfiguration
     }
 
     /**
-     * @param array<string, string> $moduleConfiguration
+     * @param array<string, mixed> $moduleConfiguration
      *
      * @return bool
      */
     protected function isStrictLevelConfigured(array $moduleConfiguration): bool
     {
-        return (isset($moduleConfiguration[static::MODULE_CONFIG_TOOL_KEY])
-            && $moduleConfiguration[static::MODULE_CONFIG_TOOL_KEY]['level'] === static::CS_STRICT_LEVEL);
+        if (isset($moduleConfiguration[static::MODULE_CONFIG_TOOL_KEY][static::MODULE_CONFIG_LEVEL])) {
+            return $moduleConfiguration[static::MODULE_CONFIG_TOOL_KEY][static::MODULE_CONFIG_LEVEL] === static::CS_STRICT_LEVEL;
+        }
+
+        return false;
     }
 
     /**
