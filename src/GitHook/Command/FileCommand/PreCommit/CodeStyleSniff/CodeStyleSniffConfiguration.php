@@ -68,7 +68,7 @@ class CodeStyleSniffConfiguration
      */
     protected function isStrictLevelConfigured(array $moduleConfiguration): bool
     {
-        return (isset($moduleConfiguration[static::MODULE_CONFIG_TOOL_KEY]['level'])
+        return (isset($moduleConfiguration[static::MODULE_CONFIG_TOOL_KEY])
             && $moduleConfiguration[static::MODULE_CONFIG_TOOL_KEY]['level'] === static::CS_STRICT_LEVEL);
     }
 
