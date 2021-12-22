@@ -33,6 +33,31 @@ class CodeStyleSniffConfiguration
     protected const CS_STRICT_LEVEL = 2;
 
     /**
+     * @var string
+     */
+    protected const DEVELOPMENT_MODULE = 'Development';
+
+    /**
+     * @var string
+     */
+    protected const PHPCS_XML_FILE = 'phpcs.xml';
+
+    /**
+     * @var string
+     */
+    protected const RULESET_XML_FILE = 'ruleset.xml';
+
+    /**
+     * @var string
+     */
+    protected const RULESET_STRICT_XML_FILE = 'rulesetStrict.xml';
+
+    /**
+     * @var string
+     */
+    protected const TOOLING_YML_FILE = 'tooling.yml';
+
+    /**
      * @param \GitHook\Command\Context\CommandContextInterface $context
      *
      * @return string
@@ -42,16 +67,20 @@ class CodeStyleSniffConfiguration
         $modulePath = $this->getModulePath($context);
 
         if ($modulePath === null) {
-            return 'config/ruleset.xml';
+            return APPLICATION_ROOT_DIR . DIRECTORY_SEPARATOR . static::PHPCS_XML_FILE;
         }
 
-        $moduleConfiguration = $this->getModuleConfiguration(dirname($modulePath) . DIRECTORY_SEPARATOR . 'tooling.yml');
+        $phpcsFilePath = dirname($modulePath) . DIRECTORY_SEPARATOR . static::PHPCS_XML_FILE;
+        if (file_exists($phpcsFilePath)) {
+            return $phpcsFilePath;
+        }
 
+        $moduleConfiguration = $this->getModuleConfiguration(dirname($modulePath) . DIRECTORY_SEPARATOR . static::TOOLING_YML_FILE);
         if ($this->isStrictLevelConfigured($moduleConfiguration)) {
-            return 'vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml';
+            return $this->getPathToDevelopmentModule($modulePath) . static::RULESET_STRICT_XML_FILE;
         }
 
-        return 'vendor/spryker/code-sniffer/Spryker/ruleset.xml';
+        return $this->getPathToDevelopmentModule($modulePath) . static::RULESET_XML_FILE;
     }
 
     /**
@@ -64,6 +93,16 @@ class CodeStyleSniffConfiguration
         preg_match(static::CORE_MODULE_PATH_REGEX, $context->getFile(), $matches);
 
         return $matches[0] ?? null;
+    }
+
+    /**
+     * @param string $modulePath
+     *
+     * @return string
+     */
+    protected function getPathToDevelopmentModule(string $modulePath): string
+    {
+        return dirname($modulePath, 2) . DIRECTORY_SEPARATOR . static::DEVELOPMENT_MODULE . DIRECTORY_SEPARATOR;
     }
 
     /**
