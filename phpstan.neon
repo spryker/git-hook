@@ -1,6 +1,6 @@
 parameters:
-    bootstrap: %rootDir%/../../../phpstan-bootstrap.php
-
+    bootstrapFiles:
+        - '%rootDir%/../../../phpstan-bootstrap.php'
     ignoreErrors:
-        - '#has invalid typehint type Composer\\Script\\Event#'
+        - '#has invalid type Composer\\Script\\Event#'
         - '#on an unknown class Composer\\Script\\Event#'
