@@ -42,7 +42,8 @@ class CodeStyleCheckCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['vendor/bin/phpcs', $context->getFile(), '--standard=config/ruleset.xml'];
+        $standard = $this->findStandard(__DIR__);
+        $processDefinition = ['vendor/bin/phpcs', $context->getFile(), '--standard=' . $standard];
         $process = $this->buildProcess($processDefinition);
         $process->run();
 
@@ -53,5 +54,19 @@ class CodeStyleCheckCommand implements CommandInterface
         }
 
         return $commandResult;
+    }
+
+    private function findStandard(string $directory)
+    {
+        $candidates = [
+            implode(DIRECTORY_SEPARATOR, [PROJECT_ROOT, 'config', 'ruleset.xml']),
+            implode(DIRECTORY_SEPARATOR, [PROJECT_ROOT, 'phpcs.xml']),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (file_exists($candidate)) {
+                return $candidate;
+            }
+        }
     }
 }
