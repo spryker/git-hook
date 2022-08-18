@@ -13,6 +13,7 @@ use GitHook\Command\CommandResult;
 use GitHook\Command\CommandResultInterface;
 use GitHook\Command\Context\CommandContextInterface;
 use GitHook\Helper\ProcessBuilderHelper;
+use UnexpectedValueException;
 
 class CodeStyleCheckCommand implements CommandInterface
 {
@@ -56,7 +57,14 @@ class CodeStyleCheckCommand implements CommandInterface
         return $commandResult;
     }
 
-    private function findStandard(string $directory)
+    /**
+     * @param string $directory
+     *
+     * @throws \UnexpectedValueException if no file found
+     *
+     * @return string
+     */
+    private function findStandard(string $directory): string
     {
         $candidates = [
             implode(DIRECTORY_SEPARATOR, [PROJECT_ROOT, 'config', 'ruleset.xml']),
@@ -68,5 +76,7 @@ class CodeStyleCheckCommand implements CommandInterface
                 return $candidate;
             }
         }
+
+        throw new UnexpectedValueException('Unable to locate phpcs standard');
     }
 }
