@@ -43,7 +43,7 @@ class CodeStyleCheckCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $standard = $this->findStandard(__DIR__);
+        $standard = $this->findStandard();
         $processDefinition = ['vendor/bin/phpcs', $context->getFile(), '--standard=' . $standard];
         $process = $this->buildProcess($processDefinition);
         $process->run();
@@ -64,7 +64,7 @@ class CodeStyleCheckCommand implements CommandInterface
      *
      * @return string
      */
-    private function findStandard(string $directory): string
+    private function findStandard(): string
     {
         $candidates = [
             implode(DIRECTORY_SEPARATOR, [PROJECT_ROOT, 'config', 'ruleset.xml']),
