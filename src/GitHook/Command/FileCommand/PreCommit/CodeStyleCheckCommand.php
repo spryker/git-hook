@@ -12,6 +12,7 @@ use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\CommandResultInterface;
 use GitHook\Command\Context\CommandContextInterface;
+use GitHook\Command\FileCommand\PreCommit\CodeStyleSniff\CodeStyleSniffConfiguration;
 use GitHook\Helper\ProcessBuilderHelper;
 
 class CodeStyleCheckCommand implements CommandInterface
@@ -40,9 +41,12 @@ class CodeStyleCheckCommand implements CommandInterface
      */
     public function run(CommandContextInterface $context): CommandResultInterface
     {
+        $configuration = new CodeStyleSniffConfiguration();
+        $rulesetPath = $configuration->resolvePath($context);
+
         $commandResult = new CommandResult();
 
-        $processDefinition = ['vendor/bin/phpcs', $context->getFile(), '--standard=config/ruleset.xml'];
+        $processDefinition = ['vendor/bin/phpcs', $context->getFile(), '--standard=' . $rulesetPath];
         $process = $this->buildProcess($processDefinition);
         $process->run();
 
