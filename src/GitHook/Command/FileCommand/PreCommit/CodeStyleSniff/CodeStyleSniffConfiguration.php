@@ -67,7 +67,7 @@ class CodeStyleSniffConfiguration
         $modulePath = $this->getModulePath($context);
 
         if ($modulePath === null) {
-            return APPLICATION_ROOT_DIR . DIRECTORY_SEPARATOR . static::PHPCS_XML_FILE;
+            return PROJECT_ROOT . DIRECTORY_SEPARATOR . static::PHPCS_XML_FILE;
         }
 
         $phpcsFilePath = dirname($modulePath) . DIRECTORY_SEPARATOR . static::PHPCS_XML_FILE;
