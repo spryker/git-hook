@@ -14,6 +14,6 @@ trait BranchHelper
      */
     public function getBranch(): string
     {
-        return exec('git branch | grep \* | cut -d \' \' -f2 2> /dev/null');
+        return (string)exec('git branch | grep \* | cut -d \' \' -f2 2> /dev/null');
     }
 }

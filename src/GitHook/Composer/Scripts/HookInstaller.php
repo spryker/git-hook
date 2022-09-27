@@ -12,35 +12,35 @@ use Composer\Script\Event;
 class HookInstaller
 {
     /**
-     * @var array
+     * @var array<string>
      */
     protected static $projectHooks = [
         'pre-commit',
     ];
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected static $sprykerHooks = [
         'pre-commit',
     ];
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected static $sprykerShopHooks = [
         'pre-commit',
     ];
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected static $ecoHooks = [
         'pre-commit',
     ];
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected static $gitHookHooks = [
         'pre-commit',
@@ -62,8 +62,8 @@ class HookInstaller
         }
 
         foreach (static::$projectHooks as $hook) {
-            $src = realpath($hookDirectory . $hook);
-            $dist = realpath($gitHookDirectory) . '/' . $hook;
+            $src = (string)realpath($hookDirectory . $hook);
+            $dist = (string)realpath($gitHookDirectory) . '/' . $hook;
 
             copy($src, $dist);
             chmod($dist, 0755);
@@ -90,8 +90,8 @@ class HookInstaller
         }
 
         foreach (static::$sprykerHooks as $hook) {
-            $src = realpath($hookDirectory . $hook);
-            $dist = realpath($gitHookDirectory) . '/' . $hook;
+            $src = (string)realpath($hookDirectory . $hook);
+            $dist = (string)realpath($gitHookDirectory) . '/' . $hook;
 
             copy($src, $dist);
             chmod($dist, 0755);
@@ -118,8 +118,8 @@ class HookInstaller
         }
 
         foreach (static::$sprykerShopHooks as $hook) {
-            $src = realpath($hookDirectory . $hook);
-            $dist = realpath($gitHookDirectory) . '/' . $hook;
+            $src = (string)realpath($hookDirectory . $hook);
+            $dist = (string)realpath($gitHookDirectory) . '/' . $hook;
 
             copy($src, $dist);
             chmod($dist, 0755);
@@ -147,8 +147,8 @@ class HookInstaller
         }
 
         foreach (static::$gitHookHooks as $hook) {
-            $src = realpath($hookDirectory . $hook);
-            $dist = realpath($gitHookDirectory) . '/' . $hook;
+            $src = (string)realpath($hookDirectory . $hook);
+            $dist = (string)realpath($gitHookDirectory) . '/' . $hook;
 
             copy($src, $dist);
             chmod($dist, 0755);
@@ -170,12 +170,12 @@ class HookInstaller
 
         $ecoBaseDirectory = $vendorDir . '/spryker-eco/';
         $hookDirectory = $vendorDir . '/spryker/git-hook/hooks/eco/';
-        $modulesDirs = array_filter(glob($ecoBaseDirectory . '*'), 'is_dir');
+        $modulesDirs = array_filter(glob($ecoBaseDirectory . '*') ?: [], 'is_dir');
 
         foreach (static::$ecoHooks as $hook) {
-            $src = realpath($hookDirectory . DIRECTORY_SEPARATOR . $hook);
+            $src = (string)realpath($hookDirectory . DIRECTORY_SEPARATOR . $hook);
             foreach ($modulesDirs as $dirname) {
-                $destinationDirectory = realpath($dirname . '/.git/hooks');
+                $destinationDirectory = (string)realpath($dirname . '/.git/hooks');
                 if (self::checkDirectoryPermissions($destinationDirectory, $event)) {
                     $dist = $destinationDirectory . DIRECTORY_SEPARATOR . $hook;
 
@@ -206,8 +206,8 @@ class HookInstaller
         }
 
         foreach (static::$sprykerHooks as $hook) {
-            $src = realpath($hookDirectory . $hook);
-            $dist = realpath($gitHookDirectory) . '/' . $hook;
+            $src = (string)realpath($hookDirectory . $hook);
+            $dist = (string)realpath($gitHookDirectory) . '/' . $hook;
 
             copy($src, $dist);
             chmod($dist, 0755);

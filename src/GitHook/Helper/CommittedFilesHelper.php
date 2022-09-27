@@ -63,6 +63,6 @@ trait CommittedFilesHelper
      */
     protected function isMergeInProcess(): bool
     {
-        return trim(exec('git rev-parse -q --verify MERGE_HEAD')) !== '';
+        return trim((string)exec('git rev-parse -q --verify MERGE_HEAD')) !== '';
     }
 }
