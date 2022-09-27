@@ -12,8 +12,8 @@ jobs:
       fail-fast: false
       matrix:
         php-version: [
-          '7.3',
-          '7.4'
+          '7.4',
+          '8.1'
         ]
 
     steps:
@@ -23,9 +23,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
           extensions: mbstring, intl, pdo_mysql
 
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
+      - uses: actions/checkout@v3
 
       - name: Validate composer.json and composer.lock
         run: composer validate
@@ -47,11 +45,11 @@ jobs:
           composer --version
           composer install
 
-      - name: CodeStyle checks
-        run: composer cs-check
-
       - name: PHPStan checks
         run: composer stan
+
+      - name: CodeStyle checks
+        run: composer cs-check
 
   prefer-lowest:
     runs-on: ubuntu-18.04
@@ -59,7 +57,7 @@ jobs:
       fail-fast: false
       matrix:
         php-version: [
-            '7.3'
+            '7.4'
         ]
 
     steps:
@@ -69,9 +67,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
           extensions: mbstring, intl, pdo_mysql
 
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
+      - uses: actions/checkout@v3
 
       - name: Get Composer Cache Directory
         id: composer-cache

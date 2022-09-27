@@ -1,6 +1,6 @@
 # GitHook
 [![CI](https://github.com/spryker/git-hook/actions/workflows/ci.yml/badge.svg)](https://github.com/spryker/git-hook/actions/workflows/ci.yml)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)](https://php.net/)
 [![License](https://img.shields.io/github/license/spryker/git-hook.svg)](https://packagist.org/packages/spryker/git-hook)
 
 GitHook for Spryker. This tool will add Git hooks to your local hooks directory.

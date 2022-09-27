@@ -20,11 +20,11 @@
         "source": "https://github.com/spryker/git-hook"
     },
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "spryker/laminas": "^1.0.0",
-        "symfony/process": "^3.3.0 || ^4.0.0 || ^5.0.0 || ^6.0.0",
-        "symfony/yaml": "^3.4.0 || ^4.0.0 || ^5.0.0 || ^6.0.0",
-        "symfony/console": "^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0"
+        "symfony/process": "^4.0.0 || ^5.0.0 || ^6.0.0",
+        "symfony/yaml": "^4.0.0 || ^5.0.0 || ^6.0.0",
+        "symfony/console": "^4.0.0 || ^5.0.0 || ^6.0.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.2.0",
