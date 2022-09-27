@@ -100,7 +100,7 @@ class PhpStanCheckCommand implements CommandInterface
             return $level;
         }
 
-        $moduleConfig = json_decode(file_get_contents($phpStanConfigFilePath), true);
+        $moduleConfig = json_decode((string)file_get_contents($phpStanConfigFilePath), true);
         if (!isset($moduleConfig['defaultLevel'])) {
             return $level;
         }

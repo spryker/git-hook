@@ -39,7 +39,7 @@
     "scripts": {
         "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml -p -s src/",
         "cs-fix": "phpcbf --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml -p src/",
-        "stan": "vendor/bin/phpstan analyse -l 5 -c phpstan.neon src/"
+        "stan": "vendor/bin/phpstan analyse"
     },
     "config": {
         "allow-plugins": {

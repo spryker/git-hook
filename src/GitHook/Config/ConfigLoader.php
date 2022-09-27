@@ -20,14 +20,14 @@ class ConfigLoader
         $configDefault = PROJECT_ROOT . '/.githook';
 
         if (is_file($configLocal)) {
-            $config = Yaml::parse(file_get_contents($configLocal));
+            $config = Yaml::parse((string)file_get_contents($configLocal));
 
             return new GitHookConfig($config);
         }
         $config = [];
 
         if (is_file($configDefault)) {
-            $config = Yaml::parse(file_get_contents($configDefault));
+            $config = Yaml::parse((string)file_get_contents($configDefault));
         }
 
         return new GitHookConfig($config);
