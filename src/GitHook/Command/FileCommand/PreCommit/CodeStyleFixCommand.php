@@ -19,6 +19,26 @@ class CodeStyleFixCommand implements CommandInterface
     use ProcessBuilderHelper;
 
     /**
+     * @var string
+     */
+    protected const BINARY_STYLE_FIXER = 'vendor/bin/phpcbf';
+
+    /**
+     * @var string
+     */
+    protected const OPTION_STANDARD = '--standard';
+
+    /**
+     * @var string
+     */
+    protected const RULESET_PATH = 'phpcs.xml';
+
+    /**
+     * @var string
+     */
+    protected const RULESET_LEGACY_PATH = 'config/ruleset.xml';
+
+    /**
      * @param \GitHook\Command\CommandConfigurationInterface $commandConfiguration
      *
      * @return \GitHook\Command\CommandConfigurationInterface
@@ -42,10 +62,28 @@ class CodeStyleFixCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['vendor/bin/phpcbf', $context->getFile(), '--standard=config/ruleset.xml'];
+        $processDefinition = [
+            static::BINARY_STYLE_FIXER,
+            $context->getFile(),
+            $this->getStandardRulesetOption(),
+        ];
+
         $process = $this->buildProcess($processDefinition);
         $process->run();
 
         return $commandResult;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getStandardRulesetOption(): string
+    {
+        $filepath = static::RULESET_LEGACY_PATH;
+        if (file_exists(PROJECT_ROOT . DIRECTORY_SEPARATOR . static::RULESET_PATH)) {
+            $filepath = static::RULESET_PATH;
+        }
+
+        return sprintf('%s=%s', static::OPTION_STANDARD, $filepath);
     }
 }
