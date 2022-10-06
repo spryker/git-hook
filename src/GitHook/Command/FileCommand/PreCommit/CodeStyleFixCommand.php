@@ -32,7 +32,7 @@ class CodeStyleFixCommand implements CommandInterface
     /**
      * @var string
      */
-    protected const ERROR_FILE_DOES_NOT_EXIST = 'Configuration file does not exist';
+    protected const ERROR_FILE_DOES_NOT_EXIST = 'Please add root configuration file. Configuration file does not exist';
 
     /**
      * @var string
