@@ -23,7 +23,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
           extensions: mbstring, intl, pdo_mysql
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Validate composer.json and composer.lock
         run: composer validate
@@ -67,7 +67,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
           extensions: mbstring, intl, pdo_mysql
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Get Composer Cache Directory
         id: composer-cache
