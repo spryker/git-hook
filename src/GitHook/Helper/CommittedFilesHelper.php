@@ -46,14 +46,14 @@ trait CommittedFilesHelper
      */
     protected function getAffectedFiles(string $revision): array
     {
-        exec(sprintf('git diff --name-only --diff-filter=AM %s', $revision), $committedFiles);
+        exec(sprintf('git diff --name-only --cached --diff-filter=AM %s', $revision), $committedFiles);
 
         if (!$this->isMergeInProcess()) {
             return $committedFiles;
         }
 
-        exec(sprintf('git diff --name-only --diff-filter=AM MERGE_HEAD...%s', $revision), $mergeConflictFiles);
-        exec(sprintf('git diff --name-only --diff-filter=AM %s MERGE_HEAD', $revision), $mergeFiles);
+        exec(sprintf('git diff --name-only --cached --diff-filter=AM MERGE_HEAD...%s', $revision), $mergeConflictFiles);
+        exec(sprintf('git diff --name-only --cached --diff-filter=AM %s MERGE_HEAD', $revision), $mergeFiles);
 
         return array_merge(array_diff($committedFiles, $mergeFiles), $mergeConflictFiles);
     }
