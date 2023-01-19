@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 
 define('MODULE_NAME', basename(dirname(__DIR__, 2)));
