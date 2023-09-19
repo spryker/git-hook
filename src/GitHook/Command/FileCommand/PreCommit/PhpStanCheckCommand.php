@@ -53,7 +53,7 @@ class PhpStanCheckCommand implements CommandInterface
 
         $level = $this->getLevel($phpStanConfiguration, $context);
 
-        $processDefinition = ['vendor/bin/phpstan', 'analyse', $filePath, '-l', $level, '-c', $phpStanConfiguration->getConfigPath()];
+        $processDefinition = ['vendor/bin/phpstan', 'analyse', $filePath, '-l', $level, '-c', $phpStanConfiguration->getConfigPath(), '--memory-limit=-1'];
         $process = $this->buildProcess($processDefinition, PROJECT_ROOT);
         $process->run();
 

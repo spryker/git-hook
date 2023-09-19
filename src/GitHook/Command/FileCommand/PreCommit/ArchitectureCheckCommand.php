@@ -63,7 +63,7 @@ class ArchitectureCheckCommand implements CommandInterface
         $processDefinition = [
             'vendor/bin/phpmd',
             $directory,
-            'xml',
+            'json',
             'vendor/spryker/architecture-sniffer/src/ruleset.xml',
             '--minimumpriority',
             $configuration->getMinimumPriority(),
