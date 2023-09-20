@@ -45,11 +45,8 @@ jobs:
           extensions: mbstring, intl, bcmath
           coverage: none
 
-      - name: Composer Install
-        run: composer install --prefer-dist --no-interaction --profile
-
-      - name: Composer Update
-        run: composer update --prefer-lowest --prefer-dist --no-interaction --profile -vvv
+      - name: Composer prefer-lowest
+        run: composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable
 
       - name: PHPStan checks
         run: composer stan
