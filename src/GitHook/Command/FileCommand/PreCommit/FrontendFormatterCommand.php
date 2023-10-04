@@ -28,7 +28,7 @@ class FrontendFormatterCommand implements CommandInterface
         $commandConfiguration
             ->setName('Formatter')
             ->setDescription('Format files according to prettier rules.')
-            ->setAcceptedFileExtensions(['scss', 'css', 'less', 'js', 'ts', 'json', 'html']);
+            ->setAcceptedFileExtensions(['scss', 'css', 'less', 'js', 'ts', 'json', 'html', 'yml', 'yaml', 'xml']);
 
         return $commandConfiguration;
     }
@@ -42,7 +42,7 @@ class FrontendFormatterCommand implements CommandInterface
     {
         $commandResult = new CommandResult();
 
-        $processDefinition = ['node', './frontend/libs/formatter', '--fix', '--ignore-path', './.prettierignore-githook', '--file-path', $context->getFile()];
+        $processDefinition = ['npx', 'prettier', $context->getFile(), '--check', '--ignore-path', './.prettierignore-githook'];
         $process = $this->buildProcess($processDefinition);
         $process->run();
 

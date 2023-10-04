@@ -40,6 +40,16 @@ class CodeStyleSniffConfiguration
     /**
      * @var string
      */
+    protected const SPRYKER_FOLDER = 'spryker';
+
+    /**
+     * @var string
+     */
+    protected const BUNDLES_FOLDER = 'Bundles';
+
+    /**
+     * @var string
+     */
     protected const PHPCS_XML_FILE = 'phpcs.xml';
 
     /**
@@ -102,7 +112,7 @@ class CodeStyleSniffConfiguration
      */
     protected function getPathToDevelopmentModule(string $modulePath): string
     {
-        return dirname($modulePath, 2) . DIRECTORY_SEPARATOR . static::DEVELOPMENT_MODULE . DIRECTORY_SEPARATOR;
+        return dirname($modulePath, 4) . DIRECTORY_SEPARATOR . static::SPRYKER_FOLDER . DIRECTORY_SEPARATOR . static::BUNDLES_FOLDER . DIRECTORY_SEPARATOR . static::DEVELOPMENT_MODULE . DIRECTORY_SEPARATOR;
     }
 
     /**
