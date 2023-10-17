@@ -25,7 +25,7 @@ class CodeStyleSniffConfiguration
     /**
      * @var string
      */
-    protected const CORE_MODULE_PATH_REGEX = '#.*/vendor/spryker/.+/Bundles/.+/src/#';
+    protected const CORE_MODULE_PATH_REGEX = '#.*/vendor/spryker/.+/Bundles/.+/(src|tests)/#';
 
     /**
      * @var int
