@@ -12,16 +12,17 @@ jobs:
     name: Validation
     runs-on: ubuntu-20.04
 
+    strategy:
+      matrix:
+        php-version: ['8.1', '8.2']
+
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup PHP
+      - name: Setup PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
         with:
-          php-version: [
-              '8.1',
-              '8.2'
-          ]
+          php-version: ${{ matrix.php-version }}
           extensions: mbstring, intl, bcmath
           coverage: none
 
@@ -38,13 +39,17 @@ jobs:
     name: Prefer Lowest
     runs-on: ubuntu-20.04
 
+    strategy:
+      matrix:
+        php-version: ['8.1', '8.2']
+
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup PHP
+      - name: Setup PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: ${{ matrix.php-version }}
           extensions: mbstring, intl, bcmath
           coverage: none
 
