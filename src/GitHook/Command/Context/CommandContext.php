@@ -90,7 +90,7 @@ class CommandContext implements CommandContextInterface
     /**
      * @return string
      */
-    protected function getProjectPath(): string
+    public function getProjectPath(): string
     {
         return realpath(PROJECT_ROOT) . DIRECTORY_SEPARATOR;
     }
