@@ -34,11 +34,9 @@ class PackageAggregatorCommand implements CommandInterface
      */
     public function run(CommandContextInterface $context): CommandResultInterface
     {
-        $directory = $context->getProjectPath();
-
         $commandResult = new CommandResult();
 
-        $process = $this->buildProcess(['vendor/bin/package-aggregator', $directory, '--compare'], PROJECT_ROOT . PATH_PREFIX);
+        $process = $this->buildProcess(['vendor/bin/package-aggregator', PROJECT_ROOT . PATH_PREFIX, '--compare'], PROJECT_ROOT . PATH_PREFIX);
         $process->run();
 
         if (!$process->isSuccessful()) {

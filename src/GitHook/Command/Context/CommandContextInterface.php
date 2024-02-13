@@ -38,11 +38,6 @@ interface CommandContextInterface
     public function setFile(string $file);
 
     /**
-     * @return string
-     */
-    public function getProjectPath(): string;
-
-    /**
      * Returns an absolute file path.
      *
      * @return string
