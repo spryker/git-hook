@@ -12,9 +12,12 @@ use GitHook\Command\CommandInterface;
 use GitHook\Command\CommandResult;
 use GitHook\Command\CommandResultInterface;
 use GitHook\Command\Context\CommandContextInterface;
+use GitHook\Helper\ProcessBuilderHelper;
 
 class PackageAggregatorCommand implements CommandInterface
 {
+    use ProcessBuilderHelper;
+
     /**
      * @param \GitHook\Command\CommandConfigurationInterface $commandConfiguration
      *
