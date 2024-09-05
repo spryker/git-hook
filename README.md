@@ -1,6 +1,6 @@
 # GitHook
 [![CI](https://github.com/spryker/git-hook/actions/workflows/ci.yml/badge.svg)](https://github.com/spryker/git-hook/actions/workflows/ci.yml)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.2-8892BF.svg)](https://php.net/)
 [![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat)](https://phpstan.org/)
 [![License](https://img.shields.io/github/license/spryker/git-hook.svg)](https://packagist.org/packages/spryker/git-hook)
 
