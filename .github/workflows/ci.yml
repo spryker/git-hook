@@ -9,24 +9,54 @@ on:
 
 jobs:
   validation:
-    name: Validation
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: [
+            '8.2',
+            '8.3'
+        ]
 
     steps:
-      - uses: actions/checkout@v2
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: [
-              '8.2',
-              '8.3'
-          ]
-          extensions: mbstring, intl, bcmath
-          coverage: none
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, intl, pdo_mysql
 
-      - name: Composer Install
-        run: composer install --prefer-dist --no-interaction --profile
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Composer validate
+        run: composer validate
+
+      - name: Composer get cache directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Composer cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Composer install
+        run: |
+          composer --version
+          composer install --optimize-autoloader
+
+      - name: Codeception tests
+        run: |
+          vendor/bin/codecept build
+          XDEBUG_MODE=coverage vendor/bin/codecept run --coverage-xml
+
+      - name: Code Coverage Report
+        if: success()
+        uses: codecov/codecov-action@v1
 
       - name: PHPStan checks
         run: composer stan
@@ -34,22 +64,39 @@ jobs:
       - name: CodeStyle checks
         run: composer cs-check
 
-  lowest:
-    name: Prefer Lowest
+  prefer-lowest:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: [
+            '8.2'
+        ]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
-          extensions: mbstring, intl, bcmath
-          coverage: none
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, intl, pdo_mysql
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Composer cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
 
       - name: Composer prefer-lowest
-        run: composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable
+        run: composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable -o
 
-      - name: PHPStan checks
-        run: composer stan
+      - name: Codecept run test
+        run: composer test
